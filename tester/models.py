@@ -9,6 +9,8 @@ from otree.api import (
     currency_range,
 )
 from django.db import models as djmodels
+import csv
+import itertools
 
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
 
@@ -23,9 +25,16 @@ class Constants(BaseConstants):
     num_rounds = 1
     LIKERT = range(0, 11)
 
+    with open('./data/q.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        bodies = [i[0] for i in csv_reader]
+
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        ps = self.player_set.all()
+        sqs = [SensitiveQ(owner=p, body=t) for p, t in itertools.product(ps, Constants.bodies)]
+        SensitiveQ.objects.bulk_create(sqs)
 
 
 class Group(BaseGroup):
@@ -35,12 +44,14 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     pass
 
+
 class ProtoQ(djmodels.Model):
     body = models.StringField()
 
+
 class SensitiveQ(djmodels.Model):
     owner = djmodels.ForeignKey(to=Player, on_delete=djmodels.CASCADE, related_name="sqs")
-    prototype = djmodels.ForeignKey(to=ProtoQ, on_delete=djmodels.CASCADE, related_name="sqs")
+    body = models.StringField()
     attitude = models.IntegerField(choices=Constants.LIKERT, widget=widgets.RadioSelectHorizontal)
     average_attitude = models.IntegerField(choices=Constants.LIKERT, widget=widgets.RadioSelectHorizontal)
     """
@@ -50,9 +61,8 @@ class SensitiveQ(djmodels.Model):
     first = models.IntegerField(min=0, max=100)
     second = models.IntegerField(min=0, max=100)
     third = models.IntegerField(min=0, max=100)
-from django.db.models.signals import post_migrate,class_prepared
-def my_callback(sender, **kwargs):
-    print('migration complete')
-    pass
-post_migrate.connect(my_callback)
-class_prepared.connect(my_callback)
+    """Friendship answer. Do we want them to be likert as well?"""
+    friend = models.IntegerField(choices=Constants.LIKERT)
+
+    def __str__(self):
+        return f'Q: "{self.body}" for participant {self.owner.participant.code}'
