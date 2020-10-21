@@ -1,0 +1,31 @@
+{% extends "tester/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+    <button type="button" class="btn btn-lg" id="answer">SEND ANSWER</button>
+    {% next_button %}
+    <script>
+        let qid, field, body
+        $(() => {
+            liveSend({info_request: true})
+        })
+        const $sendbutton = $('#answer')
+
+        function liveRecv(data) {
+            console.debug('received a message!', data);
+            ({id: qid, field, body} = data);
+
+            // your code goes here
+        }
+
+        $sendbutton.on('click', () => {
+            liveSend({answer: true, qid: qid, field: field, value: Math.random()});
+        })
+
+
+    </script>
+{% endblock %}

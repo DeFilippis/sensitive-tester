@@ -42,11 +42,42 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    def get_next_q(self, data):
+        qid = data.get('qid')
+        field = data.get('field')
+        value = data.get('value')
+        next_q = self.next_q()
+        r = {self.id_in_group: next_q}
+        if data.get('info_request'):
+            return r
 
+        if data.get('answer') and qid and field and value:
+            q = SensitiveQ.objects.get(id=qid)
+            setattr(q, field, value)
+            q.save()
+        r = {self.id_in_group: self.next_q()}  # we update the req
+        return r
 
-class ProtoQ(djmodels.Model):
-    body = models.StringField()
+    def next_q(self):
+        """
+        We figure out the next unanswered question and return it
+        we do it the following way:
+        we first check if there are unanswered individual questions, if there are any we return the first one
+        check if there are unanswered average questions
+        then we return if there are unsanswered questions about distribution
+        and then we return the questions about friendship
+
+        """
+        checking_order = ['attitude', 'average_attitude', 'first', 'friend']
+        for i in checking_order:
+            d = {f'{i}__isnull': True}
+            unanswered = self.sqs.filter(**d)
+            if unanswered.exists():
+                q = unanswered.first()
+                return dict(body=q.body, field=i, id=q.id)
+            else:
+                continue
+        return dict(no_q_left=True)
 
 
 class SensitiveQ(djmodels.Model):

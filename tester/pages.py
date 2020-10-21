@@ -3,16 +3,10 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
-    pass
+class Q(Page):
+    live_method = 'get_next_q'
 
 
-class ResultsWaitPage(WaitPage):
-    pass
 
 
-class Results(Page):
-    pass
-
-
-page_sequence = [MyPage, ResultsWaitPage, Results]
+page_sequence = [Q]
