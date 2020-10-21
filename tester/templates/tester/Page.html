@@ -19,12 +19,10 @@
                     window.socket_path = "{{ view.live_url }}";
                     window.id_in_group = {{ player.id_in_group }};
                 </script>
-                <div class="lead " id="app">APP MOUNTS HERE</div>
+                <div class="lead " id="app"> </div>
                 {% render_bundle 'chunk-vendors' %}
                 {% render_bundle 'main' %}
-                <div>Если вы считаете, что произошла ошибка, напишите нам по адресу
-                    <a href="mailto:epee@hse.ru" target="_blank" rel="noopener noreferrer">epee@hse.ru</a>.
-                </div>
+
             </div>
         </div>
     </div>
