@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+    <form id="liveform"></form>
+    <script src="{% static 'otree/js/live.js' %}" id="otree-live" data-socket-url="{{ view.live_url }}"></script>
     <button type="button" class="btn btn-lg" id="answer">SEND ANSWER</button>
     {% next_button %}
     <script>

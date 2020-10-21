@@ -11,7 +11,9 @@ from otree.api import (
 from django.db import models as djmodels
 import csv
 import itertools
+import logging
 
+logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
 
 doc = """
@@ -43,6 +45,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     def get_next_q(self, data):
+        logger.info(data)
         qid = data.get('qid')
         field = data.get('field')
         value = data.get('value')

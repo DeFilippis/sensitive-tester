@@ -1,4 +1,7 @@
 from os import environ
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SESSION_CONFIGS = [
     dict(
@@ -37,4 +40,19 @@ DEMO_PAGE_INTRO_HTML = """ """
 SECRET_KEY = '&7hh8&8q=8ifh$)0&kzlh^)!tqas&4s4w6dofyup+!n4=i)7m)'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
-INSTALLED_APPS = ['otree']
+
+INSTALLED_APPS = [
+    'otree',
+    'webpack_loader',
+]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        # 'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'front', 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.3,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+}
