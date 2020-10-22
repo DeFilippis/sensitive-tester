@@ -1,0 +1,30 @@
+{% extends "tester/Page.html" %}
+{% load otree %}
+
+
+{% block content %}
+    <style>
+    .infocard{max-width:700px}
+    </style>
+    <form class="otree-form" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+        <div class="_otree-content">
+
+            <div class="card infocard" >
+                <div class="card-body">
+                    <div class="my-5">
+                        At the next page we will ask you to rank the importance of the statements
+                    </div>
+
+                    <button class="mdc-button foo-button mdc-button--outlined">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Proceed</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+
+
+{% endblock %}

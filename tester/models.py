@@ -12,6 +12,7 @@ from django.db import models as djmodels
 import csv
 import itertools
 import logging
+import yaml
 
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
@@ -24,9 +25,12 @@ App testing for the most controversial questions for the conformity project
 class Constants(BaseConstants):
     name_in_url = 'tester'
     players_per_group = None
-    num_rounds = 1
+
     LIKERT = range(0, 11)
 
+    with open(r'./data/qleads.yaml') as file:
+        leads = yaml.load(file, Loader=yaml.FullLoader)
+    num_rounds = len(leads) + 1  # we ask one extra question (about relative importance).
     with open('./data/q.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         bodies = [i[0] for i in csv_reader]
@@ -97,6 +101,9 @@ class SensitiveQ(djmodels.Model):
     third = models.IntegerField(min=0, max=100)
     """Friendship answer. Do we want them to be likert as well?"""
     friend = models.IntegerField(choices=Constants.LIKERT)
+    # Block of importance questions
+    absolute_importance = models.IntegerField(choices=Constants.LIKERT)
+    relative_importance = models.IntegerField()
 
     def __str__(self):
         return f'Q: "{self.body}" for participant {self.owner.participant.code}'

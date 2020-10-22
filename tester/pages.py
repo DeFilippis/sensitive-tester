@@ -1,12 +1,56 @@
 from otree.api import Currency as c, currency_range
-from ._builtin import Page, WaitPage
+from ._builtin import WaitPage, Page as oTreePage
+from .generic_pages import GenPage as Page
 from .models import Constants
 
 
+class QIntro(Page):
+    def is_displayed(self):
+        return self.round_number < Constants.num_rounds
+
+    """
+    Here we introduce the forthcoming set of questions
+    """
+
+
 class Q(Page):
+    """
+    Here we show the set of questions (:
+    personal attitude,
+    average attitude,
+    likelyhood of friendship,
+    personal (aka absolute) Importance,
+    distribution of averages
+    """
+
+    def is_displayed(self):
+        return self.round_number < Constants.num_rounds
+
     live_method = 'get_next_q'
 
 
+class RelIntro(oTreePage):
+    """
+    Introducing relative importance question
+    """
+
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
 
-page_sequence = [Q]
+class RelImportance(oTreePage):
+    """
+    A bit particular page for ranking questions by their relative importance.
+    Doesnt' make sense to reuse previous app because it's just too different
+    """
+
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
+
+page_sequence = [
+    QIntro,
+    # Q,
+    RelIntro,
+    RelImportance,
+]

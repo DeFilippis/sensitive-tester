@@ -1,5 +1,5 @@
 <template>
-  <v-app class='jopa' >
+  <v-app class='main-app' >
     <v-row align='center' justify='center' >
 
     
@@ -101,6 +101,10 @@ export default {
 .main_card {
   max-width: 700px;
 }
-#app{background:transparent}
+#app{background:transparent;
+max-width: 700px;}
+.main-app{
+  max-width: 700px;
+}
  
 </style>
