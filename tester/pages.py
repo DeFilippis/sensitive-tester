@@ -43,6 +43,16 @@ class RelImportance(oTreePage):
     A bit particular page for ranking questions by their relative importance.
     Doesnt' make sense to reuse previous app because it's just too different
     """
+    def post(self):
+        """VERY UGLY WAY. SHOULD FIX IT LATER!!!"""
+        for k,v in self.request.POST.dict().items():
+            try:
+                i = self.participant.sqs.get(label=k)
+                i.relative_importance = v
+                i.save()
+            except Exception as e:
+                print(e)
+        return super().post()
 
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -50,7 +60,7 @@ class RelImportance(oTreePage):
 
 page_sequence = [
     QIntro,
-    # Q,
+    Q,
     RelIntro,
     RelImportance,
 ]

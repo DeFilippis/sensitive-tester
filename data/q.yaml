@@ -1,0 +1,8 @@
+# The 'for_ranking' is a shortcut for relative importance ranking only (otherwise descriptions are too lengthy)
+- statement: Drinking alcohol is morally acceptable.
+  for_ranking: Alcohol
+- statement: I support gay marriage
+  for_ranking: Gay marriage
+- statement: I support the legalization of marijuana
+  for_ranking: Marijuana
+

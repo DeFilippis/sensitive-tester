@@ -19,12 +19,13 @@
                     window.socket_path = "{{ view.live_url }}";
                     window.id_in_group = {{ player.id_in_group }};
                 </script>
-                <div class="lead " id="app"></div>
-                {% block content %}
-                
-                {% endblock %}
+                <form class="otree-form" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+                    <div class="lead " id="app"></div>
+                    {% block content %}
 
+                    {% endblock %}
 
+                </form>
             </div>
         </div>
     </div>

@@ -3,9 +3,9 @@
 #lead is for the actual text that is shown on the apge
 attitude:
   announcement:
-    To what extent do you agree with the following statements (where "0" means "Totally disagree" and "10" means "Absolutely agree")
+    To what extent do you agree with the  statement which will be shown at the screen (where "0" means "Totally disagree" and "10" means "Absolutely agree")
   lead:
-    To what extent do you agree with the following statements (where "0" means "Totally disagree" and "10" means "Absolutely agree")
+    To what extent do you agree with the  statement (where "0" means "Totally disagree" and "10" means "Absolutely agree")
 average_attitude:
   announcement:
     How did the average participant of this study answer the question (where "0" means "Totally disagree" and "10" means "Absolutely agree")
@@ -21,8 +21,8 @@ absolute_importance:
     How important your opinion on the following statement for you (from 0 to 10)
   lead:
     How important your opinion on the following statement for you (from 0 to 10)
-distribution:
-  announcement:
-    Estimate the share of participants over the values
-  lead:
-    Each ball represents 10% of population. Put them to the slots to estimate how many people would answer along these values for this statement.
+#distribution:
+#  announcement:
+#    Estimate the share of participants over the values
+#  lead:
+#    Each ball represents 10% of population. Put them to the slots to estimate how many people would answer along these values for this statement.

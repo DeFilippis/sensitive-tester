@@ -7,6 +7,10 @@ const pages = {
         entry: './src/main.js',
         chunks: ['chunk-vendors']
     },
+    'relimp': {
+        entry: './src/rel_importance.js',
+        chunks: ['chunk-vendors']
+    },
 };
 
 module.exports = {

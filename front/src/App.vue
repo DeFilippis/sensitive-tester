@@ -8,7 +8,7 @@
         <v-card-text>
           <v-row align="center" justify="center">
             <v-col cols="12">
-              <div v-if="q">{{ q }}</div>
+              <div v-if="lead">{{ lead }}</div>
             </v-col>
             <v-col cols="12">
               <div
@@ -41,14 +41,7 @@
 export default {
   data() {
     return {
-      type_correspondence: {
-        attitude:
-          'To what extent do you agree with the following statements (where "0" means "Totally disagree" and "10" means "Absolutely agree")',
-        average_attitude:
-          'How did the average participant of this study answer the question (where "0" means "Totally disagree" and "10" means "Absolutely agree")',
-        friend:
-          'Imagine two people who strongly disagree with each other on this question. (Person A answers "0", and Person B answers "10."). How likely is it that this disagreement would prevent them from being friends?',
-      },
+      lead: window.field_desc['lead'],
       no_q_left: false,
       body: null,
       qid: null,
@@ -76,10 +69,11 @@ export default {
     };
     //
   },
-  computed: {
-    q() {
-      return this.type_correspondence[this.field];
-    },
+ 
+  watch:{
+    no_q_left(val){
+      if (val) {document.getElementById('form').submit()}
+    }
   },
   methods: {
     answer(val) {
