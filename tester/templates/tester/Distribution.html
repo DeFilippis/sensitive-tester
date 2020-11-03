@@ -4,7 +4,9 @@
 
 
 {% block content %}
-
+    <script>
+    window.distribution = {{ player.get_distribution|json }}
+    </script>
     {% render_bundle 'chunk-vendors' %}
     {% render_bundle 'distribution' %}
 {% endblock %}

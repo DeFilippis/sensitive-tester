@@ -9,3 +9,9 @@ class GenPage(Page):
         c['field'] = Constants.fields[self.round_number - 1]
         c['field_desc'] = Constants.leads[c['field']]
         return c
+class DistributionPage(Page):
+    def is_displayed(self):
+        if self.round_number <=len(Constants.fields):
+            curfield = Constants.fields[self.round_number - 1]
+            return curfield == 'average_attitude'
+        return False

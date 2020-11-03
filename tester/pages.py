@@ -1,14 +1,9 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import WaitPage, Page as oTreePage
-from .generic_pages import GenPage as Page
+from .generic_pages import GenPage as Page, DistributionPage
 from .models import Constants
 
 
-class Distribution(Page):
-    def is_displayed(self):
-        return self.round_number == 1
-
-    live_method = 'get_next_q_for_distribution'
 
 
 class QIntro(Page):
@@ -34,6 +29,16 @@ class Q(Page):
         return self.round_number < Constants.num_rounds
 
     live_method = 'get_next_q'
+
+
+class DistributionIntro(DistributionPage):
+    """
+    Introducing distribution question
+    """
+
+
+class Distribution(DistributionPage):
+    live_method = 'get_next_q_for_distribution'
 
 
 class RelIntro(oTreePage):
@@ -67,9 +72,10 @@ class RelImportance(oTreePage):
 
 
 page_sequence = [
-    # Distribution,
-    # QIntro,
+    QIntro,
     Q,
-    # RelIntro,
-    # RelImportance,
+    DistributionIntro,
+    Distribution,
+    RelIntro,
+    RelImportance,
 ]

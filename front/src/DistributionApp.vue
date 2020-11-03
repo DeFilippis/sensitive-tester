@@ -9,7 +9,7 @@
                 <transition
                   name="custom-classes-transition"
                   enter-active-class="animate__animated animate__bounceIn"
-                  leave-active-class="animate__animated animate__fadeOut"
+                  
                 >
                   <span
                     dark
@@ -33,6 +33,7 @@
 
               <vue-slider
                 @change="changingSliders"
+                @drag-end="draggingEnd"
                 class="slider-itself"
                 :railStyle="rail"
                 v-model="value"
@@ -67,7 +68,7 @@
                 </template>
                 <template v-slot:dot="{ pos, index }">
                   <div :class="sliderStyle(pos, index)">
-                    <v-icon dense class="shevron shevron-left" color="">
+                    <v-icon dense class="shevron shevron-left" color="" v-if='!mergedSlider'>
                       mdi-chevron-left
                     </v-icon>
                     <v-icon dense class="shevron shevron-right">
@@ -88,10 +89,13 @@
       <v-row>
         <v-col>
           <transition
-           name="custom-classes-transition"
-                  enter-active-class="animate__animated animate__backInDown"
-                  leave-active-class="animate__animated animate__backOutDown">
-            <v-btn v-if="bothSlidersTouched" @click="deliver" color='error'>next</v-btn>
+            name="custom-classes-transition"
+            enter-active-class="animate__animated animate__backInDown"
+            leave-active-class="animate__animated animate__backOutDown"
+          >
+            <v-btn v-if="bothSlidersTouched" @click="deliver" color="error"
+              >next</v-btn
+            >
           </transition>
         </v-col>
       </v-row>
@@ -100,7 +104,6 @@
 </template>
 
 <script>
-
 import VueSlider from "vue-slider-component";
 import { Chart } from "highcharts-vue";
 import "vue-slider-component/theme/default.css";
@@ -114,13 +117,14 @@ export default {
   data: function() {
     return {
       body: "",
+      mergedSlider:false,
       no_q_left: false,
       qid: null,
       distribution: {},
       slidersTouched: [false, false],
       bothSlidersTouched: false,
-      initialValue:[0, 33.33333, 66.666, 100],
-      value: [0, 33.33333, 66.666, 100],
+      initialValue: window.distribution,
+      value: window.distribution,
       rail: {
         background: "gray",
         "border-radius": "0px",
@@ -134,7 +138,7 @@ export default {
       chartOptions: {
         chart: {
           height: 300,
-          marginBottom:0,
+          marginBottom: 20,
           type: "column",
           margin: [50, 50, 100, 80],
         },
@@ -200,7 +204,7 @@ export default {
       const d = JSON.parse(data["data"]);
 
       ({ body: this.body, id: this.qid, no_q_left: this.no_q_left } = d);
-      this.value=_.clone(this.initialValue);
+      this.value = _.clone(this.initialValue);
       this.slidersTouched = [false, false];
       this.bothSlidersTouched = false;
     };
@@ -227,6 +231,9 @@ export default {
         second: result[1],
         third: result[2],
       };
+      
+      this.mergedSlider = _.includes(this.distribution,0);
+
       this.chartOptions.series[0].data = result;
     },
   },
@@ -239,6 +246,9 @@ export default {
           distribution: this.distribution,
         });
       }
+    },
+    draggingEnd(index) {
+      this.$socket.sendObj({ slider_movement_counter: true, qid: this.qid });
     },
     changingSliders(value, index) {
       this.slidersTouched[index - 1] = true;
@@ -270,6 +280,12 @@ export default {
       return classes[index];
     },
     sliderStyle(pos, index) {
+      
+      if (index===1 && this.mergedSlider) {
+      console.debug('gonna invisible', index, this.mergedSlider)
+        
+        return 'inv'
+        }
       if (index !== 0 && index !== 3) {
         return "slider-button";
       }

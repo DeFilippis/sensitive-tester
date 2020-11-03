@@ -14,6 +14,7 @@ import itertools
 import logging
 import yaml
 from otree.models import Participant
+import random
 
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
@@ -26,7 +27,7 @@ App testing for the most controversial questions for the conformity project
 class Constants(BaseConstants):
     name_in_url = 'tester'
     players_per_group = None
-
+    distributions = [[0, 33, 66, 100], [0, 50, 50, 100]]
     LIKERT = range(0, 11)
 
     with open(r'./data/qleads.yaml') as file:
@@ -43,9 +44,11 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
+        for p in self.get_players():
+            p.initial_distribution = p.id_in_group % 2
         if self.round_number == 1:
             ps = self.session.get_participants()
-            sqs = [SensitiveQ(owner=p, body=t.get('statement'), label=t.get('for_ranking'))
+            sqs = [SensitiveQ(owner=p, body=t.get('statement'), label=t.get('for_ranking'), order_r=random.random())
                    for p, t in itertools.product(ps, Constants.qs)]
             SensitiveQ.objects.bulk_create(sqs)
 
@@ -55,6 +58,11 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    initial_distribution = models.IntegerField()
+
+    def get_distribution(self):
+        return Constants.distributions[self.initial_distribution]
+
     def _next_q_for_dist(self):
         unanswered = self.participant.sqs.filter(first__isnull=True)
 
@@ -67,12 +75,17 @@ class Player(BasePlayer):
     def get_next_q_for_distribution(self, data):
         logger.info('message received from distribution')
         logger.info(data)
+        qid = data.get('qid')
+        distribution = data.get('distribution')
+        if data.get('slider_movement_counter') and qid:
+            q = SensitiveQ.objects.get(id=qid)
+            q.slider_movement_counter += 1
+            q.save()
+            return
         if data.get('info_request'):
             r = {self.id_in_group: self._next_q_for_dist()}
             return r
 
-        qid = data.get('qid')
-        distribution = data.get('distribution')
         if qid and distribution:
             q = SensitiveQ.objects.get(id=qid)
             for k, v in distribution.items():
@@ -120,11 +133,15 @@ class Player(BasePlayer):
 
 
 class SensitiveQ(djmodels.Model):
+    class Meta:
+        ordering = ['order_r']
     owner = djmodels.ForeignKey(to=Participant, on_delete=djmodels.CASCADE, related_name="sqs")
     body = models.StringField()
     label = models.StringField()
     attitude = models.IntegerField(choices=Constants.LIKERT, widget=widgets.RadioSelectHorizontal)
     average_attitude = models.IntegerField(choices=Constants.LIKERT, widget=widgets.RadioSelectHorizontal)
+    slider_movement_counter = models.IntegerField(default=0)
+    order_r = models.FloatField()
     """
     The block of the following questions is to elicit info about distribution shape.
     We may think about something more complex later on. 
@@ -144,8 +161,8 @@ class SensitiveQ(djmodels.Model):
 
 def custom_export(players):
     yield ['code', 'body', 'label', 'attitude', 'average_attitude', 'first', 'second', 'third', 'friendship',
-           'absolute_importance', 'relative_importance']
+           'absolute_importance', 'relative_importance', 'slider_movement_counter', 'order_r']
     for q in SensitiveQ.objects.order_by('id'):
         participant = q.owner
         yield [participant.code, q.body, q.label, q.attitude, q.average_attitude, q.first, q.second, q.third, q.friend,
-               q.absolute_importance, q.relative_importance]
+               q.absolute_importance, q.relative_importance, q.slider_movement_counter, q.order_r]

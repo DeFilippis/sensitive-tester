@@ -12,8 +12,8 @@
                 <v-card-title class="justify-center text-center" :style="{background:fieldCol, 'border-radius':'25px'}">
                   <transition
                     name="custom-classes-transition"
-                    enter-active-class="animate__animated animate__wobble"
-                    leave-active-class="animate__animated animate__backOutDown"
+                  enter-active-class="animate__animated animate__bounceIn"
+                  
                     appear
                   >
                     <div :key="body" class="white--text text-center">

@@ -5,4 +5,12 @@
   for_ranking: Gay marriage
 - statement: I support the legalization of marijuana
   for_ranking: Marijuana
+- statement: I do not believe in race-based affirmative action
+  for_ranking: Affirmative action
+- statement: I support Donald Trump and believe that he is a good President
+  for_ranking: Donald Trump's support
+- statement: I believe in women’s right to abortion
+  for_ranking: Abortion
+- statement: I believe that Islam is fundamentally a peaceful religion
+  for_ranking: Islam
 
