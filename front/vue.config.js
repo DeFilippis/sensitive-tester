@@ -11,6 +11,12 @@ const pages = {
         entry: './src/rel_importance.js',
         chunks: ['chunk-vendors']
     },
+    
+    'distribution': {
+        entry: './src/distribution.js',
+        chunks: ['chunk-vendors']
+    },
+
 };
 
 module.exports = {

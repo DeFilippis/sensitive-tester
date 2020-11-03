@@ -4,6 +4,13 @@ from .generic_pages import GenPage as Page
 from .models import Constants
 
 
+class Distribution(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    live_method = 'get_next_q_for_distribution'
+
+
 class QIntro(Page):
     def is_displayed(self):
         return self.round_number < Constants.num_rounds
@@ -43,9 +50,10 @@ class RelImportance(oTreePage):
     A bit particular page for ranking questions by their relative importance.
     Doesnt' make sense to reuse previous app because it's just too different
     """
+
     def post(self):
         """VERY UGLY WAY. SHOULD FIX IT LATER!!!"""
-        for k,v in self.request.POST.dict().items():
+        for k, v in self.request.POST.dict().items():
             try:
                 i = self.participant.sqs.get(label=k)
                 i.relative_importance = v
@@ -59,6 +67,7 @@ class RelImportance(oTreePage):
 
 
 page_sequence = [
+    Distribution,
     QIntro,
     Q,
     RelIntro,

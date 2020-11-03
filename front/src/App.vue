@@ -1,38 +1,45 @@
 <template>
-  <v-app class='main-app' >
-    <v-row align='center' justify='center' >
+  <v-app class="main-app">
+    <v-row align="center" justify="center">
+      <div v-cloak>
+        <v-card flat class="py-12 main_card" v-if="!no_q_left && body">
+          <v-card-text>
+            <v-row align="center" justify="center">
+              <v-col cols="12">
+                <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
+              </v-col>
+              <v-col cols="12">
+                <div
+                  v-if="!no_q_left && body"
+                  :style="{
+                    'border-radius': '10px',
+                    'padding-top': '10px',
+                    'padding-bottom': '10px',
+                    background: this.fieldCol,
+                    'font-weight': 'bold',
+                  }"
+                  class="lead  darken-2 text-center"
+                >
+                  <transition name="fade" :duration="500" mode="out-in">
+                    <span class="white--text" :key="body">{{ body }}</span>
+                  </transition>
+                </div>
+              </v-col>
+              <v-col cols="12">
+                <div v-if="no_q_left">No questions left</div>
+              </v-col>
 
-    
-    <div v-cloak>
-      <v-card flat class="py-12 main_card" v-if="!no_q_left && body">
-        <v-card-text>
-          <v-row align="center" justify="center">
-            <v-col cols="12">
-              <div v-if="lead">{{ lead }}</div>
-            </v-col>
-            <v-col cols="12">
-              <div
-                v-if="!no_q_left && body"
-                class="lead purple darken-2 text-center"
-              >
-                <span class="white--text">{{ body }}</span>
-              </div>
-            </v-col>
-            <v-col cols="12">
-              <div v-if="no_q_left">No questions left</div>
-            </v-col>
-
-            <v-col cols="12">
-              <v-btn-toggle v-model="value">
-                <v-btn v-for="i in likert" :key="i" @click="answer(i)">
-                  {{ i }}
-                </v-btn>
-              </v-btn-toggle>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </div>
+              <v-col cols="12">
+                <v-btn-toggle v-model="value">
+                  <v-btn v-for="i in likert" :key="i" @click="answer(i)">
+                    {{ i }}
+                  </v-btn>
+                </v-btn-toggle>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </div>
     </v-row>
   </v-app>
 </template>
@@ -41,7 +48,8 @@
 export default {
   data() {
     return {
-      lead: window.field_desc['lead'],
+      lead: window.field_desc["lead"],
+      trans: true,
       no_q_left: false,
       body: null,
       qid: null,
@@ -55,6 +63,7 @@ export default {
     // console.debug(this.$options.sockets)
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
+      this.trans = false;
       ({
         no_q_left: this.no_q_left,
         body: this.body,
@@ -63,20 +72,36 @@ export default {
         value: this.value,
       } = d);
     };
+    this.trans = true;
     this.$options.sockets.onopen = (data) => {
       console.debug("pizda connected");
       this.$socket.sendObj({ info_request: true });
     };
     //
   },
- 
-  watch:{
-    no_q_left(val){
-      if (val) {document.getElementById('form').submit()}
-    }
+
+  watch: {
+    no_q_left(val) {
+      if (val) {
+        document.getElementById("form").submit();
+      }
+    },
+  },
+  computed: {
+    fieldCol() {
+    
+      const colorCorr = {
+        attitude: "black",
+        average_attitude: "red",
+        friend: "blue",
+        absolute_importance: "darkgrey",
+      };
+      return colorCorr[this.field] || "black";
+    },
   },
   methods: {
     answer(val) {
+      this.trans = true;
       this.$socket.sendObj({
         answer: true,
         qid: this.qid,
@@ -88,17 +113,25 @@ export default {
   },
 };
 </script>
-<style >
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 [v-cloak] {
   display: none;
 }
 .main_card {
   max-width: 700px;
 }
-#app{background:transparent;
-max-width: 700px;}
-.main-app{
+#app {
+  background: transparent;
   max-width: 700px;
 }
- 
+.main-app {
+  max-width: 700px;
+}
 </style>

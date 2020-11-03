@@ -55,6 +55,31 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    def _next_q_for_dist(self):
+        unanswered = self.participant.sqs.filter(first__isnull=True)
+
+        if unanswered.exists():
+            q = unanswered.first()
+            return dict(body=q.body, id=q.id)
+        else:
+            return dict(no_q_left=True)
+
+    def get_next_q_for_distribution(self, data):
+        logger.info('message received from distribution')
+        logger.info(data)
+        if data.get('info_request'):
+            r = {self.id_in_group: self._next_q_for_dist()}
+            return r
+
+        qid = data.get('qid')
+        distribution = data.get('distribution')
+        if qid and distribution:
+            q = SensitiveQ.objects.get(id=qid)
+            for k, v in distribution.items():
+                setattr(q, k, v)
+            q.save()
+            return {self.id_in_group: self._next_q_for_dist()}  # we update the req
+
     def get_next_q(self, data):
         logger.info(data)
         qid = data.get('qid')
@@ -65,7 +90,7 @@ class Player(BasePlayer):
         if data.get('info_request'):
             return r
 
-        if data.get('answer') and qid and field and value:
+        if data.get('answer') and qid and field and value is not None:
             q = SensitiveQ.objects.get(id=qid)
             setattr(q, field, value)
             q.save()
