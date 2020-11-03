@@ -67,9 +67,9 @@ class RelImportance(oTreePage):
 
 
 page_sequence = [
-    Distribution,
-    QIntro,
+    # Distribution,
+    # QIntro,
     Q,
-    RelIntro,
-    RelImportance,
+    # RelIntro,
+    # RelImportance,
 ]

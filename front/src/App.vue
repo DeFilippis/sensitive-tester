@@ -9,21 +9,20 @@
                 <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
               </v-col>
               <v-col cols="12">
-                <div
-                  v-if="!no_q_left && body"
-                  :style="{
-                    'border-radius': '10px',
-                    'padding-top': '10px',
-                    'padding-bottom': '10px',
-                    background: this.fieldCol,
-                    'font-weight': 'bold',
-                  }"
-                  class="lead  darken-2 text-center"
-                >
-                  <transition name="fade" :duration="500" mode="out-in">
-                    <span class="white--text" :key="body">{{ body }}</span>
+                <v-card-title class="justify-center text-center" :style="{background:fieldCol, 'border-radius':'25px'}">
+                  <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animate__animated animate__wobble"
+                    leave-active-class="animate__animated animate__backOutDown"
+                    appear
+                  >
+                    <div :key="body" class="white--text text-center">
+                      <span >
+                        {{ body }}
+                      </span>
+                    </div>
                   </transition>
-                </div>
+                </v-card-title>
               </v-col>
               <v-col cols="12">
                 <div v-if="no_q_left">No questions left</div>
@@ -51,7 +50,7 @@ export default {
       lead: window.field_desc["lead"],
       trans: true,
       no_q_left: false,
-      body: null,
+      body: "",
       qid: null,
       field: null,
       value: null,
@@ -89,7 +88,6 @@ export default {
   },
   computed: {
     fieldCol() {
-    
       const colorCorr = {
         attitude: "black",
         average_attitude: "red",
@@ -114,6 +112,10 @@ export default {
 };
 </script>
 <style>
+:root {
+  --animate-duration: 1800ms;
+  --animate-delay: 2s;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

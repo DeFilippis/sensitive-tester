@@ -8,8 +8,8 @@
               <v-card-title class="justify-center">
                 <transition
                   name="custom-classes-transition"
-                  enter-active-class="animate__animated animate__backInDown"
-                  leave-active-class="animate__animated animate__backOutDown"
+                  enter-active-class="animate__animated animate__bounceIn"
+                  leave-active-class="animate__animated animate__fadeOut"
                 >
                   <span
                     dark
@@ -87,8 +87,11 @@
       </v-row>
       <v-row>
         <v-col>
-          <transition name="slide-fade">
-            <v-btn v-if="bothSlidersTouched" @click="deliver">next</v-btn>
+          <transition
+           name="custom-classes-transition"
+                  enter-active-class="animate__animated animate__backInDown"
+                  leave-active-class="animate__animated animate__backOutDown">
+            <v-btn v-if="bothSlidersTouched" @click="deliver" color='error'>next</v-btn>
           </transition>
         </v-col>
       </v-row>
@@ -116,6 +119,7 @@ export default {
       distribution: {},
       slidersTouched: [false, false],
       bothSlidersTouched: false,
+      initialValue:[0, 33.33333, 66.666, 100],
       value: [0, 33.33333, 66.666, 100],
       rail: {
         background: "gray",
@@ -130,6 +134,7 @@ export default {
       chartOptions: {
         chart: {
           height: 300,
+          marginBottom:0,
           type: "column",
           margin: [50, 50, 100, 80],
         },
@@ -195,6 +200,7 @@ export default {
       const d = JSON.parse(data["data"]);
 
       ({ body: this.body, id: this.qid, no_q_left: this.no_q_left } = d);
+      this.value=_.clone(this.initialValue);
       this.slidersTouched = [false, false];
       this.bothSlidersTouched = false;
     };
