@@ -1,0 +1,19 @@
+{% extends 'tester/Page.html' %}
+{% load otree  %}
+{% load render_bundle from webpack_loader %}
+
+
+
+
+{% block content %}
+
+
+    <script>
+    window.field_desc = {{ field_desc|json }} ;
+    </script>
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'main' %}
+{% endblock %}
+
+
+

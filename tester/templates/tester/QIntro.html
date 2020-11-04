@@ -1,0 +1,54 @@
+{% extends "tester/Page.html" %}
+{% load otree %}
+
+
+{% block content %}
+    <style>
+    .infocard{max-width:700px}
+    .infotext{text-align:left;
+              padding-top: 25px;
+              padding-bottom: 10px; }
+    </style>
+
+
+
+            <div class="card infocard" >
+                <div class="card-body">
+
+                    {% if field == "average_attitude" %}
+                        <h5 class="card-title">Guess How The Average Participant Responded</h5>
+                    {% elif field == "attitude" %}
+                        <h5 class="card-title">Report Your Attitudes On A Variety of Topics</h5>
+                    {% elif field == "absolute_importance" %}
+                        <h5 class="card-title">Report How Important Your Various Attitudes Are To You</h5>
+                    {% else %}
+                        <h5 class="card-title">Report How Likely Disagreement On A Topic Impedes Friendship</h5>
+                    {% endif %}
+
+                    <div class = "infotext">
+                        On the next page we will show you several statements and we'll ask you to answer the following question:
+                    </div>
+                    <div class="text-center lead font-weight-bold my-5">
+                        {{ field_desc.announcement }}
+                    </div>
+
+
+                    {% if field == "average_attitude" %}
+                        <div class="alert alert-success" role="alert">
+                            ATTENTION - We will reward  {{Constants.bonus_amount_distribution}} cents to the 10 participants who guess closest to the correct answer. As a result, it is in your best interest to try to guess correctly. 
+                        </div>
+                    {% endif %}
+
+                    <button class="mdc-button foo-button mdc-button--outlined">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Proceed</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}

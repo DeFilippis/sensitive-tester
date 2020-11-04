@@ -1,0 +1,14 @@
+{% extends 'tester/Page.html' %}
+{% load render_bundle from webpack_loader %}
+{% load otree %}
+
+
+{% block content %}
+    <script>
+    window.originalList = {{ Constants.for_ranking|json }}
+    </script>
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'relimp' %}
+{% endblock %}
+
+

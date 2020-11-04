@@ -1,0 +1,36 @@
+{% extends 'tester/Base.html' %}
+{% load otree %}
+{% block back %}
+
+{% endblock %}
+{% block styles %}
+    <style>
+        body, html {
+            height: 100%;
+        }
+    </style>
+
+{% endblock %}
+{% block main %}
+
+    <div class="   d-flex flex-column h-100 ">
+
+        <div class="card flex-grow-1 my-auto d-flex align-items-center flex-column bg-dark h-100">
+            <div class="my-auto text-center">
+                <script>
+                    window.socket_path = {{ view.live_url|json }};
+                    window.id_in_group = {{ player.id_in_group }};
+                </script>
+                <form class="otree-form" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+                    <div class="lead " id="app"></div>
+                    {% block content %}
+
+                    {% endblock %}
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
