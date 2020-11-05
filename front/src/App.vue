@@ -9,15 +9,17 @@
                 <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
               </v-col>
               <v-col cols="12">
-                <v-card-title class="justify-center text-center" :style="{background:fieldCol, 'border-radius':'25px'}">
+                <v-card-title
+                  class="justify-center text-center"
+                  :style="{ background: fieldCol, 'border-radius': '25px' }"
+                >
                   <transition
                     name="custom-classes-transition"
-                  enter-active-class="animate__animated animate__bounceIn"
-                  
+                    enter-active-class="animate__animated animate__bounceIn"
                     appear
                   >
                     <div :key="body" class="white--text text-center">
-                      <span >
+                      <span class='bodytext'> 
                         {{ body }}
                       </span>
                     </div>
@@ -135,5 +137,8 @@ export default {
 }
 .main-app {
   max-width: 700px;
+}
+.bodytext{
+  word-break: normal;
 }
 </style>

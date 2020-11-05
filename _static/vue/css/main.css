@@ -1,0 +1,1 @@
+:root{--animate-duration:1800ms;--animate-delay:2s}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}[v-cloak]{display:none}#app,.main_card{max-width:700px}#app{background:transparent}.main-app{max-width:700px}.bodytext{word-break:normal}

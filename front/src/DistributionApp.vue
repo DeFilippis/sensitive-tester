@@ -118,6 +118,7 @@ export default {
   data: function() {
     return {
       body: "",
+      mergingSliderThreshold:1,
       mergedSlider:false,
       no_q_left: false,
       qid: null,
@@ -230,8 +231,9 @@ export default {
         second: result[1],
         third: result[2],
       };
+      const [__, firstSlPos, secondSlPos] = newV;
       
-      this.mergedSlider = _.includes(this.distribution,0);
+      this.mergedSlider = secondSlPos-firstSlPos<this.mergingSliderThreshold;
 
       this.chartOptions.series[0].data = result;
     },
