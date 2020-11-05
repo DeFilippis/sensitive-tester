@@ -20,13 +20,22 @@ class Q(Page):
     Here we show the set of questions (:
     personal attitude,
     average attitude,
-    likelyhood of friendship,
+    likelihood of friendship,
     personal (aka absolute) Importance,
     distribution of averages
     """
 
     def is_displayed(self):
+        #print(self.player.get_next_q())
         return self.round_number < Constants.num_rounds
+
+    def vars_for_template(self):
+        pass
+        #return(
+            #dict{
+            #    field = self.player.get_next_q
+            #}
+        #)
 
     live_method = 'get_next_q'
 
