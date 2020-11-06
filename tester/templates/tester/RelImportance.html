@@ -5,7 +5,7 @@
 
 {% block content %}
     <script>
-    window.originalList = {{ Constants.for_ranking|json }}
+    window.originalList = {{ player.get_ranking_titles|json }}
     </script>
     {% render_bundle 'chunk-vendors' %}
     {% render_bundle 'relimp' %}

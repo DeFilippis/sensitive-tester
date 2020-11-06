@@ -15,6 +15,7 @@ import logging
 import yaml
 from otree.models import Participant
 import random
+from django.db.models import Q, Max, FloatField
 
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
@@ -29,13 +30,14 @@ class Constants(BaseConstants):
     players_per_group = None
     distributions = [[0, 33, 66, 100], [0, 50, 50, 100]]
     LIKERT = range(0, 11)
-    bonus_amount_average = 50 # amount in cents to be bonus participants for guessing second-order beliefs correctly
-    bonus_amount_distribution = 50 # amount in cents to bonus participants for guessing distributions correctly
+    bonus_amount_average = 50  # amount in cents to be bonus participants for guessing second-order beliefs correctly
+    bonus_amount_distribution = 50  # amount in cents to bonus participants for guessing distributions correctly
 
     with open(r'./data/qleads.yaml') as file:
         leads = yaml.load(file, Loader=yaml.FullLoader)
     fields = list(leads.keys())  # again, not the best one, but will work for now. TODO?
-
+    sortable_fields = fields + ['first',
+                                'relative_importance']  # we use this for creating custom sorting for each field
     num_rounds = len(fields) + 1  # we ask one extra question (about relative importance).
     with open(r'./data/q.yaml') as file:
         qs = yaml.load(file, Loader=yaml.FullLoader)
@@ -53,6 +55,10 @@ class Subsession(BaseSubsession):
             sqs = [SensitiveQ(owner=p, body=t.get('statement'), label=t.get('for_ranking'), order_r=random.random())
                    for p, t in itertools.product(ps, Constants.qs)]
             SensitiveQ.objects.bulk_create(sqs)
+            for p in ps:
+                for s in p.sqs.all():
+                    for f in Constants.sortable_fields:
+                        Sorter.objects.create(s=s, f=f, r=random.random())
 
 
 class Group(BaseGroup):
@@ -61,6 +67,14 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     initial_distribution = models.IntegerField()
+
+    def get_ranking_titles(self):
+        sqs = self.participant.sqs.all()
+
+        sqs = sqs.annotate(s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
+                           ).order_by('s').values_list('label', flat=True)
+
+        return [{'label': q} for q in sqs]
 
     def get_distribution(self):
         return Constants.distributions[self.initial_distribution]
@@ -126,6 +140,10 @@ class Player(BasePlayer):
 
         d = {f'{field}__isnull': True}
         unanswered = self.participant.sqs.filter(**d)
+        if field in Constants.sortable_fields:
+            unanswered = unanswered.annotate(s=Max('sorters__r', filter=Q(sorters__f=field), output_field=FloatField()),
+                                             ).order_by('s')
+
         print('FIELD', field, unanswered, self.round_number)
         if unanswered.exists():
             q = unanswered.first()
@@ -137,6 +155,7 @@ class Player(BasePlayer):
 class SensitiveQ(djmodels.Model):
     class Meta:
         ordering = ['order_r']
+
     owner = djmodels.ForeignKey(to=Participant, on_delete=djmodels.CASCADE, related_name="sqs")
     body = models.StringField()
     label = models.StringField()
@@ -159,6 +178,15 @@ class SensitiveQ(djmodels.Model):
 
     def __str__(self):
         return f'Q: "{self.body}" for participant {self.owner.code}'
+
+
+class Sorter(djmodels.Model):
+    s = djmodels.ForeignKey(to=SensitiveQ, on_delete=djmodels.CASCADE, related_name='sorters')
+    r = models.FloatField()
+    f = models.StringField()
+
+    def __str__(self):
+        return f'sorter for {self.s.body}: field {self.f}, r: {self.r}'
 
 
 def custom_export(players):
