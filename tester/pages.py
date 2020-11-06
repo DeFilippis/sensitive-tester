@@ -1,6 +1,6 @@
 from otree.api import Currency as c, currency_range
-from ._builtin import WaitPage, Page as oTreePage
-from .generic_pages import GenPage as Page, DistributionPage
+from ._builtin import WaitPage
+from .generic_pages import GenPage as Page, DistributionPage,oTreePage
 from .models import Constants
 
 

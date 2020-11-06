@@ -43,7 +43,6 @@ class Constants(BaseConstants):
         qs = yaml.load(file, Loader=yaml.FullLoader)
 
     bodies = [q.get('statement') for q in qs]
-    for_ranking = [{'label': q.get('for_ranking')} for q in qs]
 
 
 class Subsession(BaseSubsession):
@@ -55,10 +54,12 @@ class Subsession(BaseSubsession):
             sqs = [SensitiveQ(owner=p, body=t.get('statement'), label=t.get('for_ranking'), order_r=random.random())
                    for p, t in itertools.product(ps, Constants.qs)]
             SensitiveQ.objects.bulk_create(sqs)
-            for p in ps:
-                for s in p.sqs.all():
-                    for f in Constants.sortable_fields:
-                        Sorter.objects.create(s=s, f=f, r=random.random())
+            sorters = []
+
+            for s in SensitiveQ.objects.filter(owner__session=self.session):
+                for f in Constants.sortable_fields:
+                    sorters.append(Sorter(s=s, f=f, r=random.random()))
+            Sorter.objects.bulk_create((sorters))
 
 
 class Group(BaseGroup):
@@ -68,13 +69,22 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     initial_distribution = models.IntegerField()
 
+    def get_progress(self):
+        totpages = self.participant._max_page_index
+        curpage = self.participant._index_in_pages
+        totsorters = Sorter.objects.filter(s__owner=self.participant).exclude(
+            f='relative_importance')
+        submitted_qs = totsorters.filter(submitted=True).count()
+
+        return f"{(curpage + submitted_qs) / (totpages + totsorters.count()) * 100:.2f}"
+
     def get_ranking_titles(self):
         sqs = self.participant.sqs.all()
 
         sqs = sqs.annotate(s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
                            ).order_by('s').values_list('label', flat=True)
 
-        return [{'label': q} for q in sqs]
+        return [{'label': q} for q in sqs if q != 'attention']
 
     def get_distribution(self):
         return Constants.distributions[self.initial_distribution]
@@ -84,7 +94,7 @@ class Player(BasePlayer):
 
         if unanswered.exists():
             q = unanswered.first()
-            return dict(body=q.body, id=q.id)
+            return dict(body=q.body, id=q.id,  progress_value=self.get_progress())
         else:
             return dict(no_q_left=True)
 
@@ -106,7 +116,9 @@ class Player(BasePlayer):
             q = SensitiveQ.objects.get(id=qid)
             for k, v in distribution.items():
                 setattr(q, k, v)
+
             q.save()
+            q.mark_sorters_done('first')
             return {self.id_in_group: self._next_q_for_dist()}  # we update the req
 
     def get_next_q(self, data):
@@ -123,6 +135,7 @@ class Player(BasePlayer):
             q = SensitiveQ.objects.get(id=qid)
             setattr(q, field, value)
             q.save()
+            q.mark_sorters_done(field)
         r = {self.id_in_group: self.next_q()}  # we update the req
         return r
 
@@ -144,17 +157,20 @@ class Player(BasePlayer):
             unanswered = unanswered.annotate(s=Max('sorters__r', filter=Q(sorters__f=field), output_field=FloatField()),
                                              ).order_by('s')
 
-        print('FIELD', field, unanswered, self.round_number)
         if unanswered.exists():
             q = unanswered.first()
-            return dict(body=q.body, field=field, id=q.id)
+            body = q.body
+            if q.label == 'attention':
+                body = q.body.format(
+                    random_num=random.randint(0, 10))  # we inject it everywhere. Dont' know if it makes sense
+            return dict(body=body, field=field, id=q.id, progress_value=self.get_progress())
         else:
             return dict(no_q_left=True)
 
 
 class SensitiveQ(djmodels.Model):
-    class Meta:
-        ordering = ['order_r']
+    def mark_sorters_done(self, field_name):
+        self.sorters.filter(f=field_name).update(submitted=True)
 
     owner = djmodels.ForeignKey(to=Participant, on_delete=djmodels.CASCADE, related_name="sqs")
     body = models.StringField()
@@ -184,6 +200,7 @@ class Sorter(djmodels.Model):
     s = djmodels.ForeignKey(to=SensitiveQ, on_delete=djmodels.CASCADE, related_name='sorters')
     r = models.FloatField()
     f = models.StringField()
+    submitted = models.BooleanField(default=False)
 
     def __str__(self):
         return f'sorter for {self.s.body}: field {self.f}, r: {self.r}'
@@ -191,8 +208,25 @@ class Sorter(djmodels.Model):
 
 def custom_export(players):
     yield ['code', 'body', 'label', 'attitude', 'average_attitude', 'first', 'second', 'third', 'friendship',
-           'absolute_importance', 'relative_importance', 'slider_movement_counter', 'order_r']
-    for q in SensitiveQ.objects.order_by('id'):
+           'absolute_importance', 'relative_importance', 'slider_movement_counter',
+           "sorter_attitude",
+           "sorter_average_attitude",
+           "sorter_first",
+           "sorter_friendship",
+           "sorter_absolute_importance",
+           "sorter_relative_importance",
+           ]
+    annotation = {}
+    for f in Constants.sortable_fields:
+        annotation[f'sorter_{f}'] = Max('sorters__r', filter=Q(sorters__f=f), output_field=FloatField())
+    sortableq = SensitiveQ.objects.order_by('id').annotate(**annotation)
+
+    for q in sortableq:
         participant = q.owner
         yield [participant.code, q.body, q.label, q.attitude, q.average_attitude, q.first, q.second, q.third, q.friend,
-               q.absolute_importance, q.relative_importance, q.slider_movement_counter, q.order_r]
+               q.absolute_importance, q.relative_importance, q.slider_movement_counter, q.sorter_attitude,
+               q.sorter_average_attitude,
+               q.sorter_first,
+               q.sorter_friend,
+               q.sorter_absolute_importance,
+               q.sorter_relative_importance]

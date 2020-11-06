@@ -19,3 +19,5 @@
   for_ranking: Western Culture
 - statement: I believe immigrants strengthen our country because of their hard work and talent.
   for_ranking: Immigrants
+- statement: Click {random_num} if you pay attention.
+  for_ranking: attention
