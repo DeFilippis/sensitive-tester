@@ -13,8 +13,8 @@
                 >
                   <span
                     dark
-                    :style="{ background: 'black' }"
-                    class="white--text darken-2"
+                    :style="{ }"
+                    class="question-box"
                     :key="body"
                     >{{ body }}</span
                   >
@@ -24,7 +24,8 @@
                 Please drag the sliders below to divide it into three areas
                 based on your estimate of how many people in this study have
                 answered from 0 to 3, from 4 to 6, from 7 to 10 about the
-                statement above.
+                statement above. <b>Please Note: You must move BOTH the sliders in order 
+                to progress to the next page </b>
               </div>
             </v-card>
 
@@ -90,7 +91,7 @@
         <v-col>
           <transition
             name="custom-classes-transition"
-            enter-active-class="animate__animated animate__backInDown"
+            enter-active-class="animate__animated animate__animate__fadeIn"
             leave-active-class="animate__animated animate__backOutDown"
           >
             <v-btn v-if="bothSlidersTouched" @click="deliver" color="error"
@@ -117,6 +118,7 @@ export default {
   data: function() {
     return {
       body: "",
+      mergingSliderThreshold:1,
       mergedSlider:false,
       no_q_left: false,
       qid: null,
@@ -158,12 +160,10 @@ export default {
         },
         tooltip: {
           formatter: function() {
-            return (
-              "The value for <b>" +
-              this.x +
-              "</b> is <b>" +
+            return ("<b>" + 
               _.round(this.y) +
-              "%</b> "
+              "%</b> " + "of participants answered between <b>" +
+              this.x + "</b>"
             );
           },
         },
@@ -231,8 +231,9 @@ export default {
         second: result[1],
         third: result[2],
       };
+      const [__, firstSlPos, secondSlPos] = newV;
       
-      this.mergedSlider = _.includes(this.distribution,0);
+      this.mergedSlider = secondSlPos-firstSlPos<this.mergingSliderThreshold;
 
       this.chartOptions.series[0].data = result;
     },
@@ -308,6 +309,18 @@ export default {
 .shevron {
   margin: -3px !important;
 }
+
+.question-box{
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: bold;
+  background-color: #5bc0de;
+  word-break: normal;
+}
+
+
 .left-wrap {
   background: black;
   border-radius: 10px 0px 0px 10px !important;

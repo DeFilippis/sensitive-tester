@@ -3,24 +3,24 @@
 #lead is for the actual text that is shown on the apge
 attitude:
   announcement:
-    To what extent do you agree with the  statement which will be shown at the screen (where "0" means "Totally disagree" and "10" means "Absolutely agree")
+    To what extent do you agree with the statement shown on the screen (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
   lead:
-    To what extent do you agree with the  statement (where "0" means "Totally disagree" and "10" means "Absolutely agree")
+    To what extent do you agree with the following statement (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
 average_attitude:
   announcement:
-    How did the average participant of this study answer the question (where "0" means "Totally disagree" and "10" means "Absolutely agree")
+    How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
   lead:
-    How did the average participant of this study answer the question (where "0" means "Totally disagree" and "10" means "Absolutely agree")
-friend:
-  announcement:
-    Imagine two people who strongly disagree with each other on this question. (Person A answers "0", and Person B answers "10."). How likely is it that this disagreement would prevent them from being friends?
-  lead:
-    Imagine two people who strongly disagree with each other on this question. (Person A answers "0", and Person B answers "10."). How likely is it that this disagreement would prevent them from being friends?
+    How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
 absolute_importance:
   announcement:
-    How important your opinion on the following statement for you (from 0 to 10)
+    How important is your opinion on the following statement for you (where "0" means "Not At All Important" and "10" means "Extremely Important")?
   lead:
-    How important your opinion on the following statement for you (from 0 to 10)
+    How important is your opinion on the following statement for you (where "0" means "Not At All Important" and "10" means "Extremely Important")?
+friend:
+  announcement:
+    Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends (where “0” means it’s “Very Unlikely” and “10” means “Very Likely”)?
+  lead:
+    Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends (where “0” means it’s “Very Unlikely” and “10” means “Very Likely”)?
 #distribution:
 #  announcement:
 #    Estimate the share of participants over the values

@@ -29,6 +29,8 @@ class Constants(BaseConstants):
     players_per_group = None
     distributions = [[0, 33, 66, 100], [0, 50, 50, 100]]
     LIKERT = range(0, 11)
+    bonus_amount_average = 50 # amount in cents to be bonus participants for guessing second-order beliefs correctly
+    bonus_amount_distribution = 50 # amount in cents to bonus participants for guessing distributions correctly
 
     with open(r'./data/qleads.yaml') as file:
         leads = yaml.load(file, Loader=yaml.FullLoader)

@@ -1,16 +1,21 @@
 # The 'for_ranking' is a shortcut for relative importance ranking only (otherwise descriptions are too lengthy)
-- statement: Drinking alcohol is morally acceptable.
+- statement: I believe that drinking alcohol is morally acceptable.
   for_ranking: Alcohol
 - statement: I support gay marriage
   for_ranking: Gay marriage
-- statement: I support the legalization of marijuana
-  for_ranking: Marijuana
-- statement: I do not believe in race-based affirmative action
+- statement: I support race-based affirmative action
   for_ranking: Affirmative action
-- statement: I support Donald Trump and believe that he is a good President
-  for_ranking: Donald Trump's support
-- statement: I believe in women’s right to abortion
+- statement: I support Vladimir Putin
+  for_ranking: I support Vladimir Putin
+- statement: I believe in a woman's right to abortion
   for_ranking: Abortion
 - statement: I believe that Islam is fundamentally a peaceful religion
   for_ranking: Islam
-
+- statement: I believe that there are only two genders
+  for_ranking: Two Genders
+- statement: I believe that the government should mandate the wearing of masks in public to limit the spread of COVID-19.
+  for_ranking: COVID Masks
+- statement: I believe that Western culture is generally superior to that of the Middle East and Africa
+  for_ranking: Western Culture
+- statement: I believe immigrants strengthen our country because of their hard work and talent.
+  for_ranking: Immigrants
