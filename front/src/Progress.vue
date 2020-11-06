@@ -9,10 +9,10 @@
         aria-valuemin="0"
         aria-valuemax="100"
       />
-      <div
+      <div 
         class="justify-content-center d-flex position-absolute w-100 align-items-center align-self-center"
       >
-        <div v-if='fixedProg'>{{ fixedProg }}%</div>
+        <div v-if="progressValue">{{ fixedProg }}%</div>
       </div>
     </div>
   </div>
