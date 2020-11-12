@@ -3,6 +3,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+test = "poop" 
+
 SESSION_CONFIGS = [
     dict(
        name='tester',
