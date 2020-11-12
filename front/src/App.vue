@@ -19,7 +19,7 @@
                     appear
                   >
                     <div :key="body" class="white--text text-center">
-                      <span class='bodytext'> 
+                      <span class="bodytext">
                         {{ body }}
                       </span>
                     </div>
@@ -58,7 +58,30 @@ export default {
       value: null,
       toggle_exclusive: undefined,
       likert: this._.range(0, 11),
+      progressValue:0,
     };
+  },
+
+  computed: {
+    fieldCol() {
+      const colorCorr = {
+        attitude: "black",
+        average_attitude: "red",
+        friend: "blue",
+        absolute_importance: "darkgrey",
+      };
+      return colorCorr[this.field] || "black";
+    },
+  },
+  watch: {
+    progressValue(val){
+      window.vueProgress.progressValue=val
+    },
+    no_q_left(val) {
+      if (val) {
+        document.getElementById("form").submit();
+      }
+    },
   },
   mounted() {
     // console.debug(this.$options.sockets)
@@ -71,34 +94,16 @@ export default {
         id: this.qid,
         field: this.field,
         value: this.value,
+        progress_value: this.progressValue
       } = d);
     };
     this.trans = true;
     this.$options.sockets.onopen = (data) => {
-      console.debug("pizda connected");
       this.$socket.sendObj({ info_request: true });
     };
     //
   },
 
-  watch: {
-    no_q_left(val) {
-      if (val) {
-        document.getElementById("form").submit();
-      }
-    },
-  },
-  computed: {
-    fieldCol() {
-      const colorCorr = {
-        attitude: "black",
-        average_attitude: "red",
-        friend: "blue",
-        absolute_importance: "darkgrey",
-      };
-      return colorCorr[this.field] || "black";
-    },
-  },
   methods: {
     answer(val) {
       this.trans = true;
@@ -138,7 +143,7 @@ export default {
 .main-app {
   max-width: 700px;
 }
-.bodytext{
+.bodytext {
   word-break: normal;
 }
 </style>

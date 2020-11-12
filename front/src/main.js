@@ -26,7 +26,7 @@ Vue.use(VueNativeSock, ws_path, {
 });
 
 
-new Vue({
+window.vueOpinion = new Vue({
     vuetify: new Vuetify(
         {
             defaultAssets: {

@@ -16,6 +16,10 @@ const pages = {
         entry: './src/distribution.js',
         chunks: ['chunk-vendors']
     },
+    'progress': {
+        entry: './src/progress.js',
+        chunks: ['chunk-vendors']
+    },
 
 };
 
