@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from django.conf import settings
 from django.db import models as djmodels
 import csv
 import itertools
@@ -17,6 +18,7 @@ from otree.models import Participant
 import random
 from django.db.models import Q, Max, FloatField
 from django.utils.translation import gettext_lazy as _
+
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
 
@@ -46,12 +48,21 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
+    def get_current_language(self):
+
+        return self.session.config.get('language', settings.LANGUAGE_CODE)
+
     def creating_session(self):
         for p in self.get_players():
             p.initial_distribution = p.id_in_group % 2
         if self.round_number == 1:
+            l=self.get_current_language()
             ps = self.session.get_participants()
-            sqs = [SensitiveQ(owner=p, body=t.get('statement'), label=t.get('for_ranking'), order_r=random.random())
+            sqs = [SensitiveQ(owner=p,
+                              body=t[l].get('statement'),
+                              label=t[l].get('for_ranking'),
+                              order_r=random.random()
+                              )
                    for p, t in itertools.product(ps, Constants.qs)]
             SensitiveQ.objects.bulk_create(sqs)
             sorters = []
@@ -94,7 +105,7 @@ class Player(BasePlayer):
 
         if unanswered.exists():
             q = unanswered.first()
-            return dict(body=q.body, id=q.id,  progress_value=self.get_progress())
+            return dict(body=q.body, id=q.id, progress_value=self.get_progress())
         else:
             return dict(no_q_left=True)
 

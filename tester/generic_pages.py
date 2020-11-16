@@ -2,12 +2,12 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants, Sorter
 from django.db.models import Q
-from django.conf import settings
+
 from django.utils import translation
 
 class TransMixin:
     def get_current_language(self):
-        return self.session.config.get('language', settings.LANGUAGE_CODE)
+        return self.subsession.get_current_language()
     def get_context_data(self, **context):
         user_language = self.get_current_language()
         translation.activate(user_language)

@@ -3,44 +3,45 @@
     statement: I believe that drinking alcohol is morally acceptable.
     for_ranking: Alcohol
   ru:
-    statement: I believe that drinking alcohol is morally acceptable.
-    for_ranking: Alcohol
+    statement: Я думаю, что потреблять алкоголь морально приемлемо
+    for_ranking: Алкоголь
 - en:
     statement: I support gay marriage
     for_ranking: Gay marriage
   ru:
-    statement: I support gay marriage
-    for_ranking: Gay marriage
+    statement: Я поддерживаю однополые браки
+    for_ranking: Однополые браки
+
 - en:
     statement: I support Vladimir Putin
     for_ranking: I support Vladimir Putin
   ru:
-    statement: I support Vladimir Putin
-    for_ranking: I support Vladimir Putin
+    statement: Я поддерживаю Владимира Путина
+    for_ranking: Путин
 - en:
     statement: I believe in a woman's right to abortion
     for_ranking: Abortion
   ru:
-    statement: I believe in a woman's right to abortion
-    for_ranking: Abortion
+    statement: Я считаю, что любая женщина имеет право на аборт
+    for_ranking: Аборты
 - en:
     statement: I believe that Islam is fundamentally a peaceful religion
     for_ranking: Islam
   ru:
-    statement: I believe that Islam is fundamentally a peaceful religion
-    for_ranking: Islam
+    statement: Я полагаю, что ислам по своей сути - миролюбивая религия
+    for_ranking: Ислам
 - en:
     statement: I believe that there are only two genders
     for_ranking: Two Genders
   ru:
-    statement: I believe that there are only two genders
-    for_ranking: Two Genders
+    statement: Я полагаю, что существует всего два пола
+    for_ranking: Вопросы пола
 - en:
     statement: I believe that the government should mandate the wearing of masks in public to limit the spread of COVID-19.
     for_ranking: COVID Masks
   ru:
-    statement: I believe that the government should mandate the wearing of masks in public to limit the spread of COVID-19.
-    for_ranking: COVID Masks
+    statement: Я считаю, что правительство должно принуждать к ношению масок в общественных местах для того, чтобы ограничить распространения COVID-19
+    for_ranking: Маски при ковиде
 - en:
     statement: I believe that Western culture is generally superior to that of the Middle East.
     for_ranking: Western Culture
