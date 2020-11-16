@@ -30,17 +30,17 @@ SESSION_CONFIGS = [
     dict(
         name='full_ru',
         display_name="tester (Russian)",
-        numÒ_demo_participants=1,
+        num_demo_participants=1,
         app_sequence=['tester', 'sensitive_tester_endline'],
         language='ru'
     ),
     dict(
         name='full_en',
         display_name="tester (English)",
-        numÒ_demo_participants=1,
+        num_demo_participants=1,
         app_sequence=['tester', 'sensitive_tester_endline'],
         language='en'
-    ),
+    )
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
