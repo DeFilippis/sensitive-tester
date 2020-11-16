@@ -20,9 +20,9 @@ average_attitude:
       How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
   ru:
     announcement:
-      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+      Как средний участник этого исследования ответил на вопрос (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
     lead:
-      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+      Как средний участник этого исследования ответил на вопрос (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
 absolute_importance:
   en:
     announcement:
@@ -31,9 +31,9 @@ absolute_importance:
       How important is your opinion on the following statement for you (where "0" means "Not At All Important" and "10" means "Extremely Important")?
   ru:
     announcement:
-      How important is your opinion on the following statement for you (where "0" means "Not At All Important" and "10" means "Extremely Important")?
+      Насколько важно для вас ваше мнение по поводу следующего утверждения (где «0» означает «Совсем не важно», а «10» означает «Чрезвычайно важно»)?
     lead:
-      How important is your opinion on the following statement for you (where "0" means "Not At All Important" and "10" means "Extremely Important")?
+      Насколько важно для вас ваше мнение по поводу следующего утверждения (где «0» означает «Совсем не важно», а «10» означает «Чрезвычайно важно»)?
 friend:
   en:
     announcement:
@@ -42,6 +42,6 @@ friend:
       Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends (where “0” means it’s “Very Unlikely” and “10” means “Very Likely”)?
   ru:
     announcement:
-      Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends (where “0” means it’s “Very Unlikely” and “10” means “Very Likely”)?
+      Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями (где «0» означает «очень маловероятно», а «10» означает «очень вероятно»)?
     lead:
-      Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends (where “0” means it’s “Very Unlikely” and “10” means “Very Likely”)?
+      Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями (где «0» означает «очень маловероятно», а «10» означает «очень вероятно»)?
