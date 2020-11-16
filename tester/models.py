@@ -56,7 +56,7 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             p.initial_distribution = p.id_in_group % 2
         if self.round_number == 1:
-            l=self.get_current_language()
+            l = self.get_current_language()
             ps = self.session.get_participants()
             sqs = [SensitiveQ(owner=p,
                               body=t[l].get('statement'),
