@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-16 15:32+0300\n"
+"POT-Creation-Date: 2020-11-16 22:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,93 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: tester/models.py:48
+msgid ""
+"Please drag the sliders below to divide it into three areas\n"
+"            based on your estimate of how many people in this study have\n"
+"            answered from 0 to 3, from 4 to 6, from 7 to 10 about the\n"
+"            statement above. <b>Please Note: You must move BOTH the sliders "
+"in order \n"
+"            to progress to the next page</b>"
+msgstr ""
+"Перетащите ползунки ниже, чтобы разделить его на три области на основе вашей "
+"оценки того, сколько людей в этом исследовании ответили от 0 до 3, от 4 до "
+"6, от 7 до 10 по поводу утверждения выше. Обратите внимание: вы должны "
+"переместить ОБА ползунка, чтобы перейти на следующую страницу."
+
+#: tester/models.py:55
+msgid "from 0 to 3"
+msgstr "от 0 до 3"
+
+#: tester/models.py:55
+msgid "from 4 to 6"
+msgstr "от 4 до 6"
+
+#: tester/models.py:55
+msgid "From 7 to 10"
+msgstr "от 7 до 10"
+
+#: tester/models.py:56
+msgid "Share (in %)"
+msgstr "Доля (в %)"
+
+#: tester/models.py:57
+msgid "Distribution of answers"
+msgstr "Распределение ответов"
+
+#: tester/models.py:58
+msgid "of participants answered between"
+msgstr " участников выбравших "
+
+#: tester/models.py:59 tester/models.py:65
+msgid "Next"
+msgstr "Далее"
+
+#: tester/models.py:62
+msgid "Sort items based on the relative importance for you"
+msgstr "Отсортируйте элементы в порядке важности для вас"
+
+#: tester/models.py:63
+msgid "Move from here"
+msgstr "Переместите элементы отсюда"
+
+#: tester/models.py:64
+msgid "...to here"
+msgstr "Сюда в порядке важности для вас"
+
+#: tester/templates/tester/DistributionIntro.html:23
+msgid "Guess The Distribution of Responses from Other Participants"
+msgstr "Угадайте распределение ответов от других участников"
+
+#: tester/templates/tester/DistributionIntro.html:29
+msgid ""
+"On the next page, we want you to estimate the fraction of participants in "
+"this study that gave each kind of answer to the questions asked we just "
+"asked about."
+msgstr "На следующей странице мы хотим, чтобы вы оценили долю участников в этом исследовании, которые дали каждый вид ответов на заданные нами вопросы."
+
+#: tester/templates/tester/DistributionIntro.html:33
+msgid ""
+"Specifically, you will be asked to move sliders to estimate the percentage "
+"of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range."
+msgstr "В частности, вам будет предложено переместить ползунки, чтобы оценить процент участников, которые дали ответы, которые попали в диапазон 0–3, 4–6 и 7–10."
+
+#: tester/templates/tester/DistributionIntro.html:42
+msgid ""
+"ATTENTION - We will reward  %(bonus)s cents to the 10 participants who guess "
+"closest to the correct answer. As a result, it is in your best interest to "
+"try to guess correctly."
+msgstr ""
+"Внимание: мы выплатм   %(bonus)s центов тем 10 участникам, чей ответ окажется ближе всего к верному "
+"значению. Тем самым, в ваших интересах попытаться назвать максимально верное "
+"значение."
+
+#: tester/templates/tester/DistributionIntro.html:55
+#: tester/templates/tester/QIntro.html:54
+#: tester/templates/tester/RelIntro.html:21
+msgid "Proceed"
+msgstr "Продолжить"
 
 #: tester/templates/tester/QIntro.html:20
 msgid "Guess How The Average Participant Responded"
@@ -34,7 +121,9 @@ msgstr "Укажите, насколько вам важна ваша позиц
 
 #: tester/templates/tester/QIntro.html:32
 msgid "Report How Likely Disagreement On A Topic Impedes Friendship"
-msgstr "Как вам кажется, насколько несогласие по ряду вопросов может препятствовать дружбе"
+msgstr ""
+"Как вам кажется, насколько несогласие по ряду вопросов может препятствовать "
+"дружбе"
 
 #: tester/templates/tester/QIntro.html:37
 msgid ""
@@ -57,6 +146,10 @@ msgstr ""
 "значению. Тем самым, в ваших интересах попытаться назвать максимально верное "
 "значение."
 
-#: tester/templates/tester/QIntro.html:54
-msgid "Proceed"
-msgstr "Продолжить"
+#: tester/templates/tester/RelIntro.html:16
+msgid ""
+"On the next page we will ask you to rank the attitudes you just reported "
+"based on how important they are to you."
+msgstr ""
+"На следующей странице мы попросим вас оценить отношения, о которых вы только "
+"что сообщили, в зависимости от того, насколько они важны для вас."

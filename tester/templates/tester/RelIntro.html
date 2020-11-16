@@ -1,8 +1,9 @@
 {% extends "tester/Page.html" %}
-{% load otree %}
 
 
 {% block content %}
+
+
     <style>
     .infocard{max-width:700px}
     </style>
@@ -12,13 +13,12 @@
             <div class="card infocard" >
                 <div class="card-body">
                     <div class="my-5">
-                        On the next page we will ask you to rank the attitudes you just reported based on 
-                        how important they are to you.
+                        {% trans "On the next page we will ask you to rank the attitudes you just reported based on how important they are to you." %}
                     </div>
 
                     <button class="mdc-button foo-button mdc-button--outlined">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Proceed</span>
+                        <span class="mdc-button__label">{% trans 'Proceed' %}</span>
                     </button>
                 </div>
             </div>

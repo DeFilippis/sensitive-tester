@@ -1,9 +1,23 @@
 <template>
   <v-app class="main-app">
+    
+      
+       
+    
     <v-row align="center" justify="center">
       <v-card class="widecard p-3">
+        <v-card-actions class='d-flex justify-content-end'>
+          <v-btn
+            color="error"
+            
+            @click="postit"
+            v-if="listFull"
+          >
+            {{ next }}
+          </v-btn>
+        </v-card-actions>
         <v-card-title>
-          Sort items based on the relative importance for you
+          {{ title }}
         </v-card-title>
         <div>
           <div class="alert alert-danger" v-if="error">
@@ -30,9 +44,14 @@
             </div>
           </v-row>
         </div>
-        <v-card-actions>
-          <v-btn color="deep-purple lighten-2" outlined @click="postit">
-            Next
+        <v-card-actions class='d-flex justify-content-end'>
+          <v-btn
+            color="error"
+            
+            @click="postit"
+            v-if="listFull"
+          >
+            {{ next }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -47,13 +66,16 @@ export default {
   components: { RankList },
   name: "Rank",
   data() {
+    const { title, originalListTitle, rankedListTitle, next } = window.rank_obj;
+
     return {
       error: false,
       list1: _.clone(this.originalList),
       list2: [],
-
-      originalListTitle: "Move from here",
-      rankedListTitle: "...to here",
+      title: title,
+      next: next,
+      originalListTitle: originalListTitle,
+      rankedListTitle: rankedListTitle,
 
       options: {
         group: "people",
@@ -61,15 +83,19 @@ export default {
       },
     };
   },
-
+  computed: {
+    listFull() {
+      return this.list1.length === 0;
+    },
+  },
   methods: {
     listchanged() {
       this.error = false;
       // window.listFilled = this.list1.length === 0;
     },
-    postit(){
-      document.getElementById('form').submit();
-    }
+    postit() {
+      document.getElementById("form").submit();
+    },
   },
 };
 </script>

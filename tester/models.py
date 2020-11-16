@@ -10,7 +10,6 @@ from otree.api import (
 )
 from django.conf import settings
 from django.db import models as djmodels
-import csv
 import itertools
 import logging
 import yaml
@@ -45,6 +44,25 @@ class Constants(BaseConstants):
         qs = yaml.load(file, Loader=yaml.FullLoader)
 
     bodies = [q.get('statement') for q in qs]
+    distribution_explication = _("""Please drag the sliders below to divide it into three areas
+            based on your estimate of how many people in this study have
+            answered from 0 to 3, from 4 to 6, from 7 to 10 about the
+            statement above. <b>Please Note: You must move BOTH the sliders in order 
+            to progress to the next page</b>""")
+
+    distribution_obj = dict(
+        categories=[_("from 0 to 3"), _("from 4 to 6"), _("From 7 to 10")],
+        yLab=(_('Share (in %)')),
+        plotTitle=_("Distribution of answers", ),
+        popup=_('of participants answered between'),
+        next=_('Next')
+    )
+    rank_obj = dict(
+        title=_('Sort items based on the relative importance for you'),
+        originalListTitle=_('Move from here'),
+        rankedListTitle=_('...to here'),
+        next=_('Next')
+    )
 
 
 class Subsession(BaseSubsession):

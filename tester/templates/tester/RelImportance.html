@@ -1,11 +1,14 @@
 {% extends 'tester/Page.html' %}
 {% load render_bundle from webpack_loader %}
-{% load otree %}
+
 
 
 {% block content %}
     <script>
     window.originalList = {{ player.get_ranking_titles|json }}
+
+    window.rank_obj = {{ js_vars.rank_obj|safe }}
+
     </script>
     {% render_bundle 'chunk-vendors' %}
     {% render_bundle 'relimp' %}

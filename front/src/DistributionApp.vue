@@ -1,9 +1,10 @@
 <template>
   <v-app>
+    
     <v-container justify="center" align="center">
       <v-row justify="center" align="center">
-        <v-col lg="6">
-          <div>
+        <v-col lg=6 sm=12>>
+          
             <v-card class="my-3">
               <v-card-title class="justify-center">
                 <transition
@@ -20,15 +21,12 @@
                   >
                 </transition>
               </v-card-title>
-              <div class="px-3 pb-3">
-                Please drag the sliders below to divide it into three areas
-                based on your estimate of how many people in this study have
-                answered from 0 to 3, from 4 to 6, from 7 to 10 about the
-                statement above. <b>Please Note: You must move BOTH the sliders in order 
-                to progress to the next page </b>
+              <div class="px-3 pb-3" v-html='explication'>
+                 </b>
               </div>
             </v-card>
-
+  </v-col>
+  <v-col lg=6 sm=12>
             <div class="slider-wrapper">
               <div class="left-wrap"></div>
 
@@ -95,7 +93,7 @@
             leave-active-class="animate__animated animate__backOutDown"
           >
             <v-btn v-if="bothSlidersTouched" @click="deliver" color="error"
-              >next</v-btn
+              >{{next}}</v-btn
             >
           </transition>
         </v-col>
@@ -116,8 +114,14 @@ export default {
   },
 
   data: function() {
+    const epxlication = window.distribution_explication;
+    const {categories,plotTitle,yLab,popup, next} =window.distribution_obj;
+    
     return {
       body: "",
+      next:next,
+      categories:categories,
+      explication: window.distribution_explication,
       mergingSliderThreshold:1,
       mergedSlider:false,
       no_q_left: false,
@@ -153,16 +157,16 @@ export default {
         },
         colors: ["black", "blue", "orange"],
         title: {
-          text: "Distribution of answers",
+          text: plotTitle,
         },
         xAxis: {
-          categories: ["from 0 to 3", "from 4 to 6", "From 7 to 10"],
+          categories: categories,
         },
         tooltip: {
           formatter: function() {
             return ("<b>" + 
               _.round(this.y) +
-              "%</b> " + "of participants answered between <b>" +
+              "%</b> " + popup +" <b>" +
               this.x + "</b>"
             );
           },
@@ -170,7 +174,7 @@ export default {
         yAxis: {
           min: 0,
           title: {
-            text: "Share (in %)",
+            text: yLab,
           },
         },
         legend: {
@@ -210,7 +214,7 @@ export default {
     };
 
     this.$options.sockets.onopen = (data) => {
-      console.debug("pizda connected");
+      
       this.$socket.sendObj({ info_request: true });
     };
   },
@@ -256,7 +260,7 @@ export default {
       this.bothSlidersTouched = _.every(this.slidersTouched);
     },
     get_label(i) {
-      const labs = ["from 0 to 3", "from 4 to 6", "from 7 to 10"];
+      const labs = this.categories;
       return labs[i];
     },
     x() {

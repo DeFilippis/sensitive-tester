@@ -5,7 +5,9 @@
 
 {% block content %}
     <script>
-    window.distribution = {{ player.get_distribution|json }}
+    window.distribution = {{ player.get_distribution|json|safe }}
+    window.distribution_explication = {{ js_vars.distribution_explication|json|safe }}
+    window.distribution_obj = {{ js_vars.distribution_obj|safe }}
     </script>
     {% render_bundle 'chunk-vendors' %}
     {% render_bundle 'distribution' %}
