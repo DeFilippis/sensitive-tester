@@ -17,9 +17,9 @@
   for_ranking: Western Culture
 - statement: I believe immigrants strengthen our country because of their hard work and talent.
   for_ranking: Immigrants
-- statement: I believe, in general, Russian parliamentary elections are subject to significant amounts of fraud.
+- statement: I believe, in general, Parliamentary elections are subject to significant amounts of fraud.
   for_ranking: Election Fraud
 - statement: Click {random_num} if you are paying attention.
   for_ranking: attention
-- statement: I believe that, in general, jaywalking is morally acceptable. 
+- statement: I believe that jaywalking -- when a pedestrian crosses a roadway that has traffic -- is morally acceptable. 
   for_ranking: Jaywalking
