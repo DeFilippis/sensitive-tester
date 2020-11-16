@@ -29,14 +29,14 @@ SESSION_CONFIGS = [
 
     dict(
         name='full_ru',
-        display_name="tester (Russian)",
+        display_name="Full study (Russian)",
         num_demo_participants=1,
         app_sequence=['tester', 'sensitive_tester_endline'],
         language='ru'
     ),
     dict(
         name='full_en',
-        display_name="tester (English)",
+        display_name="Full study (English)",
         num_demo_participants=1,
         app_sequence=['tester', 'sensitive_tester_endline'],
         language='en'
