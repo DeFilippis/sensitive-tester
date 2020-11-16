@@ -6,28 +6,41 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SESSION_CONFIGS = [
 
     dict(
-       name='tester_en',
-       display_name="tester (English)",
-       num_demo_participants=1,
-       app_sequence=['tester'],
+        name='tester_en',
+        display_name="tester (English)",
+        num_demo_participants=1,
+        app_sequence=['tester'],
         language='en'
     ),
     dict(
-       name='tester_ru',
-       display_name="tester (Russian)",
-       num_demo_participants=1,
-       app_sequence=['tester'],
-    language='ru'
+        name='tester_ru',
+        display_name="tester (Russian)",
+        num_demo_participants=1,
+        app_sequence=['tester'],
+        language='ru'
     ),
 
     dict(
-       name='endline',
-       display_name="endline_test",
-       num_demo_participants=1,
-       app_sequence=['sensitive_tester_endline']
+        name='endline',
+        display_name="endline_test",
+        num_demo_participants=1,
+        app_sequence=['sensitive_tester_endline']
     ),
 
-
+    dict(
+        name='full_ru',
+        display_name="tester (Russian)",
+        numÒ_demo_participants=1,
+        app_sequence=['tester', 'sensitive_tester_endline'],
+        language='ru'
+    ),
+    dict(
+        name='full_en',
+        display_name="tester (English)",
+        numÒ_demo_participants=1,
+        app_sequence=['tester', 'sensitive_tester_endline'],
+        language='en'
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
