@@ -46,29 +46,23 @@
     statement: I believe that Western culture is generally superior to that of the Middle East.
     for_ranking: Western Culture
   ru:
-    statement: I believe that Western culture is generally superior to that of the Middle East.
-    for_ranking: Western Culture
+    statement: Я считаю, что западная культура в целом превосходит культуру ближневосточных стран
+    for_ranking: Западная культура
 - en:
     statement: I believe immigrants strengthen our country because of their hard work and talent.
     for_ranking: Immigrants
   ru:
-    statement: I believe immigrants strengthen our country because of their hard work and talent.
-    for_ranking: Immigrants
+    statement: Я считаю, что иммигранты делают нашу страну сильнее своим трудолюбием и талантом
+    for_ranking: Иммигранты
 - en:
     statement: I believe, in general, Russian parliamentary elections are subject to significant amounts of fraud.
     for_ranking: Election Fraud
   ru:
-    statement: I believe, in general, Russian parliamentary elections are subject to significant amounts of fraud.
-    for_ranking: Election Fraud
-- en:
-    statement: Click {random_num} if you are paying attention.
-    for_ranking: attention
-  ru:
-    statement: Click {random_num} if you are paying attention.
-    for_ranking: attention
+    statement: Я считаю, что  выборы в Государственную думу проходили с большим количеством фальсификаций
+    for_ranking: Фальсификация выборов
 - en:
     statement: I believe that, in general, jaywalking is morally acceptable.
     for_ranking: Jaywalking
   ru:
-    statement: I believe that, in general, jaywalking is morally acceptable.
-    for_ranking: Jaywalking
+    statement: Я не считаю чем-то аморальным переходить улицу на красный сигнал светофора
+    for_ranking: Переход на красный
