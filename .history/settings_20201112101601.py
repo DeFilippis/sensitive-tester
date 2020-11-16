@@ -16,15 +16,6 @@ SESSION_CONFIGS = [
        num_demo_participants=2,
        app_sequence=['tester']
     ),
-
-    dict(
-       name='endline',
-       display_name="endline_test",
-       num_demo_participants=1,
-       app_sequence=['sensitive_tester_endline']
-    ),
-
-
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
