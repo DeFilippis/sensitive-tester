@@ -1,5 +1,5 @@
 {% extends "tester/Page.html" %}
-{% load otree %}
+
 
 
 {% block content %}
@@ -16,17 +16,27 @@
                 <div class="card-body">
 
                     {% if field == "average_attitude" %}
-                        <h5 class="card-title">Guess How The Average Participant Responded</h5>
+                        <h5 class="card-title">
+                            {% trans 'Guess How The Average Participant Responded' %}
+                        </h5>
                     {% elif field == "attitude" %}
-                        <h5 class="card-title">Report Your Attitudes On A Variety of Topics</h5>
+                        <h5 class="card-title">
+                            {% trans 'Report Your Attitudes On A Variety of Topics' %}
+                        </h5>
                     {% elif field == "absolute_importance" %}
-                        <h5 class="card-title">Report How Important Your Various Attitudes Are To You</h5>
+                        <h5 class="card-title">
+                            {% trans 'Report How Important Your Various Attitudes Are To You' %}
+                        </h5>
                     {% else %}
-                        <h5 class="card-title">Report How Likely Disagreement On A Topic Impedes Friendship</h5>
+                        <h5 class="card-title">
+                            {% trans 'Report How Likely Disagreement On A Topic Impedes Friendship' %}
+                        </h5>
                     {% endif %}
 
                     <div class = "infotext">
-                        On the next page we will show you several statements and we'll ask you to answer the following question:
+                        {% blocktrans trimmed %}
+                            On the next page we will show you several statements and we'll ask you to answer the following question:
+                        {% endblocktrans %}
                     </div>
                     <div class="text-center lead font-weight-bold my-5">
                         {{ field_desc.announcement }}
@@ -35,13 +45,13 @@
 
                     {% if field == "average_attitude" %}
                         <div class="alert alert-success" role="alert">
-                            ATTENTION - We will reward  {{Constants.bonus_amount_distribution}} cents to the 10 participants who guess closest to the correct answer. As a result, it is in your best interest to try to guess correctly. 
+                            {% trans 'ATTENTION - We will reward' %}  {{Constants.bonus_amount_distribution}} {% trans 'cents to the 10 participants who guess closest to the correct answer. As a result, it is in your best interest to try to guess correctly.' %}
                         </div>
                     {% endif %}
 
                     <button class="mdc-button foo-button mdc-button--outlined">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Proceed</span>
+                        <span class="mdc-button__label">{% trans 'Proceed' %}</span>
                     </button>
                 </div>
             </div>

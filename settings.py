@@ -4,17 +4,20 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SESSION_CONFIGS = [
+
     dict(
-       name='tester',
-       display_name="tester",
+       name='tester_en',
+       display_name="tester (English)",
        num_demo_participants=1,
-       app_sequence=['tester']
+       app_sequence=['tester'],
+        language='en'
     ),
     dict(
-       name='tester2',
-       display_name="tester for 2",
-       num_demo_participants=2,
-       app_sequence=['tester']
+       name='tester_ru',
+       display_name="tester (Russian)",
+       num_demo_participants=1,
+       app_sequence=['tester'],
+    language='ru'
     ),
 
     dict(
