@@ -3,7 +3,7 @@
     
     <v-container justify="center" align="center">
       <v-row justify="center" align="center">
-        <v-col lg=6 sm=12>>
+        <v-col lg=6 sm=12>
           
             <v-card class="my-3">
               <v-card-title class="justify-center">
@@ -22,7 +22,7 @@
                 </transition>
               </v-card-title>
               <div class="px-3 pb-3" v-html='explication'>
-                 </b>
+                
               </div>
             </v-card>
   </v-col>
@@ -203,11 +203,14 @@ export default {
     };
   },
   mounted() {
-    // console.debug(this.$options.sockets)
+
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
-
       ({ body: this.body, id: this.qid, no_q_left: this.no_q_left } = d);
+      const attention=d.label === 'attention'
+      if (attention) {
+        this.body = window.distribution_obj.attention_checker_text
+      }
       this.value = _.clone(this.initialValue);
       this.slidersTouched = [false, false];
       this.bothSlidersTouched = false;

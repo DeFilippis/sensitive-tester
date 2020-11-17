@@ -55,7 +55,9 @@ class Constants(BaseConstants):
         yLab=(_('Share (in %)')),
         plotTitle=_("Distribution of answers", ),
         popup=_('of participants answered between'),
-        next=_('Next')
+        next=_('Next'),
+        attention_checker_text=_('Attention: set middle slider to 100%'),
+
     )
     rank_obj = dict(
         title=_('Sort items based on the relative importance for you'),
@@ -123,7 +125,7 @@ class Player(BasePlayer):
 
         if unanswered.exists():
             q = unanswered.first()
-            return dict(body=q.body, id=q.id, progress_value=self.get_progress())
+            return dict(body=q.body, id=q.id, progress_value=self.get_progress(), label=q.label)
         else:
             return dict(no_q_left=True)
 
@@ -191,7 +193,7 @@ class Player(BasePlayer):
             body = q.body
             if q.label == 'attention':
                 body = q.body.format(
-                    random_num=random.randint(0, 10))  # we inject it everywhere. Dont' know if it makes sense
+                    num=random.randint(0, 10))  # we inject it everywhere. Dont' know if it makes sense
             return dict(body=body, field=field, id=q.id, progress_value=self.get_progress())
         else:
             return dict(no_q_left=True)

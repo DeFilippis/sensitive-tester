@@ -66,3 +66,9 @@
   ru:
     statement: Я не считаю чем-то аморальным переходить улицу на красный сигнал светофора
     for_ranking: Переход на красный
+- en:
+    statement: Click {num} if you pay attention
+    for_ranking: attention
+  ru:
+    statement: "Тест на внимание:  выберите {num}"
+    for_ranking: attention

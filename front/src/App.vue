@@ -14,8 +14,11 @@
                   :style="{ background: fieldCol, 'border-radius': '25px' }"
                 >
                   <transition
-                    name="custom-classes-transition"
-                    enter-active-class="animate__animated animate__bounceIn"
+                    name="fade"
+                    mode='out-in'
+                    
+                    @after-enter="afterEnter"
+                    @before-leave="beforeLeave"
                     appear
                   >
                     <div :key="body" class="white--text text-center">
@@ -30,7 +33,7 @@
                 <div v-if="no_q_left">No questions left</div>
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" :style="{visibility: !block ? 'visible' : 'hidden'}">
                 <v-btn-toggle v-model="value">
                   <v-btn v-for="i in likert" :key="i" @click="answer(i)">
                     {{ i }}
@@ -51,6 +54,7 @@ export default {
     return {
       lead: window.field_desc["lead"],
       trans: true,
+      block: true,
       no_q_left: false,
       body: "",
       qid: null,
@@ -58,7 +62,7 @@ export default {
       value: null,
       toggle_exclusive: undefined,
       likert: this._.range(0, 11),
-      progressValue:0,
+      progressValue: 0,
     };
   },
 
@@ -74,8 +78,8 @@ export default {
     },
   },
   watch: {
-    progressValue(val){
-      window.vueProgress.progressValue=val
+    progressValue(val) {
+      window.vueProgress.progressValue = val;
     },
     no_q_left(val) {
       if (val) {
@@ -90,11 +94,12 @@ export default {
       this.trans = false;
       ({
         no_q_left: this.no_q_left,
+
         body: this.body,
         id: this.qid,
         field: this.field,
         value: this.value,
-        progress_value: this.progressValue
+        progress_value: this.progressValue,
       } = d);
     };
     this.trans = true;
@@ -105,6 +110,12 @@ export default {
   },
 
   methods: {
+    afterEnter() {
+      this.block = false;
+    },
+    beforeLeave() {
+      this.block = true;
+    },
     answer(val) {
       this.trans = true;
       this.$socket.sendObj({

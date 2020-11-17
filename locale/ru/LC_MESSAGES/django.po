@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-16 22:19+0300\n"
+"POT-Creation-Date: 2020-11-17 17:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,12 +20,116 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: sensitive_tester_endline/models.py:35
+#: last/templates/last/Results.html:5
+msgid "Благодарим за участие!"
+msgstr ""
+
+#: last/templates/last/Results.html:14
+msgid "Ваш код"
+msgstr ""
+
+#: last/templates/last/Results.html:19
+msgid ""
+"Для того, чтобы задание считалось выполненным, пожалуйста скопируйте его и "
+"вставьте на\n"
+"                    страницу\n"
+"                    задания в Толоке."
+msgstr ""
+
+#: sensitive_tester_endline/models.py:34
 msgid "What year were you born?"
 msgstr ""
 
-#: sensitive_tester_endline/models.py:39
+#: sensitive_tester_endline/models.py:38
 msgid "What race do you most identify with?"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:40
+msgid "White"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:41
+msgid "Black or African American"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:42
+msgid "Asian"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:43
+msgid "American Indian or Alaska Native"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:44
+msgid "Native Hawaiian or Pacific Islander"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:49
+msgid "What is the highest level of education that you have achieved?"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:51
+msgid "Less than High School"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:52
+msgid "H.S. Graduate"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:53
+msgid "Some College"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:54
+msgid "Associate's Degree"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:55
+msgid "College Graduate"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:56
+msgid "Master's Degree"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:57
+msgid "Professional Degree (JD/MD)"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:58
+msgid "PhD"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:63
+msgid ""
+"Which of the following best represents your household income last year "
+"before taxes?"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:74
+msgid "Which of these labels best matches your religious views?"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:80
+msgid "How frequently do you attend religious services?"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:82
+msgid "At least once a week"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:83
+msgid "Once or twice a month / A few times a year"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:84
+msgid "Seldom / never"
+msgstr ""
+
+#: sensitive_tester_endline/models.py:89
+msgid ""
+"Do you have any feedback for us?  Did you enjoy the experiment?  Any "
+"complaints?"
 msgstr ""
 
 #: tester/models.py:47
@@ -66,19 +170,23 @@ msgstr "Распределение ответов"
 msgid "of participants answered between"
 msgstr " участников выбравших "
 
-#: tester/models.py:58 tester/models.py:64
+#: tester/models.py:58 tester/models.py:66
 msgid "Next"
 msgstr "Далее"
 
-#: tester/models.py:61
+#: tester/models.py:59
+msgid "Attention: set middle slider to 100%"
+msgstr "Проверка внимания: установите средний слайдер на 100%"
+
+#: tester/models.py:63
 msgid "Sort items based on the relative importance for you"
 msgstr "Отсортируйте элементы в порядке важности для вас"
 
-#: tester/models.py:62
+#: tester/models.py:64
 msgid "Move from here"
 msgstr "Переместите элементы отсюда"
 
-#: tester/models.py:63
+#: tester/models.py:65
 msgid "...to here"
 msgstr "Сюда в порядке важности для вас"
 
@@ -111,12 +219,12 @@ msgid ""
 "closest to the correct answer. As a result, it is in your best interest to "
 "try to guess correctly."
 msgstr ""
-"Внимание: мы выплатм   %(bonus)s центов тем 10 участникам, чей ответ "
+"Внимание: мы выплатим   %(bonus)s центов тем 10 участникам, чей ответ "
 "окажется ближе всего к верному значению. Тем самым, в ваших интересах "
 "попытаться назвать максимально верное значение."
 
 #: tester/templates/tester/DistributionIntro.html:55
-#: tester/templates/tester/QIntro.html:54
+#: tester/templates/tester/QIntro.html:55
 #: tester/templates/tester/RelIntro.html:21
 msgid "Proceed"
 msgstr "Продолжить"
@@ -141,17 +249,17 @@ msgstr ""
 
 #: tester/templates/tester/QIntro.html:37
 msgid ""
-"On the next page we will show you several statements and we'll ask you to "
-"answer the following question:"
+"On the next page we will show you several statements in a row. For each "
+"statement we will ask you to  answer the following question:"
 msgstr ""
-"На следующей странице вы увидите ряд утверждений, и мы попросим вас ответить "
-"на следующие вопросы:"
+"На следующей странице вам подряд будет показано несколько  утверждений. Для "
+"каждого из них мы попросим вас ответить на следующий вопрос:"
 
-#: tester/templates/tester/QIntro.html:48
+#: tester/templates/tester/QIntro.html:49
 msgid "ATTENTION - We will reward"
 msgstr "Внимание: мы выплатим по  "
 
-#: tester/templates/tester/QIntro.html:48
+#: tester/templates/tester/QIntro.html:49
 msgid ""
 "cents to the 10 participants who guess closest to the correct answer. As a "
 "result, it is in your best interest to try to guess correctly."
