@@ -24,21 +24,21 @@ SESSION_CONFIGS = [
         name='endline',
         display_name="endline_test",
         num_demo_participants=1,
-        app_sequence=['sensitive_tester_endline']
+        app_sequence=['endline']
     ),
 
     dict(
         name='full_ru',
         display_name="Full study (Russian)",
         num_demo_participants=1,
-        app_sequence=['tester', 'sensitive_tester_endline'],
+        app_sequence=['tester', 'endline'],
         language='ru'
     ),
     dict(
         name='full_en',
         display_name="Full study (English)",
         num_demo_participants=1,
-        app_sequence=['tester', 'sensitive_tester_endline'],
+        app_sequence=['tester', 'endline'],
         language='en'
     )
 ]

@@ -5,13 +5,11 @@ from otree.api import (
 from django.utils.translation import gettext_lazy as _
 
 
-
-
 class Constants(BaseConstants):
-    name_in_url = 'sensitive_tester_endline'
+    name_in_url = 'endline'
     players_per_group = None
     num_rounds = 1
-        
+
 
 class Subsession(BaseSubsession):
     pass
@@ -22,7 +20,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    
+
     sex = models.StringField(
         choices=['Male', 'Female'],
         verbose_name="What is your biological sex?",
@@ -33,17 +31,6 @@ class Player(BasePlayer):
         max=2002,
         verbose_name=_("What year were you born?")
     )
-
-    race = models.StringField(
-        verbose_name=_('What race do you most identify with?'),
-        choices=([
-            _('White'),
-            _('Black or African American'),
-            _('Asian'),
-            _('American Indian or Alaska Native'),
-            _('Native Hawaiian or Pacific Islander')
-        ]),
-        widget=widgets.RadioSelect)
 
     education = models.StringField(
         verbose_name=_('What is the highest level of education that you have achieved?'),
@@ -72,8 +59,9 @@ class Player(BasePlayer):
 
     religion = models.StringField(
         verbose_name=_("Which of these labels best matches your religious views?"),
-        choices=['Atheist', 'Agnostic', 'Spiritual but not religious', 'Christian', 'Muslim', 'Hindu', 'Buddhist',
-                 'Sikh', 'Jewish', 'Another religion not mentioned here'],
+        choices=[_('Atheist'), _('Agnostic'), _('Spiritual but not religious'), _('Christian'), _('Muslim'), _('Hindu'),
+                 _('Buddhist'),
+                 _('Sikh'), _('Jewish'), _('Another religion not mentioned here')],
         widget=widgets.RadioSelect)
 
     religious_attendance = models.StringField(
@@ -86,5 +74,4 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
 
     feedback = models.LongStringField(
-        verbose_name =_( "Do you have any feedback for us?  Did you enjoy the experiment?  Any complaints?"))
-    
+        verbose_name=_("Do you have any feedback for us?  Did you enjoy the experiment?  Any complaints?"))

@@ -15,8 +15,9 @@ import logging
 import yaml
 from otree.models import Participant
 import random
-from django.db.models import Q, Max, FloatField
+from django.db.models import Q, Max, FloatField, Sum
 from django.utils.translation import gettext_lazy as _
+import re
 
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
@@ -33,7 +34,7 @@ class Constants(BaseConstants):
     LIKERT = range(0, 11)
     bonus_amount_average = 50  # amount in cents to be bonus participants for guessing second-order beliefs correctly
     bonus_amount_distribution = 50  # amount in cents to bonus participants for guessing distributions correctly
-
+    MAX_ATTENTION_FAILURES = 1
     with open(r'./data/qleads.yaml') as file:
         leads = yaml.load(file, Loader=yaml.FullLoader)
     fields = list(leads.keys())  # again, not the best one, but will work for now. TODO?
@@ -81,7 +82,8 @@ class Subsession(BaseSubsession):
             sqs = [SensitiveQ(owner=p,
                               body=t[l].get('statement'),
                               label=t[l].get('for_ranking'),
-                              order_r=random.random()
+                              order_r=random.random(),
+                              attention_checker=t[l].get('for_ranking') == 'attention'
                               )
                    for p, t in itertools.product(ps, Constants.qs)]
             SensitiveQ.objects.bulk_create(sqs)
@@ -99,7 +101,10 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     initial_distribution = models.IntegerField()
-
+    attention_failure_counter = models.IntegerField(default=0)
+    @property
+    def total_attempts_failed(self):
+        return self.participant.tester_player.all().aggregate(s=Sum('attention_failure_counter')).get('s',0)
     def get_progress(self):
         totpages = self.participant._max_page_index
         curpage = self.participant._index_in_pages
@@ -156,6 +161,7 @@ class Player(BasePlayer):
         logger.info(data)
         qid = data.get('qid')
         field = data.get('field')
+        body = data.get('body')
         value = data.get('value')
         next_q = self.next_q()
         r = {self.id_in_group: next_q}
@@ -165,6 +171,18 @@ class Player(BasePlayer):
         if data.get('answer') and qid and field and value is not None:
             q = SensitiveQ.objects.get(id=qid)
             setattr(q, field, value)
+            if q.attention_checker and body:
+                p = re.compile(r'(\d)')
+                result = p.search(body)
+                try:
+                    checking_val = result.group(1)
+                    if str(checking_val[0]) != str(value):
+                        raise IndexError
+                except IndexError:
+                    self.attention_failure_counter += 1
+                    self.save()
+                if self.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
+                    return  {self.id_in_group: dict(too_many_failures=True)}
             q.save()
             q.mark_sorters_done(field)
         r = {self.id_in_group: self.next_q()}  # we update the req
@@ -203,6 +221,7 @@ class SensitiveQ(djmodels.Model):
     def mark_sorters_done(self, field_name):
         self.sorters.filter(f=field_name).update(submitted=True)
 
+    attention_checker = models.BooleanField(default=False)
     owner = djmodels.ForeignKey(to=Participant, on_delete=djmodels.CASCADE, related_name="sqs")
     body = models.StringField()
     label = models.StringField()

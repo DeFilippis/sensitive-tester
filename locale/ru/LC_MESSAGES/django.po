@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 17:01+0300\n"
+"POT-Creation-Date: 2020-11-17 17:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,20 +21,24 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: last/templates/last/Results.html:5
-msgid "Благодарим за участие!"
+msgid "Thank you for the participation"
 msgstr ""
 
 #: last/templates/last/Results.html:14
-msgid "Ваш код"
+msgid "Your code"
 msgstr ""
 
 #: last/templates/last/Results.html:19
 msgid ""
-"Для того, чтобы задание считалось выполненным, пожалуйста скопируйте его и "
-"вставьте на\n"
-"                    страницу\n"
-"                    задания в Толоке."
+"\n"
+"                    In order for the task to be considered completed, please "
+"copy and paste it on the Toloka assignment page.\n"
+"                "
 msgstr ""
+
+#: last/templates/last/Results.html:26 tester/models.py:58 tester/models.py:66
+msgid "Next"
+msgstr "Далее"
 
 #: sensitive_tester_endline/models.py:34
 msgid "What year were you born?"
@@ -169,10 +173,6 @@ msgstr "Распределение ответов"
 #: tester/models.py:57
 msgid "of participants answered between"
 msgstr " участников выбравших "
-
-#: tester/models.py:58 tester/models.py:66
-msgid "Next"
-msgstr "Далее"
 
 #: tester/models.py:59
 msgid "Attention: set middle slider to 100%"

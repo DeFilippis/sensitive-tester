@@ -1,6 +1,6 @@
 from otree.api import Currency as c, currency_range
-from ._builtin import WaitPage
-from quiz.generic_pages import Page
+from ._builtin import WaitPage,Page
+
 from .models import Constants
 
 

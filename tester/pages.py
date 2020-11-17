@@ -1,6 +1,6 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import WaitPage
-from .generic_pages import GenPage as Page, DistributionPage, oTreePage
+from .generic_pages import GenPage as Page, DistributionPage, oTreePage, UnFailedPage
 from .models import Constants
 
 
@@ -24,10 +24,7 @@ class Q(Page):
     """
 
     def is_displayed(self):
-        # print(self.player.get_next_q())
         return self.round_number < Constants.num_rounds
-
-
 
     live_method = 'get_next_q'
 
@@ -47,7 +44,7 @@ class Distribution(DistributionPage):
             distribution_obj=str(Constants.distribution_obj))
 
 
-class RelIntro(oTreePage):
+class RelIntro(UnFailedPage):
     """
     Introducing relative importance question
     """
@@ -56,7 +53,7 @@ class RelIntro(oTreePage):
         return self.round_number == Constants.num_rounds
 
 
-class RelImportance(oTreePage):
+class RelImportance(UnFailedPage):
     """
     A bit particular page for ranking questions by their relative importance.
     Doesnt' make sense to reuse previous app because it's just too different
@@ -79,7 +76,14 @@ class RelImportance(oTreePage):
     def js_vars(self):
         return dict(
             rank_obj=str(Constants.rank_obj),
-            )
+        )
+
+
+class TooManyFailures(oTreePage):
+    def is_displayed(self):
+        return self.player.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES
+
+
 page_sequence = [
     QIntro,
     Q,
@@ -87,4 +91,5 @@ page_sequence = [
     Distribution,
     RelIntro,
     RelImportance,
+    TooManyFailures,
 ]

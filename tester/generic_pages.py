@@ -5,14 +5,15 @@ from django.db.models import Q
 
 from django.utils import translation
 
+
 class TransMixin:
     def get_current_language(self):
         return self.subsession.get_current_language()
+
     def get_context_data(self, **context):
         user_language = self.get_current_language()
         translation.activate(user_language)
         return super().get_context_data(**context)
-
 
 
 class oTreePage(TransMixin, Page):
@@ -26,7 +27,15 @@ class oTreePage(TransMixin, Page):
         return f"{(curpage + unsubmitted_qs) / (totpages + totsorters.count()) * 100:.0f}"
 
 
-class GenPage(oTreePage):
+class UnFailedPage(oTreePage):
+    def get(self):
+        if self.player.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
+            self._increment_index_in_pages()
+            return self._redirect_to_page_the_user_should_be_on()
+        return super().get()
+
+
+class GenPage(UnFailedPage):
 
     def get_context_data(self, *args, **kwargs):
         c = super().get_context_data(*args, **kwargs)
@@ -35,7 +44,7 @@ class GenPage(oTreePage):
         return c
 
 
-class DistributionPage(oTreePage):
+class DistributionPage(UnFailedPage):
     def is_displayed(self):
         if self.round_number <= len(Constants.fields):
             curfield = Constants.fields[self.round_number - 1]

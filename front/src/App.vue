@@ -15,8 +15,7 @@
                 >
                   <transition
                     name="fade"
-                    mode='out-in'
-                    
+                    mode="out-in"
                     @after-enter="afterEnter"
                     @before-leave="beforeLeave"
                     appear
@@ -33,7 +32,10 @@
                 <div v-if="no_q_left">No questions left</div>
               </v-col>
 
-              <v-col cols="12" :style="{visibility: !block ? 'visible' : 'hidden'}">
+              <v-col
+                cols="12"
+                :style="{ visibility: !block ? 'visible' : 'hidden' }"
+              >
                 <v-btn-toggle v-model="value">
                   <v-btn v-for="i in likert" :key="i" @click="answer(i)">
                     {{ i }}
@@ -56,6 +58,7 @@ export default {
       trans: true,
       block: true,
       no_q_left: false,
+      too_many_failures: false,
       body: "",
       qid: null,
       field: null,
@@ -86,15 +89,21 @@ export default {
         document.getElementById("form").submit();
       }
     },
+    too_many_failures(val) {
+      if (val) {
+        document.getElementById("form").submit();
+      }
+    },
   },
   mounted() {
     // console.debug(this.$options.sockets)
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
+
       this.trans = false;
       ({
         no_q_left: this.no_q_left,
-
+        too_many_failures: this.too_many_failures,
         body: this.body,
         id: this.qid,
         field: this.field,
@@ -123,6 +132,7 @@ export default {
         qid: this.qid,
         field: this.field,
         value: val,
+        body: this.body,
       });
       this.value = null;
     },

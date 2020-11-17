@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+
+
+
+
+{% block title %}
+    {% trans 'Final Survey' %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="alert alert-success" role="alert">
+        <p>
+            {% blocktrans trimmed %}
+                You've reached the final part of this study! Please answer a few basic demographic questions about
+                yourself before finishing the study. Thank you for your patience.
+            {% endblocktrans %}
+        </p>
+    </div>
+
+
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+{% endblock %}
+ 

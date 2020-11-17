@@ -2,7 +2,7 @@
 {% load otree  i18n %}
 
 {% block title %}
-    {% trans 'Благодарим за участие!' %}
+    {% trans 'Thank you for the participation' %}
 {% endblock %}
 {% block progress %}
 
@@ -11,19 +11,19 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="lead text-center">{% trans 'Ваш код' %}
+            <div class="lead text-center">{% trans 'Your code' %}
                 <div class="text-center"><span class="font-weight-bold display-4">{{ participant.code }}</span>
                 </div>
             </div>
             <div class="lead my-3  ">
-                {% blocktrans %}Для того, чтобы задание считалось выполненным, пожалуйста скопируйте его и вставьте на
-                    страницу
-                    задания в Толоке.{% endblocktrans %}
+                {% blocktrans %}
+                    In order for the task to be considered completed, please copy and paste it on the Toloka assignment page.
+                {% endblocktrans %}
             </div>
         </div>
     </div>
 
-    <button class="d-none">Next</button>
+    <button class="d-none">{% trans 'Next' %}</button>
 {% endblock %}
 
 

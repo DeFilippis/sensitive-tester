@@ -1,0 +1,42 @@
+
+
+
+
+{% extends "tester/Page.html" %}
+
+
+
+{% block content %}
+    <style>
+    .infocard{max-width:700px}
+    .infotext{text-align:left;
+              padding-top: 25px;
+              padding-bottom: 10px; }
+    </style>
+
+
+
+            <div class="card infocard" >
+                <div class="card-body">
+
+
+
+                    <div class = "infotext">
+                        {% blocktrans trimmed %}
+                           Too many failures!
+                        {% endblocktrans %}
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}
