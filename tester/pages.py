@@ -4,6 +4,12 @@ from .generic_pages import GenPage as Page, DistributionPage, oTreePage, UnFaile
 from .models import Constants
 
 
+class Intro(Page):
+    """First page - consent form etc."""
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class QIntro(Page):
     def is_displayed(self):
         return self.round_number < Constants.num_rounds
@@ -85,6 +91,7 @@ class TooManyFailures(oTreePage):
 
 
 page_sequence = [
+    Intro,
     QIntro,
     Q,
     DistributionIntro,

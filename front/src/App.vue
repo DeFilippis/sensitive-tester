@@ -1,52 +1,56 @@
 <template>
   <v-app class="main-app">
-    <v-row align="center" justify="center">
-      <div v-cloak>
-        <v-card flat class="py-12 main_card" v-if="!no_q_left && body">
-          <v-card-text>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
-              </v-col>
-              <v-col cols="12">
-                <v-card-title
-                  class="justify-center text-center"
-                  :style="{ background: fieldCol, 'border-radius': '25px' }"
-                >
-                  <transition
-                    name="fade"
-                    mode="out-in"
-                    @after-enter="afterEnter"
-                    @before-leave="beforeLeave"
-                    appear
-                  >
-                    <div :key="body" class="white--text text-center">
-                      <span class="bodytext">
-                        {{ body }}
-                      </span>
-                    </div>
-                  </transition>
-                </v-card-title>
-              </v-col>
-              <v-col cols="12">
-                <div v-if="no_q_left">No questions left</div>
-              </v-col>
+    <v-main app>
+      <v-container>
+        <v-row>
+          <div v-cloak>
+            <v-card flat class="" v-if="!no_q_left && body">
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12">
+                    <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-card-title
+                      class="justify-center text-center"
+                      :style="{ background: fieldCol, 'border-radius': '25px' }"
+                    >
+                      <transition
+                        name="fade"
+                        mode="out-in"
+                        @after-enter="afterEnter"
+                        @before-leave="beforeLeave"
+                        appear
+                      >
+                        <div :key="body" class="white--text text-center">
+                          <span class="bodytext">
+                            {{ body }}
+                          </span>
+                        </div>
+                      </transition>
+                    </v-card-title>
+                  </v-col>
 
-              <v-col
-                cols="12"
-                :style="{ visibility: !block ? 'visible' : 'hidden' }"
-              >
-                <v-btn-toggle v-model="value">
-                  <v-btn v-for="i in likert" :key="i" @click="answer(i)">
-                    {{ i }}
-                  </v-btn>
-                </v-btn-toggle>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-    </v-row>
+                  <v-col
+                    cols="12"
+                    :style="{ visibility: !block ? 'visible' : 'hidden' }"
+                  >
+                    <v-btn-toggle
+                      v-model="value"
+                      class="d-flex justify-content-center"
+                    >
+                      <v-btn v-for="i in likert" :key="i" @click="answer(i)">
+                        {{ i }}
+                      </v-btn>
+                    </v-btn-toggle>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </div>
+        </v-row>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -82,7 +86,7 @@ export default {
   },
   watch: {
     progressValue(val) {
-      window.vueProgress.progressValue = val;
+      // window.vueProgress.progressValue = val;
     },
     no_q_left(val) {
       if (val) {
@@ -155,14 +159,14 @@ export default {
   display: none;
 }
 .main_card {
-  max-width: 700px;
+  /* max-width: 700px; */
 }
 #app {
   background: transparent;
-  max-width: 700px;
+  /* max-width: 700px; */
 }
 .main-app {
-  max-width: 700px;
+  /* max-width: 700px; */
 }
 .bodytext {
   word-break: normal;
