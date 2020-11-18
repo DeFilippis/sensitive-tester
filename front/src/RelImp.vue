@@ -1,18 +1,9 @@
 <template>
-  <v-app class="main-app">
-    
-      
-       
-    
+  <v-app class="main-app mt-3">
     <v-row align="center" justify="center">
-      <v-card class="widecard p-3">
-        <v-card-actions class='d-flex justify-content-end'>
-          <v-btn
-            color="error"
-            
-            @click="postit"
-            v-if="listFull"
-          >
+      <v-card class="widecard p-3" >
+        <v-card-actions class="d-flex justify-content-end" v-if="listFull">
+          <v-btn color="error" @click="postit">
             {{ next }}
           </v-btn>
         </v-card-actions>
@@ -44,13 +35,8 @@
             </div>
           </v-row>
         </div>
-        <v-card-actions class='d-flex justify-content-end'>
-          <v-btn
-            color="error"
-            
-            @click="postit"
-            v-if="listFull"
-          >
+        <v-card-actions class="d-flex justify-content-end">
+          <v-btn color="error" @click="postit" v-if="listFull">
             {{ next }}
           </v-btn>
         </v-card-actions>
@@ -106,14 +92,7 @@ export default {
 .main_card {
   max-width: 700px;
 }
-#app {
-  background: transparent;
-  max-width: 700px;
-}
-.main-app {
-  max-width: 700px;
-  min-width: 500px;
-}
+
 .item {
   border: 1px solid black;
 }

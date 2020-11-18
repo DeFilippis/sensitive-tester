@@ -10,7 +10,7 @@
     <v-row>
       <v-col>
         <v-card-title
-          class="justify-center text-center"
+          class="d-flex justify-center text-center white--text text-center d-flex justify-content-center "
           :style="{
             background: fieldCol,
             'border-radius': '25px',
@@ -23,19 +23,21 @@
             @before-leave="beforeLeave"
             appear
           >
-            <div :key="body" class="white--text text-center">
-              <span class="bodytext">
+            
+             
+              <span class="bodytext white--text text-center" :style="{'text-align':'center'}" :key="body">
                 {{ body }}
               </span>
-            </div>
+              
+           
           </transition>
         </v-card-title>
       </v-col>
     </v-row>
     <v-row>
       <v-col :style="{ visibility: !block ? 'visible' : 'hidden' }">
-        <v-btn-toggle v-model="value" class="d-flex justify-content-center">
-          <v-btn v-for="i in likert" :key="i" @click="answer(i)" :style="{width:'9%!important', 'min-width':'inherit'}">
+        <v-btn-toggle v-model="value" class="d-flex justify-content-center" rounded>
+          <v-btn v-for="i in likert" :key="i" @click="answer(i)" :style="{width:'9%!important', 'min-width':'inherit'}" rounded>
             {{ i }}
           </v-btn>
         </v-btn-toggle>
@@ -160,5 +162,7 @@ export default {
 }
 .bodytext {
   word-break: normal;
+  color:white;
+  text-align: center;
 }
 </style>

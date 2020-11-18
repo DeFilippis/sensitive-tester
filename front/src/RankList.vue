@@ -81,7 +81,7 @@ export default {
   flex-direction: column;
   border: 0.05rem solid lightgrey;
   border-radius: 0.25rem;
-  min-height: 589px;
+  
   flex-grow: 1;
 }
 
@@ -96,6 +96,7 @@ export default {
 
 .draggable-item {
   cursor: pointer;
+  padding:1px;
 }
 
 .draggable-item .drag-handler {
@@ -124,5 +125,6 @@ export default {
 .citylist-container {
   flex-grow: 1;
   width:250px!important;
+  min-height: 389px;
 }
 </style>
