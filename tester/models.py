@@ -34,7 +34,7 @@ class Constants(BaseConstants):
     LIKERT = range(0, 11)
     bonus_amount_average = 50  # amount in cents to be bonus participants for guessing second-order beliefs correctly
     bonus_amount_distribution = 50  # amount in cents to bonus participants for guessing distributions correctly
-    MAX_ATTENTION_FAILURES = 1
+    MAX_ATTENTION_FAILURES = 3
     with open(r'./data/qleads.yaml') as file:
         leads = yaml.load(file, Loader=yaml.FullLoader)
     fields = list(leads.keys())  # again, not the best one, but will work for now. TODO?
@@ -102,9 +102,11 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     initial_distribution = models.IntegerField()
     attention_failure_counter = models.IntegerField(default=0)
+
     @property
     def total_attempts_failed(self):
-        return self.participant.tester_player.all().aggregate(s=Sum('attention_failure_counter')).get('s',0)
+        return self.participant.tester_player.all().aggregate(s=Sum('attention_failure_counter')).get('s', 0)
+
     def get_progress(self):
         totpages = self.participant._max_page_index
         curpage = self.participant._index_in_pages
@@ -167,7 +169,7 @@ class Player(BasePlayer):
         r = {self.id_in_group: next_q}
         if data.get('info_request'):
             return r
-
+        attention_failed = False
         if data.get('answer') and qid and field and value is not None:
             q = SensitiveQ.objects.get(id=qid)
             setattr(q, field, value)
@@ -181,11 +183,13 @@ class Player(BasePlayer):
                 except IndexError:
                     self.attention_failure_counter += 1
                     self.save()
-                if self.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
-                    return  {self.id_in_group: dict(too_many_failures=True)}
+                    if self.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
+                        return {self.id_in_group: dict(too_many_failures=True)}
+                    attention_failed = True
             q.save()
             q.mark_sorters_done(field)
-        r = {self.id_in_group: self.next_q()}  # we update the req
+        print("ATTENTION FAILED", attention_failed)
+        r = {self.id_in_group: {**self.next_q(), 'attention_failed': attention_failed}}  # we update the req
         return r
 
     def next_q(self):

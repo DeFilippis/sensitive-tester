@@ -1,5 +1,5 @@
 <template>
-  <v-container   class="justify-content-center d-flex  flex-column  text-center">
+  <v-container class="justify-content-center d-flex  flex-column  text-center">
     <v-row>
       <v-col>
         <h4 v-if="lead" :style="{ color: 'black' }">
@@ -23,33 +23,50 @@
             @before-leave="beforeLeave"
             appear
           >
-            
-             
-              <span class="bodytext white--text text-center" :style="{'text-align':'center'}" :key="body">
-                {{ body }}
-              </span>
-              
-           
+            <span
+              class="bodytext white--text text-center"
+              :style="{ 'text-align': 'center' }"
+              :key="body"
+            >
+              {{ body }}
+            </span>
           </transition>
         </v-card-title>
       </v-col>
     </v-row>
     <v-row>
       <v-col :style="{ visibility: !block ? 'visible' : 'hidden' }">
-        <v-btn-toggle v-model="value" class="d-flex justify-content-center" rounded>
-          <v-btn v-for="i in likert" :key="i" @click="answer(i)" :style="{width:'9%!important', 'min-width':'inherit'}" rounded>
+        <v-btn-toggle
+          v-model="value"
+          class="d-flex justify-content-center"
+          rounded
+        >
+          <v-btn
+            v-for="i in likert"
+            :key="i"
+            @click="answer(i)"
+            :style="{ width: '9%!important', 'min-width': 'inherit' }"
+            rounded
+          >
             {{ i }}
           </v-btn>
         </v-btn-toggle>
       </v-col>
     </v-row>
+    
+    <div data-app>
+      <attention-failed :dialog="attentionFailed" @input="attentionFailed = false" />
+    </div>
   </v-container>
 </template>
 
 <script>
+import AttentionFailed from "./components/AttentionFailed";
 export default {
+  components: { AttentionFailed },
   data() {
     return {
+      attentionFailed: false,
       lead: window.field_desc["lead"],
       trans: true,
       block: true,
@@ -95,9 +112,10 @@ export default {
     // console.debug(this.$options.sockets)
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
-
+      
       this.trans = false;
       ({
+        attention_failed: this.attentionFailed,
         no_q_left: this.no_q_left,
         too_many_failures: this.too_many_failures,
         body: this.body,
@@ -106,7 +124,9 @@ export default {
         value: this.value,
         progress_value: this.progressValue,
       } = d);
+      
     };
+    
     this.trans = true;
     this.$options.sockets.onopen = (data) => {
       this.$socket.sendObj({ info_request: true });
@@ -162,7 +182,7 @@ export default {
 }
 .bodytext {
   word-break: normal;
-  color:white;
+  color: white;
   text-align: center;
 }
 </style>
