@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container   class="justify-content-center d-flex  flex-column  text-center">
     <v-row>
       <v-col>
         <h4 v-if="lead" :style="{ color: 'black' }">
@@ -35,7 +35,7 @@
     <v-row>
       <v-col :style="{ visibility: !block ? 'visible' : 'hidden' }">
         <v-btn-toggle v-model="value" class="d-flex justify-content-center">
-          <v-btn v-for="i in likert" :key="i" @click="answer(i)">
+          <v-btn v-for="i in likert" :key="i" @click="answer(i)" :style="{width:'9%!important', 'min-width':'inherit'}">
             {{ i }}
           </v-btn>
         </v-btn-toggle>
