@@ -1,57 +1,47 @@
 <template>
-  <v-app class="main-app">
-    <v-main app>
-      <v-container>
-        <v-row>
-          <div v-cloak>
-            <v-card flat class="" v-if="!no_q_left && body">
-              <v-card-text>
-                <v-row>
-                  <v-col cols="12">
-                    <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-title
-                      class="justify-center text-center"
-                      :style="{ background: fieldCol, 'border-radius': '25px' }"
-                    >
-                      <transition
-                        name="fade"
-                        mode="out-in"
-                        @after-enter="afterEnter"
-                        @before-leave="beforeLeave"
-                        appear
-                      >
-                        <div :key="body" class="white--text text-center">
-                          <span class="bodytext">
-                            {{ body }}
-                          </span>
-                        </div>
-                      </transition>
-                    </v-card-title>
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    :style="{ visibility: !block ? 'visible' : 'hidden' }"
-                  >
-                    <v-btn-toggle
-                      v-model="value"
-                      class="d-flex justify-content-center"
-                    >
-                      <v-btn v-for="i in likert" :key="i" @click="answer(i)">
-                        {{ i }}
-                      </v-btn>
-                    </v-btn-toggle>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-card>
-          </div>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+  <v-container fluid>
+    <v-row>
+      <v-col>
+        <h4 v-if="lead" :style="{ color: 'black' }">
+          {{ lead }}
+        </h4>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card-title
+          class="justify-center text-center"
+          :style="{
+            background: fieldCol,
+            'border-radius': '25px',
+          }"
+        >
+          <transition
+            name="fade"
+            mode="out-in"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            appear
+          >
+            <div :key="body" class="white--text text-center">
+              <span class="bodytext">
+                {{ body }}
+              </span>
+            </div>
+          </transition>
+        </v-card-title>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col :style="{ visibility: !block ? 'visible' : 'hidden' }">
+        <v-btn-toggle v-model="value" class="d-flex justify-content-center">
+          <v-btn v-for="i in likert" :key="i" @click="answer(i)">
+            {{ i }}
+          </v-btn>
+        </v-btn-toggle>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
