@@ -1,5 +1,5 @@
 <template>
-  <div class="  d-flex flex-column citylist-container">
+  <div class="  d-flex flex-column citylist-container" :style="{'align-self':'stretch'}">
     
     <draggable
       class="list-group source citylist"
@@ -125,6 +125,7 @@ export default {
 .citylist-container {
   flex-grow: 1;
   width:250px!important;
-  min-height: 389px;
+  align-self:stretch
+
 }
 </style>

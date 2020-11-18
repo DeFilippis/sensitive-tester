@@ -10,7 +10,7 @@ import random
 
 class Endline(Page):
     form_model = 'player'
-    form_fields = ['sex', 'birth', 'race', 'education', 'income', 'religion', 'religious_attendance', 'feedback']
+    form_fields = ['sex', 'birth',  'education', 'income', 'religion', 'religious_attendance', 'feedback']
 
 page_sequence = [
         Endline,

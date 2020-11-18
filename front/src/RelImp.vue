@@ -14,9 +14,9 @@
           <div class="alert alert-danger" v-if="error">
             Move all the items based on the importance
           </div>
-          <div class="row d-flex align-items-end ">
-            <div class="col-6 ">{{ originalListTitle }}</div>
-            <div class="col-6">{{ rankedListTitle }}</div>
+          <div class="row d-flex align-items-stretch ">
+            <div class="col-6 my-auto flex-grow-1" >{{ originalListTitle }}</div>
+            <div class="col-6 my-auto flex-grow-1" >{{ rankedListTitle }}</div>
           </div>
           <v-row class="d-flex  mx-1" align="center" justify="center">
             <RankList
