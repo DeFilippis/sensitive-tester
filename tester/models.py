@@ -34,7 +34,7 @@ class Constants(BaseConstants):
     LIKERT = range(0, 11)
     bonus_amount_average = 50  # amount in cents to be bonus participants for guessing second-order beliefs correctly
     bonus_amount_distribution = 50  # amount in cents to bonus participants for guessing distributions correctly
-    MAX_ATTENTION_FAILURES = 3
+    MAX_ATTENTION_FAILURES = 2
     with open(r'./data/qleads.yaml') as file:
         leads = yaml.load(file, Loader=yaml.FullLoader)
     fields = list(leads.keys())  # again, not the best one, but will work for now. TODO?
@@ -45,8 +45,7 @@ class Constants(BaseConstants):
         qs = yaml.load(file, Loader=yaml.FullLoader)
 
     bodies = [q.get('statement') for q in qs]
-    distribution_explication = _("""Please drag the sliders below to divide it into three areas
-            based on your estimate of how many people in this study have
+    distribution_explication = _("""Using the sliders please estimate the share of  participants in this study who have
             answered from 0 to 3, from 4 to 6, from 7 to 10 about the
             statement above. <b>Please Note: You must move BOTH the sliders in order 
             to progress to the next page</b>""")
@@ -57,7 +56,7 @@ class Constants(BaseConstants):
         plotTitle=_("Distribution of answers", ),
         popup=_('of participants answered between'),
         next=_('Next'),
-        attention_checker_text=_('Attention: set middle slider to 100%'),
+        attention_checker_text=_('Attention: set middle slider (the blue one) to 100%'),
 
     )
     rank_obj = dict(
@@ -66,6 +65,10 @@ class Constants(BaseConstants):
         rankedListTitle=_('...to here'),
         next=_('Next')
     )
+    attention_error = dict(title=_('Attention'),
+                           body=_(
+                               'You commit some errors. Please pay more attention. Next time you fail to pass the attention test, we may finish the study'),
+                           button=_('Ok'))
 
 
 class Subsession(BaseSubsession):
@@ -174,11 +177,13 @@ class Player(BasePlayer):
             q = SensitiveQ.objects.get(id=qid)
             setattr(q, field, value)
             if q.attention_checker and body:
-                p = re.compile(r'(\d)')
+                _range = Constants.leads[field][self.subsession.get_current_language()]['range']
+                p = re.compile(r'\"(.*?[^,])\"')
                 result = p.search(body)
                 try:
                     checking_val = result.group(1)
-                    if str(checking_val[0]) != str(value):
+                    checking_index = _range.index(checking_val)
+                    if checking_index != value:
                         raise IndexError
                 except IndexError:
                     self.attention_failure_counter += 1
@@ -188,7 +193,6 @@ class Player(BasePlayer):
                     attention_failed = True
             q.save()
             q.mark_sorters_done(field)
-        print("ATTENTION FAILED", attention_failed)
         r = {self.id_in_group: {**self.next_q(), 'attention_failed': attention_failed}}  # we update the req
         return r
 
@@ -213,10 +217,11 @@ class Player(BasePlayer):
         if unanswered.exists():
             q = unanswered.first()
             body = q.body
+            r = dict(body=body, field=field, id=q.id, progress_value=self.get_progress(), label=q.label, )
             if q.label == 'attention':
-                body = q.body.format(
-                    num=random.randint(0, 10))  # we inject it everywhere. Dont' know if it makes sense
-            return dict(body=body, field=field, id=q.id, progress_value=self.get_progress())
+                _range = Constants.leads[field][self.subsession.get_current_language()]['range']
+                r['body'] = q.body.format(num=random.choice(_range))
+            return r
         else:
             return dict(no_q_left=True)
 

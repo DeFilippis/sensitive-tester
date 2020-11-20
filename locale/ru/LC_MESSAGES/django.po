@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 17:08+0300\n"
+"POT-Creation-Date: 2020-11-20 20:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,129 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: endline/models.py:32
+msgid "What year were you born?"
+msgstr ""
+
+#: endline/models.py:36
+msgid "What is the highest level of education that you have achieved?"
+msgstr ""
+
+#: endline/models.py:38
+msgid "Less than High School"
+msgstr ""
+
+#: endline/models.py:39
+msgid "H.S. Graduate"
+msgstr ""
+
+#: endline/models.py:40
+msgid "Some College"
+msgstr ""
+
+#: endline/models.py:41
+msgid "Associate's Degree"
+msgstr ""
+
+#: endline/models.py:42
+msgid "College Graduate"
+msgstr ""
+
+#: endline/models.py:43
+msgid "Master's Degree"
+msgstr ""
+
+#: endline/models.py:44
+msgid "Professional Degree (JD/MD)"
+msgstr ""
+
+#: endline/models.py:45
+msgid "PhD"
+msgstr ""
+
+#: endline/models.py:50
+msgid ""
+"Which of the following best represents your household income last year "
+"before taxes?"
+msgstr ""
+
+#: endline/models.py:61
+msgid "Which of these labels best matches your religious views?"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Atheist"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Agnostic"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Spiritual but not religious"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Christian"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Muslim"
+msgstr ""
+
+#: endline/models.py:62
+msgid "Hindu"
+msgstr ""
+
+#: endline/models.py:63
+msgid "Buddhist"
+msgstr ""
+
+#: endline/models.py:64
+msgid "Sikh"
+msgstr ""
+
+#: endline/models.py:64
+msgid "Jewish"
+msgstr ""
+
+#: endline/models.py:64
+msgid "Another religion not mentioned here"
+msgstr ""
+
+#: endline/models.py:68
+msgid "How frequently do you attend religious services?"
+msgstr ""
+
+#: endline/models.py:70
+msgid "At least once a week"
+msgstr ""
+
+#: endline/models.py:71
+msgid "Once or twice a month / A few times a year"
+msgstr ""
+
+#: endline/models.py:72
+msgid "Seldom / never"
+msgstr ""
+
+#: endline/models.py:77
+msgid ""
+"Do you have any feedback for us?  Did you enjoy the experiment?  Any "
+"complaints?"
+msgstr ""
+
+#: endline/templates/endline/Endline.html:7
+msgid "Final Survey"
+msgstr ""
+
+#: endline/templates/endline/Endline.html:15
+msgid ""
+"You've reached the final part of this study! Please answer a few basic "
+"demographic questions about yourself before finishing the study. Thank you "
+"for your patience."
+msgstr ""
 
 #: last/templates/last/Results.html:5
 msgid "Thank you for the participation"
@@ -36,107 +159,11 @@ msgid ""
 "                "
 msgstr ""
 
-#: last/templates/last/Results.html:26 tester/models.py:58 tester/models.py:66
+#: last/templates/last/Results.html:26 tester/models.py:59 tester/models.py:67
 msgid "Next"
 msgstr "Далее"
 
-#: sensitive_tester_endline/models.py:34
-msgid "What year were you born?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:38
-msgid "What race do you most identify with?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:40
-msgid "White"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:41
-msgid "Black or African American"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:42
-msgid "Asian"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:43
-msgid "American Indian or Alaska Native"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:44
-msgid "Native Hawaiian or Pacific Islander"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:49
-msgid "What is the highest level of education that you have achieved?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:51
-msgid "Less than High School"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:52
-msgid "H.S. Graduate"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:53
-msgid "Some College"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:54
-msgid "Associate's Degree"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:55
-msgid "College Graduate"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:56
-msgid "Master's Degree"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:57
-msgid "Professional Degree (JD/MD)"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:58
-msgid "PhD"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:63
-msgid ""
-"Which of the following best represents your household income last year "
-"before taxes?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:74
-msgid "Which of these labels best matches your religious views?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:80
-msgid "How frequently do you attend religious services?"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:82
-msgid "At least once a week"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:83
-msgid "Once or twice a month / A few times a year"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:84
-msgid "Seldom / never"
-msgstr ""
-
-#: sensitive_tester_endline/models.py:89
-msgid ""
-"Do you have any feedback for us?  Did you enjoy the experiment?  Any "
-"complaints?"
-msgstr ""
-
-#: tester/models.py:47
+#: tester/models.py:48
 msgid ""
 "Please drag the sliders below to divide it into three areas\n"
 "            based on your estimate of how many people in this study have\n"
@@ -145,56 +172,70 @@ msgid ""
 "in order \n"
 "            to progress to the next page</b>"
 msgstr ""
-"Перетащите ползунки ниже, чтобы разделить его на три области на основе вашей "
+"Перетащите слайдеры, чтобы разделить его на три области на основе вашей "
 "оценки того, сколько людей в этом исследовании ответили от 0 до 3, от 4 до "
 "6, от 7 до 10 по поводу утверждения выше. Обратите внимание: вы должны "
-"переместить ОБА ползунка, чтобы перейти на следующую страницу."
+"переместить ОБА слайдера, чтобы перейти на следующую страницу."
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "from 0 to 3"
 msgstr "от 0 до 3"
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "from 4 to 6"
 msgstr "от 4 до 6"
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "From 7 to 10"
 msgstr "от 7 до 10"
 
-#: tester/models.py:55
+#: tester/models.py:56
 msgid "Share (in %)"
 msgstr "Доля (в %)"
 
-#: tester/models.py:56
+#: tester/models.py:57
 msgid "Distribution of answers"
 msgstr "Распределение ответов"
 
-#: tester/models.py:57
+#: tester/models.py:58
 msgid "of participants answered between"
 msgstr " участников выбравших "
 
-#: tester/models.py:59
+#: tester/models.py:60
 msgid "Attention: set middle slider to 100%"
 msgstr "Проверка внимания: установите средний слайдер на 100%"
 
-#: tester/models.py:63
+#: tester/models.py:64
 msgid "Sort items based on the relative importance for you"
 msgstr "Отсортируйте элементы в порядке важности для вас"
 
-#: tester/models.py:64
+#: tester/models.py:65
 msgid "Move from here"
 msgstr "Переместите элементы отсюда"
 
-#: tester/models.py:65
+#: tester/models.py:66
 msgid "...to here"
 msgstr "Сюда в порядке важности для вас"
 
-#: tester/templates/tester/DistributionIntro.html:23
+#: tester/models.py:69
+msgid "Attention"
+msgstr "Внимание!"
+
+#: tester/models.py:70
+msgid ""
+"You commit some errors. Please pay more attention. Next time you fail to "
+"pass the attention test, we may finish the study"
+msgstr "Вы не прошли проверку на внимательность. Если вы не пройдете ее еще раз, вы, возможно, не сможете продолжать принимать участие в исследовании."
+
+#: tester/models.py:71
+msgid "Ok"
+msgstr "ОК"
+
+#: tester/templates/tester/DistributionIntro.html:25
 msgid "Guess The Distribution of Responses from Other Participants"
 msgstr "Угадайте распределение ответов от других участников"
 
-#: tester/templates/tester/DistributionIntro.html:29
+#: tester/templates/tester/DistributionIntro.html:31
 msgid ""
 "On the next page, we want you to estimate the fraction of participants in "
 "this study that gave each kind of answer to the questions asked we just "
@@ -203,7 +244,7 @@ msgstr ""
 "На следующей странице мы хотим, чтобы вы оценили долю участников в этом "
 "исследовании, которые дали каждый вид ответов на заданные нами вопросы."
 
-#: tester/templates/tester/DistributionIntro.html:33
+#: tester/templates/tester/DistributionIntro.html:35
 msgid ""
 "Specifically, you will be asked to move sliders to estimate the percentage "
 "of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range."
@@ -212,7 +253,7 @@ msgstr ""
 "процент участников, которые дали ответы, которые попали в диапазон 0–3, 4–6 "
 "и 7–10."
 
-#: tester/templates/tester/DistributionIntro.html:42
+#: tester/templates/tester/DistributionIntro.html:44
 #, python-format
 msgid ""
 "ATTENTION - We will reward  %(bonus)s cents to the 10 participants who guess "
@@ -223,31 +264,93 @@ msgstr ""
 "окажется ближе всего к верному значению. Тем самым, в ваших интересах "
 "попытаться назвать максимально верное значение."
 
-#: tester/templates/tester/DistributionIntro.html:55
-#: tester/templates/tester/QIntro.html:55
-#: tester/templates/tester/RelIntro.html:21
+#: tester/templates/tester/DistributionIntro.html:57
+#: tester/templates/tester/Intro.html:95 tester/templates/tester/QIntro.html:61
+#: tester/templates/tester/RelIntro.html:25
 msgid "Proceed"
 msgstr "Продолжить"
 
-#: tester/templates/tester/QIntro.html:20
+#: tester/templates/tester/Intro.html:37
+msgid ""
+"Your participation is anonymous and confidential. The results of this "
+"research will be published, but your name will never be mentioned. All "
+"decisions of the research participants will be processed by a computer "
+"program that does not reveal your identity to other participants or to us, "
+"so that no one can associate your actions with you personally."
+msgstr ""
+"Ваше участие является анонимным и конфиденциальным. Результаты этого "
+"исследования будут опубликованы, но Ваше имя никогда не будет упомянуто. Все "
+"решения участников исследования будут обрабатываться компьютерной "
+"программой, которая не раскрывает Вашу личность ни другим участникам, ни "
+"нам, так что никто не сможет связать Ваши действия лично с Вами."
+
+#: tester/templates/tester/Intro.html:46
+msgid ""
+"By participating in this study, you do not expose yourself to any risks."
+msgstr "Участвуя в данном исследовании, Вы не подвергаете себя никаким рискам."
+
+#: tester/templates/tester/Intro.html:51
+msgid ""
+"Participation in the research is possible using browsers Firefox, Chrome / "
+"Chromium, Opera, Edge or Yandex with operating systems for stationary "
+"computers, laptops or smartphones."
+msgstr ""
+"Участие в исследовании возможно с использованием браузеров Firefox, Chrome/"
+"Chromium, Opera, Edge или Yandex с операционными системами для стационарных "
+"компьютеров, ноутбуков или смартфонов."
+
+#: tester/templates/tester/Intro.html:62
+msgid ""
+"By participating in this study, you give your informed consent to the use of "
+"your answers anonymously and solely for scientific purposes."
+msgstr ""
+"Принимая участие в данном исследовании, Вы даете свое информированное "
+"согласие на использование Ваших ответов в анонимном виде и исключительно в "
+"научных целях."
+
+#: tester/templates/tester/Intro.html:69
+msgid "On average, the survey takes about 15 minutes."
+msgstr "В среднем исследование занимает около 15 минут."
+
+#: tester/templates/tester/Intro.html:76
+#, python-format
+msgid ""
+"There will be attention checks throughout the study to ensure the validity "
+"of participant's answers. Failing %(MAX_ATTENTION_FAILURES)s of these "
+"attention checks will result in getting removed the study without pay."
+msgstr ""
+"На протяжении всего исследования будут проводиться проверки внимательности "
+"для подтверждения достоверности ответов участника. Непрохождение "
+"%(MAX_ATTENTION_FAILURES)s из этих проверок внимания может привести к "
+"лишению возможности продложить исследование и невыплате вознаграждения."
+
+#: tester/templates/tester/Intro.html:84
+msgid ""
+"Let me know if you have any questions or technical difficulties via messages "
+"Yandex.Toloka or by e-mail:"
+msgstr ""
+"Дайте знать, если у Вас будут какие-либо вопросы или технические сложности "
+"через сообщения Yandex.Toloka или по e-mail: "
+
+#: tester/templates/tester/QIntro.html:26
 msgid "Guess How The Average Participant Responded"
 msgstr "Угадайте, как в среднем ответят другие участники этого исследования"
 
-#: tester/templates/tester/QIntro.html:24
+#: tester/templates/tester/QIntro.html:30
 msgid "Report Your Attitudes On A Variety of Topics"
 msgstr "Укажите ваше мнение по ряду вопросов"
 
-#: tester/templates/tester/QIntro.html:28
+#: tester/templates/tester/QIntro.html:34
 msgid "Report How Important Your Various Attitudes Are To You"
 msgstr "Укажите, насколько вам важна ваша позиция по ряду утверждений"
 
-#: tester/templates/tester/QIntro.html:32
+#: tester/templates/tester/QIntro.html:38
 msgid "Report How Likely Disagreement On A Topic Impedes Friendship"
 msgstr ""
 "Как вам кажется, насколько несогласие по ряду вопросов может препятствовать "
 "дружбе"
 
-#: tester/templates/tester/QIntro.html:37
+#: tester/templates/tester/QIntro.html:43
 msgid ""
 "On the next page we will show you several statements in a row. For each "
 "statement we will ask you to  answer the following question:"
@@ -255,11 +358,11 @@ msgstr ""
 "На следующей странице вам подряд будет показано несколько  утверждений. Для "
 "каждого из них мы попросим вас ответить на следующий вопрос:"
 
-#: tester/templates/tester/QIntro.html:49
+#: tester/templates/tester/QIntro.html:55
 msgid "ATTENTION - We will reward"
 msgstr "Внимание: мы выплатим по  "
 
-#: tester/templates/tester/QIntro.html:49
+#: tester/templates/tester/QIntro.html:55
 msgid ""
 "cents to the 10 participants who guess closest to the correct answer. As a "
 "result, it is in your best interest to try to guess correctly."
@@ -268,10 +371,30 @@ msgstr ""
 "значению. Тем самым, в ваших интересах попытаться назвать максимально верное "
 "значение."
 
-#: tester/templates/tester/RelIntro.html:16
+#: tester/templates/tester/RelIntro.html:20
 msgid ""
 "On the next page we will ask you to rank the attitudes you just reported "
 "based on how important they are to you."
 msgstr ""
 "На следующей странице мы попросим вас оценить отношения, о которых вы только "
 "что сообщили, в зависимости от того, насколько они важны для вас."
+
+#: tester/templates/tester/TooManyFailures.html:38
+msgid ""
+"Unfortunately you have not paid enough attention while answering the "
+"questions."
+msgstr "К сожалению, вы не уделили достаточно внимания при ответах на вопросы."
+
+#: tester/templates/tester/TooManyFailures.html:44
+msgid "You cannot proceed with this study anymore."
+msgstr "Вы не сможете дальше продолжать принимать участие в этом исследовании."
+
+#: tester/templates/tester/TooManyFailures.html:49
+msgid ""
+"If you believe that this was due to any technical glitches on our side or it "
+"is not your fault, please let us know immediately via Yandex.Toloka "
+"messaging system o or via e-mail at:"
+msgstr ""
+"Если вы считаете, что это произошло из-за технических сбоев с нашей стороны "
+"или не по вашей вине, пожалуйста, немедленно сообщите нам об этом через "
+"систему обмена сообщениями Яндекс.Толока или по электронной почте:"

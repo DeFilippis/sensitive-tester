@@ -36,10 +36,9 @@
                             <li class="list-group-item">
                                 {% blocktrans trimmed %}
                                     Your participation is anonymous and confidential. The results of this research will
-                                    be published, but your name will never be mentioned. All decisions of the research
+                                    be published but only in aggregated form. All decisions of the research
                                     participants will be processed by a computer program that does not reveal your
-                                    identity to other participants or to us, so that no one can associate your actions
-                                    with you personally.
+                                    identity to other participants or to the researchers.
                                 {% endblocktrans %}
                             </li>
                             <li class="list-group-item">
@@ -50,7 +49,7 @@
                             <li class="list-group-item">
                                 {% blocktrans trimmed %}
                                     Participation in the research is possible using browsers Firefox, Chrome / Chromium,
-                                    Opera, Edge
+                                    Opera, Edge, Safari,
                                     or
                                     Yandex
                                     with operating systems for stationary computers, laptops or smartphones.
@@ -71,11 +70,14 @@
                                 {% endblocktrans %}
                             </li>
                             <li class="list-group-item list-group-item-warning">
+                            {% with Constants.MAX_ATTENTION_FAILURES  as MAX_ATTENTION_FAILURES %}
+
                                 {% blocktrans trimmed %}
                                     There will be attention checks throughout the study to ensure the validity of
-                                    participant's answers. Failing two of these attention checks will result in getting
+                                    participant's answers. Failing {{ MAX_ATTENTION_FAILURES }} of these attention checks will result in getting
                                     removed the study without pay.
                                 {% endblocktrans %}
+                            {% endwith %}
                             </li>
                             <li class="list-group-item">
                                 {% blocktrans trimmed %}

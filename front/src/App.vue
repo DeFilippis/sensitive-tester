@@ -43,19 +43,26 @@
         >
           <v-btn
             v-for="i in likert"
-            :key="i"
-            @click="answer(i)"
-            :style="{ width: '9%!important', 'min-width': 'inherit' }"
+            :key="i[0]"
+            @click="answer(i[0])"
+            :style="{
+              width: calcWidth + '%!important',
+              'min-width': 'inherit',
+            }"
             rounded
           >
-            {{ i }}
+            {{ i[1] }}
           </v-btn>
         </v-btn-toggle>
       </v-col>
     </v-row>
-    
+
     <div data-app>
-      <attention-failed :dialog="attentionFailed" @input="attentionFailed = false" />
+      <attention-failed
+        :dialog="attentionFailed"
+        @input="attentionFailed = false"
+        :error="attentionError"
+      />
     </div>
   </v-container>
 </template>
@@ -66,6 +73,7 @@ export default {
   components: { AttentionFailed },
   data() {
     return {
+      attentionError: window.attentionError,
       attentionFailed: false,
       lead: window.field_desc["lead"],
       trans: true,
@@ -73,16 +81,20 @@ export default {
       no_q_left: false,
       too_many_failures: false,
       body: "",
+      label:null,
       qid: null,
       field: null,
       value: null,
       toggle_exclusive: undefined,
-      likert: this._.range(0, 11),
+      likert: window.field_range,
       progressValue: 0,
     };
   },
 
   computed: {
+    calcWidth() {
+      return 100 / this.likert.length;
+    },
     fieldCol() {
       const colorCorr = {
         attitude: "black",
@@ -109,24 +121,23 @@ export default {
     },
   },
   mounted() {
-    // console.debug(this.$options.sockets)
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
-      
+      console.debug("DDD", d);
       this.trans = false;
       ({
         attention_failed: this.attentionFailed,
         no_q_left: this.no_q_left,
         too_many_failures: this.too_many_failures,
         body: this.body,
+        label: this.label,
         id: this.qid,
         field: this.field,
         value: this.value,
         progress_value: this.progressValue,
       } = d);
-      
     };
-    
+
     this.trans = true;
     this.$options.sockets.onopen = (data) => {
       this.$socket.sendObj({ info_request: true });
@@ -155,31 +166,43 @@ export default {
   },
 };
 </script>
+
 <style>
 :root {
   --animate-duration: 1800ms;
   --animate-delay: 2s;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.fade-enter,
+.fade-leave-to
+/* .fade-leave-active below version 2.1.8 */
+
+ {
   opacity: 0;
 }
+
 [v-cloak] {
   display: none;
 }
+
 .main_card {
   /* max-width: 700px; */
 }
+
 #app {
   background: transparent;
   /* max-width: 700px; */
 }
+
 .main-app {
   /* max-width: 700px; */
 }
+
 .bodytext {
   word-break: normal;
   color: white;

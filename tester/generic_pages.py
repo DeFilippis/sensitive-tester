@@ -1,8 +1,8 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants, Sorter
-from django.db.models import Q
-
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import translation
 
 
@@ -34,13 +34,20 @@ class UnFailedPage(oTreePage):
             return self._redirect_to_page_the_user_should_be_on()
         return super().get()
 
+    def get_context_data(self, *args, **kwargs):
+        c = super().get_context_data(*args, **kwargs)
+        c['attentionError'] = json.loads(json.dumps(Constants.attention_error, cls=DjangoJSONEncoder))
+        return c
+
 
 class GenPage(UnFailedPage):
 
     def get_context_data(self, *args, **kwargs):
         c = super().get_context_data(*args, **kwargs)
+
         c['field'] = Constants.fields[self.round_number - 1]
         c['field_desc'] = Constants.leads[c['field']][self.get_current_language()]
+        c['field_range'] = [(i, j) for i,j in enumerate(c['field_desc']['range'])]
         return c
 
 

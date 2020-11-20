@@ -3,7 +3,7 @@
     statement: I believe that drinking alcohol is morally acceptable.
     for_ranking: Alcohol
   ru:
-    statement: Я думаю, что потреблять алкоголь морально приемлемо
+    statement: Я думаю, что употреблять алкоголь в больших количествах морально неприемлемо
     for_ranking: Алкоголь
 - en:
     statement: I support gay marriage
@@ -31,44 +31,32 @@
     statement: Я полагаю, что ислам по своей сути - миролюбивая религия
     for_ranking: Ислам
 - en:
-    statement: I believe that there are only two genders
-    for_ranking: Two Genders
-  ru:
-    statement: Я полагаю, что существует всего два пола
-    for_ranking: Вопросы пола
-- en:
     statement: I believe that the government should mandate the wearing of masks in public to limit the spread of COVID-19.
     for_ranking: COVID Masks
   ru:
     statement: Я считаю, что правительство должно принуждать к ношению масок в общественных местах для того, чтобы ограничить распространения COVID-19
     for_ranking: Маски при ковиде
 - en:
-    statement: I believe that Western culture is generally superior to that of the Middle East.
-    for_ranking: Western Culture
-  ru:
-    statement: Я считаю, что западная культура в целом превосходит культуру ближневосточных стран
-    for_ranking: Западная культура
-- en:
-    statement: I believe immigrants strengthen our country because of their hard work and talent.
+    statement: I believe immigrants strengthen our country.
     for_ranking: Immigrants
   ru:
-    statement: Я считаю, что иммигранты делают нашу страну сильнее своим трудолюбием и талантом
+    statement: Я считаю, что иммигранты делают нашу страну сильнее.
     for_ranking: Иммигранты
 - en:
-    statement: I believe, in general, Russian parliamentary elections are subject to significant amounts of fraud.
+    statement: I believe, in general, the last Russian parliamentary elections are subject to significant amounts of fraud.
     for_ranking: Election Fraud
   ru:
-    statement: Я считаю, что  выборы в Государственную думу проходили с большим количеством фальсификаций
+    statement: Я считаю, что  последние выборы в Государственную думу РФ проходили с большим количеством фальсификаций
     for_ranking: Фальсификация выборов
 - en:
     statement: I believe that, in general, jaywalking is morally acceptable.
     for_ranking: Jaywalking
   ru:
-    statement: Я не считаю чем-то аморальным переходить улицу на красный сигнал светофора
+    statement: Я считаю, что переходить улицу на красный сигнал светофора - нехорошо
     for_ranking: Переход на красный
 - en:
-    statement: Click {num} if you pay attention
+    statement: Click "{num}" if you are paying attention
     for_ranking: attention
   ru:
-    statement: "Тест на внимание:  выберите {num}"
+    statement: "Тест на внимание:  выберите \"{num}\""
     for_ranking: attention

@@ -4,11 +4,11 @@
     
             <v-card>
                 <v-card-title class="headline grey lighten-2">
-                    Attention!
+                    {{error.title}}
                 </v-card-title>
     
                 <v-card-text>
-                    You commit some errors. Please pay more attention. Next time you fail to pass the attention test, we may finish the study
+                    {{error.body}}
                 </v-card-text>
     
                 <v-divider></v-divider>
@@ -16,7 +16,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="error" text @click="emitOutput">
-                        Ok
+                        {{error.button}}
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -30,6 +30,10 @@ export default {
         dialog: {
             type: Boolean,
             default: false
+        },
+        error: {
+            type: Object,
+            default: ()=>{}
         }
     },
     computed: {
