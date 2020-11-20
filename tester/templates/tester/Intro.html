@@ -34,52 +34,64 @@
 
                         <ul class="list-group list-group-flush text-left infotext">
                             <li class="list-group-item">
-                                Ваше участие является анонимным и конфиденциальным. Результаты этого исследования будут
-                                опубликованы, но
-                                Ваше имя никогда не будет упомянуто. Все решения участников исследования будут
-                                обрабатываться
-                                компьютерной
-                                программой, которая не раскрывает Вашу личность ни другим участникам, ни нам, так что
-                                никто не
-                                сможет
-                                связать Ваши действия лично с Вами.
+                                {% blocktrans trimmed %}
+                                    Your participation is anonymous and confidential. The results of this research will
+                                    be published, but your name will never be mentioned. All decisions of the research
+                                    participants will be processed by a computer program that does not reveal your
+                                    identity to other participants or to us, so that no one can associate your actions
+                                    with you personally.
+                                {% endblocktrans %}
                             </li>
                             <li class="list-group-item">
-                                Участвуя в данном исследовании, Вы не подвергаете себя никаким рискам.
+                                {% blocktrans trimmed %}
+                                    By participating in this study, you do not expose yourself to any risks.
+                                {% endblocktrans %}
                             </li>
                             <li class="list-group-item">
-                                Участие в исследовании возможно с использованием браузеров Firefox, Chrome/Chromium,
-                                Opera, Edge
-                                или
-                                Yandex
-                                с операционными системами для стационарных компьютеров, ноутбуков или смартфонов.
+                                {% blocktrans trimmed %}
+                                    Participation in the research is possible using browsers Firefox, Chrome / Chromium,
+                                    Opera, Edge
+                                    or
+                                    Yandex
+                                    with operating systems for stationary computers, laptops or smartphones.
+                                {% endblocktrans %}
 
 
                             </li>
                             <li class="list-group-item">
-                                Принимая участие в данном исследовании, Вы даете свое информированное согласие на
-                                использование
-                                Ваших
-                                ответов в анонимном виде и исключительно в научных целях.
+                                {% blocktrans trimmed %}
+                                    By participating in this study, you give your informed consent to the use of your
+                                    answers anonymously and solely for scientific purposes.
+                                {% endblocktrans %}
 
                             </li>
                             <li class="list-group-item">
-                                В среднем исследование занимает около 15 минут.
+                                {% blocktrans trimmed %}
+                                    On average, the survey takes about 15 minutes.
+                                {% endblocktrans %}
+                            </li>
+                            <li class="list-group-item list-group-item-warning">
+                                {% blocktrans trimmed %}
+                                    There will be attention checks throughout the study to ensure the validity of
+                                    participant's answers. Failing two of these attention checks will result in getting
+                                    removed the study without pay.
+                                {% endblocktrans %}
                             </li>
                             <li class="list-group-item">
-                                Дайте знать, если у Вас будут какие-либо вопросы или технические сложности через
-                                сообщения
-                                Yandex.Toloka или
-                                по e-mail: <a href="mailto:epee@hse.ru" target="_blank"
-                                              rel="noopener noreferrer">epee@hse.ru</a>.
+                                {% blocktrans trimmed %}
+                                    Let me know if you have any questions or technical difficulties via
+                                    messages Yandex.Toloka or by e-mail:
+                                {% endblocktrans %} <a href="mailto:epee@hse.ru" target="_blank"
+                                                       rel="noopener noreferrer">epee@hse.ru</a>.
 
                             </li>
                         </ul>
-
-                        <button class="mdc-button foo-button mdc-button--outlined">
-                            <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">{% trans 'Proceed' %}</span>
-                        </button>
+                        <div class="text-center">
+                            <button class="mdc-button foo-button mdc-button--outlined">
+                                <div class="mdc-button__ripple"></div>
+                                <span class="mdc-button__label">{% trans 'Proceed' %}</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
