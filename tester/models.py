@@ -181,7 +181,7 @@ class Player(BasePlayer):
                 p = re.compile(r'\"(.*?[^,])\"')
                 result = p.search(body)
                 try:
-                    checking_val = result.group(1)
+                    checking_val = result.group(1).lower()
                     checking_index = _range.index(checking_val)
                     if checking_index != value:
                         raise IndexError
@@ -220,7 +220,7 @@ class Player(BasePlayer):
             r = dict(body=body, field=field, id=q.id, progress_value=self.get_progress(), label=q.label, )
             if q.label == 'attention':
                 _range = Constants.leads[field][self.subsession.get_current_language()]['range']
-                r['body'] = q.body.format(num=random.choice(_range))
+                r['body'] = q.body.format(num=random.choice(_range).capitalize())
             return r
         else:
             return dict(no_q_left=True)

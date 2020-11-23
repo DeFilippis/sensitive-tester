@@ -4,11 +4,11 @@ from .models import Constants, Sorter
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import translation
-
+from django.conf import settings
 
 class TransMixin:
     def get_current_language(self):
-        return self.subsession.get_current_language()
+        return self.session.config.get('language', settings.LANGUAGE_CODE)
 
     def get_context_data(self, **context):
         user_language = self.get_current_language()

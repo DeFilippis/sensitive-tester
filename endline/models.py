@@ -9,6 +9,27 @@ class Constants(BaseConstants):
     name_in_url = 'endline'
     players_per_group = None
     num_rounds = 1
+    EDUCATION_CHOICES = [
+        [1, _('Primary education/Middle school')],
+        [2, _('Secondary or vocational education')],
+        [3, _('A-levels/Uncompleted university degree')],
+        [4, _('Bachelor/Master')],
+        [5, _('PhD')],
+    ]
+    INCOME_CHOICES = [
+        [1, _('Not enough money even for food')],
+        [2, _('Enough for food, but not enough to buy clothes and shoes')],
+        [3, _('Enough for clothes and shoes, but not enough for the purchase of small household appliances')],
+        [4,
+         _("Enough money for small purchases, but buying expensive things (a computer, "
+         "washing machine, refrigerator) requires savings or credit."
+           )],
+        [5,
+         _(
+             "There is enough money to buy for a house, but to buy a car, a summer "
+             "residence, an apartment you need to save or take a loan")],
+        [6, _("We can afford any purchases without restrictions and loans")]
+    ]
 
 
 class Subsession(BaseSubsession):
@@ -20,41 +41,25 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
     sex = models.StringField(
-        choices=['Male', 'Female'],
-        verbose_name="What is your biological sex?",
+        choices=[_('Male'), _('Female')],
+        verbose_name=_("Please indicate your gender"),
         widget=widgets.RadioSelect)
 
     birth = models.IntegerField(
-        min=1930,
-        max=2002,
-        verbose_name=_("What year were you born?")
+        min=18,
+        max=102,
+        verbose_name=_("How old are you?")
     )
 
     education = models.StringField(
         verbose_name=_('What is the highest level of education that you have achieved?'),
-        choices=[
-            _('Less than High School'),
-            _('H.S. Graduate'),
-            _('Some College'),
-            _('Associate\'s Degree'),
-            _('College Graduate'),
-            _('Master\'s Degree'),
-            _('Professional Degree (JD/MD)'),
-            _('PhD')
-        ],
+        choices=Constants.EDUCATION_CHOICES,
         widget=widgets.RadioSelect)
 
     income = models.StringField(
-        verbose_name=_("Which of the following best represents your household income last year before taxes?"),
-        choices=[
-            "Less than $10,000",
-            "$10,000 to $19,999",
-            "$20,000 to $29,999",
-            "$30,000 to $39,999",
-            "$40,000 to $49,999", "$50,000 to $59,999", "$60,000 to $69,999", "$70,000 to $79,999", \
-            "$80,000 to $89,999", "$90,000 to $99,999", "$100,000 to $149,999", "$150,000 or more"],
+        label=_("""Which statement most accurately describes your family’s financial situation?"""),
+        choices=Constants.INCOME_CHOICES,
         widget=widgets.RadioSelect)
 
     religion = models.StringField(

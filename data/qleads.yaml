@@ -33,23 +33,23 @@ absolute_importance:
       How important is your opinion on the following statement for you?
     lead:
       How important is your opinion on the following statement for you?
-    range: [ "very important", "important", "not so important", "not important"]
+    range: ['not at all important', 'not so important', 'important', 'very important']
   ru:
     announcement:
       Насколько важно для вас ваше мнение по поводу следующего утверждения?
     lead:
       Насколько важно для вас ваше мнение по поводу следующего утверждения?
-    range: [ "очень важно", "важно", "не очень важно", "неважно"]
+    range: ['совсем неважно', 'не очень важно', 'важно', 'очень важно']
 friend:
   en:
     announcement:
       Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends?
     lead:
       Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends?
-    range: ["very likely", "likely", "unlikely", "very unlikely"]
+    range: ['very unlikely', 'unlikely', 'likely', 'very likely']
   ru:
     announcement:
       Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями?
     lead:
       Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями?
-    range: ["очень вероятно", "вероятно", "маловероятно", "совсем невероятно"]
+    range: [ "совсем невероятно",  "маловероятно","вероятно", "очень вероятно",]

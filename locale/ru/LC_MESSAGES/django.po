@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 20:14+0300\n"
+"POT-Creation-Date: 2020-11-23 18:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,121 +20,158 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: endline/models.py:32
-msgid "What year were you born?"
-msgstr ""
+#: endline/models.py:13
+msgid "Primary education/Middle school"
+msgstr "Средняя школа"
 
-#: endline/models.py:36
-msgid "What is the highest level of education that you have achieved?"
-msgstr ""
+#: endline/models.py:14
+msgid "Secondary or vocational education"
+msgstr "Среднее профессиональное образование"
 
-#: endline/models.py:38
-msgid "Less than High School"
-msgstr ""
+#: endline/models.py:15
+msgid "A-levels/Uncompleted university degree"
+msgstr "Незаконченное высшее образование"
 
-#: endline/models.py:39
-msgid "H.S. Graduate"
-msgstr ""
+#: endline/models.py:16
+msgid "Bachelor/Master"
+msgstr "Высшее образование"
 
-#: endline/models.py:40
-msgid "Some College"
-msgstr ""
+#: endline/models.py:17
+msgid "PhD"
+msgstr "Два и более диплома / Ученая степень"
 
-#: endline/models.py:41
-msgid "Associate's Degree"
-msgstr ""
+#: endline/models.py:20
+msgid "Not enough money even for food"
+msgstr "Не хватает денег даже на еду"
 
-#: endline/models.py:42
-msgid "College Graduate"
-msgstr ""
+#: endline/models.py:21
+msgid "Enough for food, but not enough to buy clothes and shoes"
+msgstr "Enough for food, but not enough to buy clothes and shoes"
 
-#: endline/models.py:43
-msgid "Master's Degree"
+#: endline/models.py:22
+msgid ""
+"Enough for clothes and shoes, but not enough for the purchase of small "
+"household appliances"
 msgstr ""
+"Хватает на одежду и обувь, но не хватает на покупку мелкой бытовой техники"
 
-#: endline/models.py:44
-msgid "Professional Degree (JD/MD)"
+#: endline/models.py:24
+msgid ""
+"Enough money for small purchases, but buying expensive things (a computer, "
+"washing machine, refrigerator) requires savings or credit."
 msgstr ""
+"Хватает денег на небольшие покупки, но покупка дорогих вещей (компьютера, "
+"стиральной машины, холодильника) требует накоплений или кредита"
+
+#: endline/models.py:29
+msgid ""
+"There is enough money to buy for a house, but to buy a car, a summer "
+"residence, an apartment you need to save or take a loan"
+msgstr ""
+"Хватает денег на покупки для дома, но на покупку машины, дачи, квартиры "
+"необходимо копить или брать кредит"
+
+#: endline/models.py:31
+msgid "We can afford any purchases without restrictions and loans"
+msgstr "Можем позволить себе любые покупки без ограничений и кредитов"
 
 #: endline/models.py:45
-msgid "PhD"
-msgstr ""
+msgid "Male"
+msgstr "Мужской"
 
-#: endline/models.py:50
-msgid ""
-"Which of the following best represents your household income last year "
-"before taxes?"
+#: endline/models.py:45
+msgid "Female"
+msgstr "Женский"
+
+#: endline/models.py:46
+msgid "Please indicate your gender"
+msgstr "Пожалуйста, укажите ваш пол"
+
+#: endline/models.py:52
+msgid "How old are you?"
+msgstr "Сколько вам лет?"
+
+#: endline/models.py:56
+msgid "What is the highest level of education that you have achieved?"
 msgstr ""
+"Какой у Вас самый высокий уровень образования, по которому Вы получили "
+"аттестат, свидетельство, диплом?"
 
 #: endline/models.py:61
+msgid ""
+"Which statement most accurately describes your family’s financial situation?"
+msgstr ""
+"Какое высказывание наиболее точно описывает финансовое положение вашей семьи?"
+
+#: endline/models.py:66
 msgid "Which of these labels best matches your religious views?"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Atheist"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Agnostic"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Spiritual but not religious"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Christian"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Muslim"
 msgstr ""
 
-#: endline/models.py:62
+#: endline/models.py:67
 msgid "Hindu"
 msgstr ""
 
-#: endline/models.py:63
+#: endline/models.py:68
 msgid "Buddhist"
 msgstr ""
 
-#: endline/models.py:64
+#: endline/models.py:69
 msgid "Sikh"
 msgstr ""
 
-#: endline/models.py:64
+#: endline/models.py:69
 msgid "Jewish"
 msgstr ""
 
-#: endline/models.py:64
+#: endline/models.py:69
 msgid "Another religion not mentioned here"
 msgstr ""
 
-#: endline/models.py:68
+#: endline/models.py:73
 msgid "How frequently do you attend religious services?"
 msgstr ""
 
-#: endline/models.py:70
+#: endline/models.py:75
 msgid "At least once a week"
 msgstr ""
 
-#: endline/models.py:71
+#: endline/models.py:76
 msgid "Once or twice a month / A few times a year"
 msgstr ""
 
-#: endline/models.py:72
+#: endline/models.py:77
 msgid "Seldom / never"
 msgstr ""
 
-#: endline/models.py:77
+#: endline/models.py:82
 msgid ""
 "Do you have any feedback for us?  Did you enjoy the experiment?  Any "
 "complaints?"
 msgstr ""
 
 #: endline/templates/endline/Endline.html:7
-msgid "Final Survey"
-msgstr ""
+msgid "Questionnaire"
+msgstr "Анкета"
 
 #: endline/templates/endline/Endline.html:15
 msgid ""
@@ -142,6 +179,8 @@ msgid ""
 "demographic questions about yourself before finishing the study. Thank you "
 "for your patience."
 msgstr ""
+"Это - последняя часть нашего исследования. Пожалуйста, ответьте на несколько "
+"основных демографических вопросов о себе. Спасибо за ваше участие!"
 
 #: last/templates/last/Results.html:5
 msgid "Thank you for the participation"
@@ -159,14 +198,22 @@ msgid ""
 "                "
 msgstr ""
 
-#: last/templates/last/Results.html:26 tester/models.py:59 tester/models.py:67
+#: last/templates/last/Results.html:26 tester/models.py:58 tester/models.py:66
 msgid "Next"
 msgstr "Далее"
 
 #: tester/models.py:48
+#, fuzzy
+#| msgid ""
+#| "Please drag the sliders below to divide it into three areas\n"
+#| "            based on your estimate of how many people in this study have\n"
+#| "            answered from 0 to 3, from 4 to 6, from 7 to 10 about the\n"
+#| "            statement above. <b>Please Note: You must move BOTH the "
+#| "sliders in order \n"
+#| "            to progress to the next page</b>"
 msgid ""
-"Please drag the sliders below to divide it into three areas\n"
-"            based on your estimate of how many people in this study have\n"
+"Using the sliders please estimate the share of  participants in this study "
+"who have\n"
 "            answered from 0 to 3, from 4 to 6, from 7 to 10 about the\n"
 "            statement above. <b>Please Note: You must move BOTH the sliders "
 "in order \n"
@@ -177,47 +224,49 @@ msgstr ""
 "6, от 7 до 10 по поводу утверждения выше. Обратите внимание: вы должны "
 "переместить ОБА слайдера, чтобы перейти на следующую страницу."
 
-#: tester/models.py:55
+#: tester/models.py:54
 msgid "from 0 to 3"
 msgstr "от 0 до 3"
 
-#: tester/models.py:55
+#: tester/models.py:54
 msgid "from 4 to 6"
 msgstr "от 4 до 6"
 
-#: tester/models.py:55
+#: tester/models.py:54
 msgid "From 7 to 10"
 msgstr "от 7 до 10"
 
-#: tester/models.py:56
+#: tester/models.py:55
 msgid "Share (in %)"
 msgstr "Доля (в %)"
 
-#: tester/models.py:57
+#: tester/models.py:56
 msgid "Distribution of answers"
 msgstr "Распределение ответов"
 
-#: tester/models.py:58
+#: tester/models.py:57
 msgid "of participants answered between"
 msgstr " участников выбравших "
 
-#: tester/models.py:60
-msgid "Attention: set middle slider to 100%"
+#: tester/models.py:59
+#, fuzzy
+#| msgid "Attention: set middle slider to 100%"
+msgid "Attention: set middle slider (the blue one) to 100%"
 msgstr "Проверка внимания: установите средний слайдер на 100%"
 
-#: tester/models.py:64
+#: tester/models.py:63
 msgid "Sort items based on the relative importance for you"
 msgstr "Отсортируйте элементы в порядке важности для вас"
 
-#: tester/models.py:65
+#: tester/models.py:64
 msgid "Move from here"
 msgstr "Переместите элементы отсюда"
 
-#: tester/models.py:66
+#: tester/models.py:65
 msgid "...to here"
 msgstr "Сюда в порядке важности для вас"
 
-#: tester/models.py:69
+#: tester/models.py:68
 msgid "Attention"
 msgstr "Внимание!"
 
@@ -225,7 +274,9 @@ msgstr "Внимание!"
 msgid ""
 "You commit some errors. Please pay more attention. Next time you fail to "
 "pass the attention test, we may finish the study"
-msgstr "Вы не прошли проверку на внимательность. Если вы не пройдете ее еще раз, вы, возможно, не сможете продолжать принимать участие в исследовании."
+msgstr ""
+"Вы не прошли проверку на внимательность. Если вы не пройдете ее еще раз, вы, "
+"возможно, не сможете продолжать принимать участие в исследовании."
 
 #: tester/models.py:71
 msgid "Ok"
@@ -265,7 +316,7 @@ msgstr ""
 "попытаться назвать максимально верное значение."
 
 #: tester/templates/tester/DistributionIntro.html:57
-#: tester/templates/tester/Intro.html:95 tester/templates/tester/QIntro.html:61
+#: tester/templates/tester/Intro.html:94 tester/templates/tester/QIntro.html:61
 #: tester/templates/tester/RelIntro.html:25
 msgid "Proceed"
 msgstr "Продолжить"
@@ -273,33 +324,32 @@ msgstr "Продолжить"
 #: tester/templates/tester/Intro.html:37
 msgid ""
 "Your participation is anonymous and confidential. The results of this "
-"research will be published, but your name will never be mentioned. All "
-"decisions of the research participants will be processed by a computer "
-"program that does not reveal your identity to other participants or to us, "
-"so that no one can associate your actions with you personally."
+"research will be published but only in aggregated form. All decisions of the "
+"research participants will be processed by a computer program that does not "
+"reveal your identity to other participants or to the researchers."
 msgstr ""
 "Ваше участие является анонимным и конфиденциальным. Результаты этого "
-"исследования будут опубликованы, но Ваше имя никогда не будет упомянуто. Все "
-"решения участников исследования будут обрабатываться компьютерной "
-"программой, которая не раскрывает Вашу личность ни другим участникам, ни "
-"нам, так что никто не сможет связать Ваши действия лично с Вами."
+"исследования будут опубликованы, но лишь в обобщенном виде. Все решения "
+"участников исследования будут обрабатываться компьютерной программой, "
+"которая не раскрывает Вашу личность ни другим участникам, ни ни "
+"исследователям."
 
-#: tester/templates/tester/Intro.html:46
+#: tester/templates/tester/Intro.html:45
 msgid ""
 "By participating in this study, you do not expose yourself to any risks."
 msgstr "Участвуя в данном исследовании, Вы не подвергаете себя никаким рискам."
 
-#: tester/templates/tester/Intro.html:51
+#: tester/templates/tester/Intro.html:50
 msgid ""
 "Participation in the research is possible using browsers Firefox, Chrome / "
-"Chromium, Opera, Edge or Yandex with operating systems for stationary "
-"computers, laptops or smartphones."
+"Chromium, Opera, Edge, Safari, or Yandex with operating systems for "
+"stationary computers, laptops or smartphones."
 msgstr ""
 "Участие в исследовании возможно с использованием браузеров Firefox, Chrome/"
-"Chromium, Opera, Edge или Yandex с операционными системами для стационарных "
-"компьютеров, ноутбуков или смартфонов."
+"Chromium, Opera, Edge, Safari или Yandex с операционными системами для "
+"стационарных компьютеров, ноутбуков или смартфонов."
 
-#: tester/templates/tester/Intro.html:62
+#: tester/templates/tester/Intro.html:61
 msgid ""
 "By participating in this study, you give your informed consent to the use of "
 "your answers anonymously and solely for scientific purposes."
@@ -308,11 +358,11 @@ msgstr ""
 "согласие на использование Ваших ответов в анонимном виде и исключительно в "
 "научных целях."
 
-#: tester/templates/tester/Intro.html:69
+#: tester/templates/tester/Intro.html:68
 msgid "On average, the survey takes about 15 minutes."
 msgstr "В среднем исследование занимает около 15 минут."
 
-#: tester/templates/tester/Intro.html:76
+#: tester/templates/tester/Intro.html:75
 #, python-format
 msgid ""
 "There will be attention checks throughout the study to ensure the validity "
@@ -324,7 +374,7 @@ msgstr ""
 "%(MAX_ATTENTION_FAILURES)s из этих проверок внимания может привести к "
 "лишению возможности продложить исследование и невыплате вознаграждения."
 
-#: tester/templates/tester/Intro.html:84
+#: tester/templates/tester/Intro.html:83
 msgid ""
 "Let me know if you have any questions or technical difficulties via messages "
 "Yandex.Toloka or by e-mail:"
@@ -352,10 +402,10 @@ msgstr ""
 
 #: tester/templates/tester/QIntro.html:43
 msgid ""
-"On the next page we will show you several statements in a row. For each "
-"statement we will ask you to  answer the following question:"
+"On the next page we will show you several statements. For each statement we "
+"will ask you to  answer the following question:"
 msgstr ""
-"На следующей странице вам подряд будет показано несколько  утверждений. Для "
+"На следующей странице вам  будет показано несколько  утверждений. Для "
 "каждого из них мы попросим вас ответить на следующий вопрос:"
 
 #: tester/templates/tester/QIntro.html:55
@@ -376,8 +426,9 @@ msgid ""
 "On the next page we will ask you to rank the attitudes you just reported "
 "based on how important they are to you."
 msgstr ""
-"На следующей странице мы попросим вас оценить отношения, о которых вы только "
-"что сообщили, в зависимости от того, насколько они важны для вас."
+"На следующей странице мы попросим вас остортировать утверждения, о которых "
+"мы вас только что спрашивали, в зависимости от того, насколько они важны для "
+"вас."
 
 #: tester/templates/tester/TooManyFailures.html:38
 msgid ""
