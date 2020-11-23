@@ -31,15 +31,15 @@ SESSION_CONFIGS = [
         name='full_ru',
         display_name="Full study (Russian)",
         num_demo_participants=1,
-        app_sequence=['tester', 'endline'],
+        app_sequence=['tester', 'endline', 'last'],
         language='ru'
     ),
     dict(
         name='full_en',
         display_name="Full study (English)",
         num_demo_participants=1,
-        app_sequence=['tester', 'endline'],
-        language='en'
+        app_sequence=['tester', 'endline', 'last'],
+        language='en',
     )
 ]
 
@@ -49,7 +49,12 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
+    real_world_currency_per_point=1.00,
+    participation_fee=0.00,
+    doc="",
+    use_browser_bots=False,
+    toloka=True,
+    toloka_sandbox=True
 )
 
 # ISO-639 code
@@ -67,14 +72,17 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 DEMO_PAGE_INTRO_HTML = """ """
+TOLOKA_API = environ.get('TOLOKA_API')
+SANDBOX_TOLOKA_API = environ.get('SANDBOX_TOLOKA_API')
 
 SECRET_KEY = '&7hh8&8q=8ifh$)0&kzlh^)!tqas&4s4w6dofyup+!n4=i)7m)'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
-
+EXTENSION_APPS = ['tolokaregister']
 INSTALLED_APPS = [
     'otree',
     'webpack_loader',
+    'django.contrib.admin',
 ]
 
 WEBPACK_LOADER = {

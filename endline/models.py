@@ -22,13 +22,29 @@ class Constants(BaseConstants):
         [3, _('Enough for clothes and shoes, but not enough for the purchase of small household appliances')],
         [4,
          _("Enough money for small purchases, but buying expensive things (a computer, "
-         "washing machine, refrigerator) requires savings or credit."
+           "washing machine, refrigerator) requires savings or credit."
            )],
         [5,
          _(
              "There is enough money to buy for a house, but to buy a car, a summer "
              "residence, an apartment you need to save or take a loan")],
         [6, _("We can afford any purchases without restrictions and loans")]
+    ]
+    RELIGION_CHOICES =[(1, _('Atheist')),
+                        (2, _('Spiritual but not religious')),
+                        (3, _('Orthodox Christian')),
+                        (4, _('Catholic')),
+                        (5, _('Muslim')),
+                        (6, _('Buddhist')),
+                        (7, _('Protestant')),
+                        (8, _('Jewish')),
+                        (9, _('Another religion not mentioned here'))]
+    RELIGION_ATTENDANCE_CHOICES = [
+        (1, _('At least once a week')),
+        (2, _('Once or twice a month')),
+        (3, _('A few times a year')),
+        (4, _('Seldom / never')),
+        (5, _('No answer, I am atheist'))
     ]
 
 
@@ -41,8 +57,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    sex = models.StringField(
-        choices=[_('Male'), _('Female')],
+    sex = models.IntegerField(
+        choices=[(0, _('Male')), (1, _('Female'))],
         verbose_name=_("Please indicate your gender"),
         widget=widgets.RadioSelect)
 
@@ -52,31 +68,25 @@ class Player(BasePlayer):
         verbose_name=_("How old are you?")
     )
 
-    education = models.StringField(
+    education = models.IntegerField(
         verbose_name=_('What is the highest level of education that you have achieved?'),
         choices=Constants.EDUCATION_CHOICES,
         widget=widgets.RadioSelect)
 
-    income = models.StringField(
+    income = models.IntegerField(
         label=_("""Which statement most accurately describes your family’s financial situation?"""),
         choices=Constants.INCOME_CHOICES,
         widget=widgets.RadioSelect)
 
-    religion = models.StringField(
+    religion = models.IntegerField(
         verbose_name=_("Which of these labels best matches your religious views?"),
-        choices=[_('Atheist'), _('Agnostic'), _('Spiritual but not religious'), _('Christian'), _('Muslim'), _('Hindu'),
-                 _('Buddhist'),
-                 _('Sikh'), _('Jewish'), _('Another religion not mentioned here')],
+        choices=Constants.RELIGION_CHOICES,
         widget=widgets.RadioSelect)
 
-    religious_attendance = models.StringField(
+    religious_attendance = models.IntegerField(
         verbose_name=_("How frequently do you attend religious services?"),
-        choices=[
-            _('At least once a week'),
-            _('Once or twice a month / A few times a year'),
-            _('Seldom / never')
-        ],
+        choices=Constants.RELIGION_ATTENDANCE_CHOICES,
         widget=widgets.RadioSelect)
 
     feedback = models.LongStringField(
-        verbose_name=_("Do you have any feedback for us?  Did you enjoy the experiment?  Any complaints?"))
+        verbose_name=_("Do you have any feedback for us?  Did you enjoy the study?  Any complaints?"))

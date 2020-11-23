@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 18:10+0300\n"
+"POT-Creation-Date: 2020-11-23 18:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "Не хватает денег даже на еду"
 
 #: endline/models.py:21
 msgid "Enough for food, but not enough to buy clothes and shoes"
-msgstr "Enough for food, but not enough to buy clothes and shoes"
+msgstr "Хватает на еду, но не хватает на покупку одежды и обуви"
 
 #: endline/models.py:22
 msgid ""
@@ -75,99 +75,105 @@ msgstr ""
 msgid "We can afford any purchases without restrictions and loans"
 msgstr "Можем позволить себе любые покупки без ограничений и кредитов"
 
+#: endline/models.py:33
+msgid "Atheist"
+msgstr "Атеист"
+
+#: endline/models.py:34
+msgid "Spiritual but not religious"
+msgstr "Верующий, но не принадлежу никакой конкретной конфессии"
+
+#: endline/models.py:35
+msgid "Orthodox Christian"
+msgstr "Православие"
+
+#: endline/models.py:36
+msgid "Catholic"
+msgstr "Католицизм"
+
+#: endline/models.py:37
+msgid "Muslim"
+msgstr "Ислам"
+
+#: endline/models.py:38
+msgid "Buddhist"
+msgstr "Буддизм"
+
+#: endline/models.py:39
+msgid "Protestant"
+msgstr "Протестантизм"
+
+#: endline/models.py:40
+msgid "Jewish"
+msgstr "Иудаизм"
+
+#: endline/models.py:41
+msgid "Another religion not mentioned here"
+msgstr "Другая религия"
+
+#: endline/models.py:43
+msgid "At least once a week"
+msgstr "Как минимум раз в неделю"
+
+#: endline/models.py:44
+msgid "Once or twice a month"
+msgstr "Один-два раза в месяц"
+
 #: endline/models.py:45
+msgid "A few times a year"
+msgstr "Несколько раз в год"
+
+#: endline/models.py:46
+msgid "Seldom / never"
+msgstr "Редко/никогда"
+
+#: endline/models.py:47
+msgid "No answer, I am atheist"
+msgstr "Нет ответа; я атеист"
+
+#: endline/models.py:61
 msgid "Male"
 msgstr "Мужской"
 
-#: endline/models.py:45
+#: endline/models.py:61
 msgid "Female"
 msgstr "Женский"
 
-#: endline/models.py:46
+#: endline/models.py:62
 msgid "Please indicate your gender"
 msgstr "Пожалуйста, укажите ваш пол"
 
-#: endline/models.py:52
+#: endline/models.py:68
 msgid "How old are you?"
 msgstr "Сколько вам лет?"
 
-#: endline/models.py:56
+#: endline/models.py:72
 msgid "What is the highest level of education that you have achieved?"
 msgstr ""
 "Какой у Вас самый высокий уровень образования, по которому Вы получили "
 "аттестат, свидетельство, диплом?"
 
-#: endline/models.py:61
+#: endline/models.py:77
 msgid ""
 "Which statement most accurately describes your family’s financial situation?"
 msgstr ""
 "Какое высказывание наиболее точно описывает финансовое положение вашей семьи?"
 
-#: endline/models.py:66
+#: endline/models.py:82
 msgid "Which of these labels best matches your religious views?"
 msgstr ""
+"Что из нижеперечисленного наиболее точно описывает ваши религиозные взгляды?"
 
-#: endline/models.py:67
-msgid "Atheist"
-msgstr ""
-
-#: endline/models.py:67
-msgid "Agnostic"
-msgstr ""
-
-#: endline/models.py:67
-msgid "Spiritual but not religious"
-msgstr ""
-
-#: endline/models.py:67
-msgid "Christian"
-msgstr ""
-
-#: endline/models.py:67
-msgid "Muslim"
-msgstr ""
-
-#: endline/models.py:67
-msgid "Hindu"
-msgstr ""
-
-#: endline/models.py:68
-msgid "Buddhist"
-msgstr ""
-
-#: endline/models.py:69
-msgid "Sikh"
-msgstr ""
-
-#: endline/models.py:69
-msgid "Jewish"
-msgstr ""
-
-#: endline/models.py:69
-msgid "Another religion not mentioned here"
-msgstr ""
-
-#: endline/models.py:73
+#: endline/models.py:87
 msgid "How frequently do you attend religious services?"
-msgstr ""
+msgstr "Как часто вы посещаете храм?"
 
-#: endline/models.py:75
-msgid "At least once a week"
-msgstr ""
-
-#: endline/models.py:76
-msgid "Once or twice a month / A few times a year"
-msgstr ""
-
-#: endline/models.py:77
-msgid "Seldom / never"
-msgstr ""
-
-#: endline/models.py:82
+#: endline/models.py:92
 msgid ""
-"Do you have any feedback for us?  Did you enjoy the experiment?  Any "
-"complaints?"
+"Do you have any feedback for us?  Did you enjoy the study?  Any complaints?"
 msgstr ""
+"Пожалуйста, оставьте здесь ваши комментарии об исследовании: понравилось ли "
+"оно вам? Есть ли у вас замечания или жалобы?"
 
 #: endline/templates/endline/Endline.html:7
 msgid "Questionnaire"
@@ -184,33 +190,25 @@ msgstr ""
 
 #: last/templates/last/Results.html:5
 msgid "Thank you for the participation"
-msgstr ""
+msgstr "Спасибо за ваше участие"
 
 #: last/templates/last/Results.html:14
 msgid "Your code"
-msgstr ""
+msgstr "Ваш код"
 
 #: last/templates/last/Results.html:19
 msgid ""
-"\n"
-"                    In order for the task to be considered completed, please "
-"copy and paste it on the Toloka assignment page.\n"
-"                "
+"In order for the task to be considered completed, please copy and paste it "
+"on the Toloka assignment page."
 msgstr ""
+"Для того, чтобы задание считалось выполненным, пожалуйста скопируйте его и "
+"вставьте на страницу задания в Толоке."
 
 #: last/templates/last/Results.html:26 tester/models.py:58 tester/models.py:66
 msgid "Next"
 msgstr "Далее"
 
 #: tester/models.py:48
-#, fuzzy
-#| msgid ""
-#| "Please drag the sliders below to divide it into three areas\n"
-#| "            based on your estimate of how many people in this study have\n"
-#| "            answered from 0 to 3, from 4 to 6, from 7 to 10 about the\n"
-#| "            statement above. <b>Please Note: You must move BOTH the "
-#| "sliders in order \n"
-#| "            to progress to the next page</b>"
 msgid ""
 "Using the sliders please estimate the share of  participants in this study "
 "who have\n"
@@ -249,10 +247,8 @@ msgid "of participants answered between"
 msgstr " участников выбравших "
 
 #: tester/models.py:59
-#, fuzzy
-#| msgid "Attention: set middle slider to 100%"
 msgid "Attention: set middle slider (the blue one) to 100%"
-msgstr "Проверка внимания: установите средний слайдер на 100%"
+msgstr "Проверка внимания: установите средний (синий) слайдер на 100%"
 
 #: tester/models.py:63
 msgid "Sort items based on the relative importance for you"
@@ -300,9 +296,9 @@ msgid ""
 "Specifically, you will be asked to move sliders to estimate the percentage "
 "of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range."
 msgstr ""
-"В частности, вам будет предложено переместить ползунки, чтобы оценить "
-"процент участников, которые дали ответы, которые попали в диапазон 0–3, 4–6 "
-"и 7–10."
+"В частности, вам будет предложено переместить слайдеры, чтобы оценить "
+"процент участников, которые ответили 0–3, 4–6 "
+"и 7–10 соответственно."
 
 #: tester/templates/tester/DistributionIntro.html:44
 #, python-format

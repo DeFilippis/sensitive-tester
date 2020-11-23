@@ -89,11 +89,11 @@ class TooManyFailures(oTreePage):
 
 
 page_sequence = [
-    # Intro,
-    # QIntro,
-    # Q,
-    # DistributionIntro,
-    # Distribution,
+    Intro,
+    QIntro,
+    Q,
+    DistributionIntro,
+    Distribution,
     RelIntro,
     RelImportance,
     TooManyFailures,
