@@ -1,69 +1,56 @@
 <template>
-  <v-app>
-    <v-container justify="center" align="center">
-      <v-row justify="center" align="center"  >
-        <v-col sm="12" md=6 xs=12 cols=12>
-          <v-card class="my-3">
-            <v-card-title class="justify-center">
-              <transition name="custom-classes-transition" enter-active-class="animate__animated animate__bounceIn">
-                <span dark :style="{ }" class="question-box" :key="body">{{ body }}</span>
-              </transition>
-            </v-card-title>
-            <div class="px-3 pb-3" v-html='explication'>
+    <v-app>
+        <v-container justify="center" align="center">
+            <v-row justify="center" align="center">
+                <v-col sm="12" md=6 xs=12 cols=12>
+                    <v-card class="my-3">
+                        <v-card-title class="justify-center">
+                            <transition name="custom-classes-transition" enter-active-class="animate__animated animate__bounceIn">
+                                <span dark :style="{ }" class="question-box" :key="body">{{ body }}</span>
+                            </transition>
+                        </v-card-title>
+                        <div class="px-3 pb-3" v-html='explication'>
     
-            </div>
-          </v-card>
-        </v-col>
-        <v-col sm="12" md=6 xs=12 cols=12>
-          <div class="slider-wrapper">
-            <div class="left-wrap"></div>
+                        </div>
+                    </v-card>
+                </v-col>
+                <v-col sm="12" md=6 xs=12 cols=12>
+                    <div class="slider-wrapper">
+                        <div class="left-wrap"></div>
     
-            <vue-slider
-              @change="changingSliders"
-              @drag-end="draggingEnd"
-              class="slider-itself"
-              :rail-style="rail"
-              v-model="value"
-              tooltip="none"
-              :process="process"
-              :min-range="0"
-              :tooltip-placement="['bottom', 'top', 'top', 'bottom']"
-              :dot-options="[
-                { disabled: true, tooltip: 'none' },
-                { disabled: false, tooltip: 'none' },
-                { disabled: false, tooltip: 'none' },
-                { disabled: true, tooltip: 'none' },
-              ]"
-              :height="50"
-              :enable-cross="false"
-            >
-              <template v-slot:process="{ start, end, style, index }">
-                <div
-                  :class="['vue-slider-process']"
-                  :style="jopa(style, index)"
-                >
-                  <div
-                    class="merge-slider vue-slider-dot-tooltip-inner"
-                    :class="inner(index, start, end)"
-                  >
-                    <span class="label">{{ get_label(index) }}</span>
-                    <span class="percentage">
-                      {{ (value[index + 1] - value[index]).toFixed(0) }}%
-                    </span>
-                  </div>
-                </div>
-              </template>
+                        <vue-slider @change="changingSliders" @drag-end="draggingEnd" class="slider-itself" :rail-style="rail" v-model="value" tooltip="none" :process="process" :min-range="0" :tooltip-placement="['bottom', 'top', 'top', 'bottom']" :dot-options="[
+                        { disabled: true, tooltip: 'none' },
+                        { disabled: false, tooltip: 'none' },
+                        { disabled: false, tooltip: 'none' },
+                        { disabled: true, tooltip: 'none' },
+                      ]" :height="50" :enable-cross="false">
+                            <template v-slot:process="{ start, end, style, index }">
+                        <div
+                          :class="['vue-slider-process']"
+                          :style="jopa(style, index)"
+                        >
+                          <div
+                            class="merge-slider vue-slider-dot-tooltip-inner"
+                            :class="inner(index, start, end)"
+                          >
+                            <span class="label">{{ get_label(index) }}</span>
+                            <span class="percentage">
+                              {{ (value[index + 1] - value[index]).toFixed(0) }}%
+                            </span>
+                          </div>
+                        </div>
+</template>
 
-              <template v-slot:dot="{ pos, index }">
-                <div :class="sliderStyle(pos, index)">
-                  <v-icon dense class="shevron shevron-left" color="" v-if='!mergedSlider'>
-                    mdi-chevron-left
-                  </v-icon>
-                  <v-icon dense class="shevron shevron-right">
-                    mdi-chevron-right
-                  </v-icon>
-                </div>
-              </template>
+<template v-slot:dot="{ pos, index }">
+    <div :class="sliderStyle(pos, index)">
+        <v-icon dense class="shevron shevron-left" color="" v-if='!mergedSlider'>
+            mdi-chevron-left
+        </v-icon>
+        <v-icon dense class="shevron shevron-right">
+            mdi-chevron-right
+        </v-icon>
+    </div>
+</template>
             </vue-slider>
             <div class="right-wrap"></div>
           </div>
@@ -90,7 +77,15 @@
           </transition>
         </v-col>
       </v-row>
+        <div data-app>
+      <attention-failed
+        :dialog="attentionFailed"
+        @input="attentionFailed = false"
+        :error="attentionError"
+      />
+    </div>
     </v-container>
+    
   </v-app>
 </template>
 
@@ -99,9 +94,12 @@ import VueSlider from "vue-slider-component";
 import { Chart } from "highcharts-vue";
 import "vue-slider-component/theme/default.css";
 import _ from "lodash";
+import AttentionFailed from "./components/AttentionFailed";
+
 export default {
     components: {
         VueSlider,
+        AttentionFailed,
         highcharts: Chart,
     },
 
@@ -110,6 +108,8 @@ export default {
         const { categories, plotTitle, yLab, popup, next } = window.distribution_obj;
 
         return {
+            attentionError: window.attentionError,
+            attentionFailed: false,
             body: "",
             next: next,
             categories: categories,
@@ -192,25 +192,6 @@ export default {
             },
         };
     },
-    mounted() {
-
-        this.$options.sockets.onmessage = (data) => {
-            const d = JSON.parse(data["data"]);
-            ({ body: this.body, id: this.qid, no_q_left: this.no_q_left } = d);
-            const attention = d.label === 'attention'
-            if (attention) {
-                this.body = window.distribution_obj.attention_checker_text
-            }
-            this.value = _.clone(this.initialValue);
-            this.slidersTouched = [false, false];
-            this.bothSlidersTouched = false;
-        };
-
-        this.$options.sockets.onopen = (data) => {
-
-            this.$socket.sendObj({ info_request: true });
-        };
-    },
     watch: {
         no_q_left(val) {
             if (val) {
@@ -235,6 +216,31 @@ export default {
             this.chartOptions.series[0].data = result;
         },
     },
+    mounted() {
+
+        this.$options.sockets.onmessage = (data) => {
+            const d = JSON.parse(data["data"]);
+            ({
+                body: this.body,
+                id: this.qid,
+                no_q_left: this.no_q_left,
+                attention_failed: this.attentionFailed
+            } = d);
+            const attention = d.label === 'attention'
+            if (attention) {
+                this.body = window.distribution_obj.attention_checker_text
+            }
+            this.value = _.clone(this.initialValue);
+            this.slidersTouched = [false, false];
+            this.bothSlidersTouched = false;
+        };
+
+        this.$options.sockets.onopen = (data) => {
+
+            this.$socket.sendObj({ info_request: true });
+        };
+    },
+
     methods: {
         deliver() {
             console.debug("delivering");

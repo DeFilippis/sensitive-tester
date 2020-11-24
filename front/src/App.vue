@@ -39,16 +39,14 @@
         <v-btn-toggle
           v-model="value"
           class="d-flex justify-content-center"
+          :class="btnFunctionClass"
           rounded
         >
           <v-btn
             v-for="i in likert"
             :key="i[0]"
             @click="answer(i[0])"
-            :style="{
-              width: calcWidth + '%!important',
-              'min-width': 'inherit',
-            }"
+            :style="individualBtnStyle"
             rounded
           >
             {{ i[1] }}
@@ -81,7 +79,7 @@ export default {
       no_q_left: false,
       too_many_failures: false,
       body: "",
-      label:null,
+      label: null,
       qid: null,
       field: null,
       value: null,
@@ -92,9 +90,31 @@ export default {
   },
 
   computed: {
-    calcWidth() {
-      return 100 / this.likert.length;
+    btnFunctionClass() {
+      const l = this.likert.length; //get the length of possible choices for likert
+      const smalls = ["xs", "sm",  ];
+      const small = smalls.includes(this.$vuetify.breakpoint.name);
+      if (small && l < 10) {
+        return { "flex-column": true, "align-items-stretch": true };
+      }
+
+      return {};
     },
+    individualBtnStyle() {
+      const l = this.likert.length; //get the length of possible choices for likert
+      const smalls = ["xs", "sm",  ];
+      const small = smalls.includes(this.$vuetify.breakpoint.name);
+      if (small && l < 10) {
+        return {
+          "min-width": "inherit",
+        };
+      }
+      return {
+        width: 100 / l + "%!important",
+        "min-width": "inherit",
+      };
+    },
+    
     fieldCol() {
       const colorCorr = {
         attitude: "black",
@@ -123,7 +143,6 @@ export default {
   mounted() {
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
-      console.debug("DDD", d);
       this.trans = false;
       ({
         attention_failed: this.attentionFailed,

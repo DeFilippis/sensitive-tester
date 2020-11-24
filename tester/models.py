@@ -154,13 +154,20 @@ class Player(BasePlayer):
             return r
 
         if qid and distribution:
+            attention_failed = False
             q = SensitiveQ.objects.get(id=qid)
             for k, v in distribution.items():
                 setattr(q, k, v)
-
             q.save()
             q.mark_sorters_done('first')
-            return {self.id_in_group: self._next_q_for_dist()}  # we update the req
+            if q.attention_checker and q.second != 100:
+                attention_failed = True
+                self.attention_failure_counter += 1
+                self.save()
+                if self.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
+                    return {self.id_in_group: dict(too_many_failures=True)}
+            return {self.id_in_group: {**self._next_q_for_dist(),
+                    'attention_failed': attention_failed}}  # we update the req
 
     def get_next_q(self, data):
         logger.info(data)
