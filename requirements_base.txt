@@ -1,4 +1,4 @@
-otree==3.2.7
+otree>=3.3.4
 django-webpack-loader
 pyyaml
 requests
