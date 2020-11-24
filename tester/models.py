@@ -143,8 +143,6 @@ class Player(BasePlayer):
             return dict(no_q_left=True)
 
     def get_next_q_for_distribution(self, data):
-        for i in Sorter.objects.filter(s__owner=self.participant):
-            print('DURATION::', i.duration)
         logger.info('message received from distribution')
         logger.info(data)
         qid = data.get('qid')

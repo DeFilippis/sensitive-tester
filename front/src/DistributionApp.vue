@@ -19,26 +19,26 @@
                         <div class="left-wrap"></div>
     
                         <vue-slider @change="changingSliders" @drag-end="draggingEnd" class="slider-itself" :rail-style="rail" v-model="value" tooltip="none" :process="process" :min-range="0" :tooltip-placement="['bottom', 'top', 'top', 'bottom']" :dot-options="[
-                        { disabled: true, tooltip: 'none' },
-                        { disabled: false, tooltip: 'none' },
-                        { disabled: false, tooltip: 'none' },
-                        { disabled: true, tooltip: 'none' },
-                      ]" :height="50" :enable-cross="false">
+                                                            { disabled: true, tooltip: 'none' },
+                                                            { disabled: false, tooltip: 'none' },
+                                                            { disabled: false, tooltip: 'none' },
+                                                            { disabled: true, tooltip: 'none' },
+                                                          ]" :height="50" :enable-cross="false">
                             <template v-slot:process="{ start, end, style, index }">
-                        <div
-                          :class="['vue-slider-process']"
-                          :style="jopa(style, index)"
-                        >
-                          <div
-                            class="merge-slider vue-slider-dot-tooltip-inner"
-                            :class="inner(index, start, end)"
-                          >
-                            <span class="label">{{ get_label(index) }}</span>
-                            <span class="percentage">
-                              {{ (value[index + 1] - value[index]).toFixed(0) }}%
-                            </span>
-                          </div>
-                        </div>
+                                                            <div
+                                                              :class="['vue-slider-process']"
+                                                              :style="jopa(style, index)"
+                                                            >
+                                                              <div
+                                                                class="merge-slider vue-slider-dot-tooltip-inner"
+                                                                :class="inner(index, start, end)"
+                                                              >
+                                                                <span class="label">{{ get_label(index) }}</span>
+                                                                <span class="percentage">
+                                                                  {{ (value[index + 1] - value[index]).toFixed(0) }}%
+                                                                </span>
+                                                              </div>
+                                                            </div>
 </template>
 
 <template v-slot:dot="{ pos, index }">
@@ -108,8 +108,10 @@ export default {
         const { categories, plotTitle, yLab, popup, next } = window.distribution_obj;
 
         return {
+            progressValue: 0,
             attentionError: window.attentionError,
             attentionFailed: false,
+            too_many_failures: false,
             body: "",
             next: next,
             categories: categories,
@@ -193,6 +195,14 @@ export default {
         };
     },
     watch: {
+        progressValue(val) {
+            window.vueProgress.progressValue = val;
+        },
+        too_many_failures(val) {
+            if (val) {
+                document.getElementById("form").submit();
+            }
+        },
         no_q_left(val) {
             if (val) {
                 document.getElementById("form").submit();
@@ -224,7 +234,9 @@ export default {
                 body: this.body,
                 id: this.qid,
                 no_q_left: this.no_q_left,
-                attention_failed: this.attentionFailed
+                attention_failed: this.attentionFailed,
+                progress_value: this.progressValue,
+                too_many_failures: this.too_many_failures,
             } = d);
             const attention = d.label === 'attention'
             if (attention) {
@@ -243,7 +255,6 @@ export default {
 
     methods: {
         deliver() {
-            console.debug("delivering");
             if (this.distribution && this.qid) {
                 this.$socket.sendObj({
                     qid: this.qid,
@@ -286,8 +297,6 @@ export default {
         sliderStyle(pos, index) {
 
             if (index === 1 && this.mergedSlider) {
-                console.debug('gonna invisible', index, this.mergedSlider)
-
                 return 'inv'
             }
             if (index !== 0 && index !== 3) {
