@@ -1,9 +1,13 @@
 from .generic_pages import GenPage as Page, DistributionPage, oTreePage, UnFailedPage
 from .models import Constants
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Intro(Page):
     """First page - consent form etc."""
+
     def is_displayed(self):
         return self.round_number == 1
 
@@ -66,12 +70,14 @@ class RelImportance(UnFailedPage):
     def post(self):
         """VERY UGLY WAY. SHOULD FIX IT LATER!!!"""
         for k, v in self.request.POST.dict().items():
-            try:
-                i = self.participant.sqs.get(label=k)
-                i.relative_importance = v
-                i.save()
-            except Exception as e:
-                print(e)
+            if k != 'csrfmiddlewaretoken':
+                try:
+                    i = self.participant.sqs.get(label=k)
+                    i.relative_importance = v
+                    i.save()
+                except Exception as e:
+                    logger.warning(e)
+
         return super().post()
 
     def is_displayed(self):
@@ -92,9 +98,9 @@ page_sequence = [
     # Intro,
     # QIntro,
     # Q,
-    DistributionIntro,
-    Distribution,
+    # DistributionIntro,
+    # Distribution,
     # RelIntro,
-    # RelImportance,
+    RelImportance,
     # TooManyFailures,
 ]

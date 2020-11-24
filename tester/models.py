@@ -108,7 +108,7 @@ class Player(BasePlayer):
 
     @property
     def total_attempts_failed(self):
-        return self.participant.tester_player.all().aggregate(s=Sum('attention_failure_counter')).get('s', 0)
+        return self.participant.tester_player.aggregate(s=Sum('attention_failure_counter')).get('s', 0)
 
     def get_progress(self):
         totpages = self.participant._max_page_index
@@ -120,9 +120,7 @@ class Player(BasePlayer):
         return f"{(curpage + submitted_qs) / (totpages + totsorters.count()) * 100:.2f}"
 
     def get_ranking_titles(self):
-        sqs = self.participant.sqs.all()
-
-        sqs = sqs.annotate(s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
+        sqs = self.participant.sqs.annotate(s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
                            ).order_by('s').values_list('label', flat=True)
 
         return [{'label': q} for q in sqs if q != 'attention']
@@ -131,7 +129,9 @@ class Player(BasePlayer):
         return Constants.distributions[self.initial_distribution]
 
     def _next_q_for_dist(self):
-        unanswered = self.participant.sqs.filter(first__isnull=True)
+        unanswered = self.participant.sqs.filter(first__isnull=True).annotate(
+            s=Max('sorters__r', filter=Q(sorters__f='first'), output_field=FloatField()),
+            ).order_by('s')
 
         if unanswered.exists():
             q = unanswered.first()
@@ -167,7 +167,7 @@ class Player(BasePlayer):
                 if self.total_attempts_failed >= Constants.MAX_ATTENTION_FAILURES:
                     return {self.id_in_group: dict(too_many_failures=True)}
             return {self.id_in_group: {**self._next_q_for_dist(),
-                    'attention_failed': attention_failed}}  # we update the req
+                                       'attention_failed': attention_failed}}  # we update the req
 
     def get_next_q(self, data):
         logger.info(data)
