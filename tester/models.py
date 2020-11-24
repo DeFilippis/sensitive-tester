@@ -15,9 +15,10 @@ import logging
 import yaml
 from otree.models import Participant
 import random
-from django.db.models import Q, Max, FloatField, Sum
+from django.db.models import Q, Max, FloatField, Sum, F, ExpressionWrapper
 from django.utils.translation import gettext_lazy as _
 import re
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 author = 'Chapkovski, De Filippis, Henig-Schmidt'
@@ -120,8 +121,9 @@ class Player(BasePlayer):
         return f"{(curpage + submitted_qs) / (totpages + totsorters.count()) * 100:.2f}"
 
     def get_ranking_titles(self):
-        sqs = self.participant.sqs.annotate(s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
-                           ).order_by('s').values_list('label', flat=True)
+        sqs = self.participant.sqs.annotate(
+            s=Max('sorters__r', filter=Q(sorters__f='relative_importance'), output_field=FloatField()),
+        ).order_by('s').values_list('label', flat=True)
 
         return [{'label': q} for q in sqs if q != 'attention']
 
@@ -131,15 +133,18 @@ class Player(BasePlayer):
     def _next_q_for_dist(self):
         unanswered = self.participant.sqs.filter(first__isnull=True).annotate(
             s=Max('sorters__r', filter=Q(sorters__f='first'), output_field=FloatField()),
-            ).order_by('s')
+        ).order_by('s')
 
         if unanswered.exists():
             q = unanswered.first()
+            q.mark_sorters_received('first')
             return dict(body=q.body, id=q.id, progress_value=self.get_progress(), label=q.label)
         else:
             return dict(no_q_left=True)
 
     def get_next_q_for_distribution(self, data):
+        for i in Sorter.objects.filter(s__owner=self.participant):
+            print('DURATION::', i.duration)
         logger.info('message received from distribution')
         logger.info(data)
         qid = data.get('qid')
@@ -224,6 +229,7 @@ class Player(BasePlayer):
 
         if unanswered.exists():
             q = unanswered.first()
+            q.mark_sorters_received(field)
             body = q.body
             r = dict(body=body, field=field, id=q.id, progress_value=self.get_progress(), label=q.label, )
             if q.label == 'attention':
@@ -235,8 +241,15 @@ class Player(BasePlayer):
 
 
 class SensitiveQ(djmodels.Model):
+    def mark_sorters_received(self, field_name):
+        now = datetime.now(tz=timezone.utc)
+        self.sorters.filter(f=field_name, get_time__isnull=True).update(get_time=now)
+
     def mark_sorters_done(self, field_name):
-        self.sorters.filter(f=field_name).update(submitted=True)
+        now = datetime.now(tz=timezone.utc)
+
+        self.sorters.filter(f=field_name).update(submitted=True, post_time=now)
+        self.sorters.filter(f=field_name).update(duration=F('post_time') - F('get_time'))
 
     attention_checker = models.BooleanField(default=False)
     owner = djmodels.ForeignKey(to=Participant, on_delete=djmodels.CASCADE, related_name="sqs")
@@ -264,6 +277,9 @@ class SensitiveQ(djmodels.Model):
 
 
 class Sorter(djmodels.Model):
+    get_time = djmodels.DateTimeField(null=True)
+    post_time = djmodels.DateTimeField(null=True)
+    duration = djmodels.DurationField(null=True)
     s = djmodels.ForeignKey(to=SensitiveQ, on_delete=djmodels.CASCADE, related_name='sorters')
     r = models.FloatField()
     f = models.StringField()
@@ -282,18 +298,32 @@ def custom_export(players):
            "sorter_friendship",
            "sorter_absolute_importance",
            "sorter_relative_importance",
+           "time_attitude",
+           "time_average_attitude",
+           "time_first",
+           "time_friendship",
+           "time_absolute_importance",
            ]
     annotation = {}
     for f in Constants.sortable_fields:
         annotation[f'sorter_{f}'] = Max('sorters__r', filter=Q(sorters__f=f), output_field=FloatField())
+        annotation[f'time_{f}'] = ExpressionWrapper(Max('sorters__duration', filter=Q(sorters__f=f), ),
+                                                    output_field=djmodels.FloatField())
     sortableq = SensitiveQ.objects.order_by('id').annotate(**annotation)
-
     for q in sortableq:
         participant = q.owner
         yield [participant.code, q.body, q.label, q.attitude, q.average_attitude, q.first, q.second, q.third, q.friend,
-               q.absolute_importance, q.relative_importance, q.slider_movement_counter, q.sorter_attitude,
+               q.absolute_importance, q.relative_importance, q.slider_movement_counter,
+               q.sorter_attitude,
                q.sorter_average_attitude,
                q.sorter_first,
                q.sorter_friend,
                q.sorter_absolute_importance,
-               q.sorter_relative_importance]
+               q.sorter_relative_importance,
+               q.time_attitude,
+               q.time_average_attitude,
+               q.time_first,
+               q.time_friend,
+               q.time_absolute_importance,
+
+               ]
