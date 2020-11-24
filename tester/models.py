@@ -308,7 +308,7 @@ def custom_export(players):
     for f in Constants.sortable_fields:
         annotation[f'sorter_{f}'] = Max('sorters__r', filter=Q(sorters__f=f), output_field=FloatField())
         annotation[f'time_{f}'] = ExpressionWrapper(Max('sorters__duration', filter=Q(sorters__f=f), ),
-                                                    output_field=djmodels.FloatField())
+                                                    output_field=djmodels.DurationField())
     sortableq = SensitiveQ.objects.order_by('id').annotate(**annotation)
     for q in sortableq:
         participant = q.owner
