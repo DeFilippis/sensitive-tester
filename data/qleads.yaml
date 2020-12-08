@@ -1,32 +1,32 @@
 #Top level should correspond to the field name in SensitiveQ model (tester/models)
 #annoucnement is for the text of the intro page (how this question is introduced for the first time)
 #lead is for the actual text that is shown on the apge
-#attitude:
-#  en:
-#    announcement:
-#      To what extent do you agree with the statement shown on the screen (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
-#    lead:
-#      To what extent do you agree with the following statement (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
-#    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#  ru:
-#    announcement:
-#      Насколько вы согласны с утверждением, отображаемым на экране (где «0» означает «полностью не согласен», а «10» означает «полностью согласен»)?
-#    lead:
-#      Насколько вы согласны со следующим утверждением (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
-#    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#average_attitude:
-#  en:
-#    announcement:
-#      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
-#    lead:
-#      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
-#    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#  ru:
-#    announcement:
-#      Как средний участник этого исследования ответил на те же вопросы (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
-#    lead:
-#      Как средний участник этого исследования ответил на этот вопрос (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
-#    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+attitude:
+  en:
+    announcement:
+      To what extent do you agree with the statement shown on the screen (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+    lead:
+      To what extent do you agree with the following statement (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  ru:
+    announcement:
+      Насколько вы согласны с утверждением, отображаемым на экране (где «0» означает «полностью не согласен», а «10» означает «полностью согласен»)?
+    lead:
+      Насколько вы согласны со следующим утверждением (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
+    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+average_attitude:
+  en:
+    announcement:
+      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+    lead:
+      How did the average participant in this study answer the question (where "0" means "Completely Disagree" and "10" means "Completely Agree")?
+    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  ru:
+    announcement:
+      Как средний участник этого исследования ответил на те же вопросы (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
+    lead:
+      Как средний участник этого исследования ответил на этот вопрос (где «0» означает «совершенно не согласен», а «10» означает «полностью согласен»)?
+    range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 absolute_importance:
   en:
     announcement:
@@ -56,10 +56,10 @@ friend:
       Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends?
     lead:
       Imagine two people who strongly disagree with each other on this question. (Person A answers “0”, and Person B answers “10.“). How likely is it that, despite knowing they disagree, they would become friends?
-    range: ['very unlikely', 'unlikely', 'likely', 'very likely']
+    range: ['Very unlikely', 'Unlikely', 'Likely', 'Very likely']
   ru:
     announcement:
       Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями?
     lead:
       Представьте себе двух человек, которые категорически не согласны друг с другом по этому вопросу. (Человек A отвечает «0», а Человек B отвечает «10.»). Насколько вероятно, что, зная, что они не согласны, они станут друзьями?
-    range: [ "совсем невероятно",  "маловероятно","вероятно", "очень вероятно",]
+    range: [ "Совсем невероятно",  "Маловероятно","Вероятно", "Очень вероятно",]
