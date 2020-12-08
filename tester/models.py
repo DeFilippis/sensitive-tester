@@ -188,7 +188,7 @@ class Player(BasePlayer):
             setattr(q, field, value)
             if q.attention_checker and body:
                 _range = Constants.leads[field][self.subsession.get_current_language()]['range']
-                _range = [str(i) for i in _range]
+                _range = [str(i).lower() for i in _range]
                 p = re.compile(r'\"(.*?[^,])\"')
                 result = p.search(body)
                 try:
