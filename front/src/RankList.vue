@@ -1,5 +1,5 @@
 <template>
-  <div class="  d-flex flex-column citylist-container" :style="{'align-self':'stretch'}">
+  <v-col cols=6  class="  d-flex flex-column citylist-container" :style="{'align-self':'stretch'}">
     
     <draggable
       class="list-group source citylist"
@@ -26,7 +26,7 @@
         </div>
       </div>
     </draggable>
-  </div>
+  </v-col>
 </template>
 
 <script>

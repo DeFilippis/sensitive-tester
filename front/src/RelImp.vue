@@ -97,6 +97,6 @@ export default {
   border: 1px solid black;
 }
 .widecard {
-  min-width: 550px;
+  /* min-width: 550px; */
 }
 </style>

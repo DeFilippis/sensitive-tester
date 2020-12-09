@@ -4,14 +4,15 @@
             <v-row justify="center" align="center">
                 <v-col sm="12" md=6 xs=12 cols=12>
                     <v-card class="my-3">
-                        <v-card-title class="justify-center">
-                            <transition name="custom-classes-transition" enter-active-class="animate__animated animate__bounceIn">
-                                <span dark :style="{ }" class="question-box" :key="body">{{ body }}</span>
-                            </transition>
-                        </v-card-title>
-                        <div class="px-3 pb-3" v-html='explication'>
+                          <div class="px-3 pb-3" v-html='explication'>
     
                         </div>
+                        <v-card-title class="justify-center" >
+                            <transition name="custom-classes-transition" enter-active-class="animate__animated animate__bounceIn">
+                                <span ref='qbody' dark :style="{ }" class="question-box" :key="body">{{ body }}</span>
+                            </transition>
+                        </v-card-title>
+                      
                     </v-card>
                 </v-col>
                 <v-col sm="12" md=6 xs=12 cols=12>
@@ -245,6 +246,10 @@ export default {
             this.value = _.clone(this.initialValue);
             this.slidersTouched = [false, false];
             this.bothSlidersTouched = false;
+            this.$nextTick(() => {
+                console.debug('PIZDA')
+                this.$refs.qbody.scrollIntoView({ block: 'end', scrollBehavior: 'smooth' });
+            });
         };
 
         this.$options.sockets.onopen = (data) => {

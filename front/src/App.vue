@@ -5,7 +5,7 @@
   >
     <v-row>
       <v-col>
-        <h4 v-if="lead" :style="{ color: 'black' }">
+        <h4 class='lead' v-if="lead" :style="{ color: 'black' }">
           {{ lead }}
         </h4>
       </v-col>
@@ -44,11 +44,12 @@
           class="d-flex justify-content-center"
           :class="btnFunctionClass"
           rounded
+          :key="btnForcer"
         >
-          <div
+          <v-btn
             class="border custombtn d-flex  justify-content-center  align-items-center"
-            v-for="i in likert"
-            :key="i[0]"
+            v-for="(i, ind) in likert"
+            :key="ind"
             @click="answer(i[0])"
             :style="individualBtnStyle"
             rounded
@@ -57,7 +58,7 @@
             <div>
               {{ i[1] }}
             </div>
-          </div>
+          </v-btn>
         </v-btn-toggle>
       </v-col>
     </v-row>
@@ -82,6 +83,7 @@ export default {
       attentionFailed: false,
       lead: window.field_desc["lead"],
       trans: true,
+      btnForcer: 0,
       block: true,
       no_q_left: false,
       too_many_failures: false,
@@ -174,6 +176,7 @@ export default {
     };
 
     this.trans = true;
+    this.btnForcer++;
     this.$options.sockets.onopen = (data) => {
       this.$socket.sendObj({ info_request: true });
     };
@@ -188,6 +191,7 @@ export default {
       this.block = true;
     },
     answer(val) {
+      this.btnForcer++;
       this.trans = true;
       this.$socket.sendObj({
         answer: true,
@@ -255,21 +259,42 @@ export default {
   border-radius: 5px;
   padding: 5px;
   min-height: 48px;
-  
 }
 @media screen and (min-width: 376px) {
-    .custombtn {
-   margin-left: 5px;
+  .custombtn {
+    margin-left: 5px;
     margin-right: 5px;
-  
-}
-   
   }
+}
+@media screen and (max-width: 376px) {
+  .lead{font-size:0.86rem}
+}
+@media screen and (min-width: 376px) {
+  .custombtn {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media screen and (min-width: 960px) {
+   
+  .v-btn.v-size--default, .v-btn.v-size--large {
+    font-size: .675rem!important;
+}
+}
 .custombtn:focus {
+  color: blue;
   outline: 5px auto -webkit-focus-ring-color;
+}
+.custombtn:not(:focus):hover {
+  color: red;
+  background: white;
 }
 .custombtn:hover {
-  outline: 5px auto -webkit-focus-ring-color;
-  background: lightgray;
+  color: blue;
+  background: gray;
 }
+@media (max-width: @screen-sm) {
+    body{font-size: 14px;}
+}
+
 </style>

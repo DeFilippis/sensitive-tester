@@ -104,6 +104,11 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    useragent_is_mobile = models.BooleanField()
+    useragent_is_bot = models.BooleanField()
+    useragent_browser_family = models.StringField()
+    useragent_os_family = models.StringField()
+    useragent_device_family = models.StringField()
     initial_distribution = models.IntegerField()
     attention_failure_counter = models.IntegerField(default=0)
 
@@ -301,6 +306,11 @@ def custom_export(players):
            "time_first",
            "time_friendship",
            "time_absolute_importance",
+           "useragent_is_mobile",
+           "useragent_is_bot",
+           "useragent_browser_family",
+           "useragent_os_family",
+           "useragent_device_family",
            ]
     annotation = {}
     for f in Constants.sortable_fields:
@@ -310,6 +320,7 @@ def custom_export(players):
     sortableq = SensitiveQ.objects.order_by('id').annotate(**annotation)
     for q in sortableq:
         participant = q.owner
+        player = participant.tester_player.first()
         yield [participant.code, q.body, q.label, q.attitude, q.average_attitude, q.first, q.second, q.third, q.friend,
                q.absolute_importance, q.relative_importance, q.slider_movement_counter,
                q.sorter_attitude,
@@ -323,5 +334,10 @@ def custom_export(players):
                q.time_first,
                q.time_friend,
                q.time_absolute_importance,
+               player.useragent_is_mobile,
+               player.useragent_is_bot,
+               player.useragent_browser_family,
+               player.useragent_os_family,
+               player.useragent_device_family,
 
                ]

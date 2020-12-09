@@ -5,3 +5,5 @@ requests
 ua-parser
 user-agents
 django-user-agents
+python-memcached
+django-dotenv

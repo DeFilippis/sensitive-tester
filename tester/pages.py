@@ -3,9 +3,19 @@ from .models import Constants
 import logging
 
 logger = logging.getLogger(__name__)
+from django_user_agents.utils import get_user_agent
 
 
 class Intro(Page):
+    def get(self, *args, **kwargs):
+        user_agent = get_user_agent(self.request)
+        self.player.useragent_is_mobile = user_agent.is_mobile
+        self.player.useragent_is_bot = user_agent.is_bot
+        self.player.useragent_browser_family = user_agent.browser.family
+        self.player.useragent_os_family = user_agent.os.family
+        self.player.useragent_device_family = user_agent.device.family
+        return super().get()
+
     """First page - consent form etc."""
 
     def is_displayed(self):

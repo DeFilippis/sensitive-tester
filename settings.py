@@ -58,6 +58,7 @@ SESSION_CONFIGS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00,
     participation_fee=0.00,
+    toloka_participation_fee=1.50,
     doc="",
     use_browser_bots=False,
     toloka=True,
@@ -90,7 +91,21 @@ INSTALLED_APPS = [
     'otree',
     'webpack_loader',
     'django.contrib.admin',
+    'django_user_agents',
 ]
+# Cache backend is optional, but recommended to speed up user agent parsing
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+MIDDLEWARE_CLASSES = (
+    'django_user_agents.middleware.UserAgentMiddleware',
+)
+# Name of cache backend to cache user agents. If it not specified default
+# cache alias will be used. Set to `None` to disable caching.
+USER_AGENTS_CACHE = 'default'
 
 WEBPACK_LOADER = {
     'DEFAULT': {
