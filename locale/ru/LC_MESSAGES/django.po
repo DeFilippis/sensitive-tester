@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 18:37+0300\n"
+"POT-Creation-Date: 2020-12-09 12:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,41 +21,45 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: endline/models.py:13
-msgid "Primary education/Middle school"
-msgstr "Средняя школа"
+msgid "Primary or lower education"
+msgstr "Начальное образование"
 
 #: endline/models.py:14
-msgid "Secondary or vocational education"
-msgstr "Среднее профессиональное образование"
+msgid "Secondary (lower or upper) education"
+msgstr "Неоконченное среднее  образование"
 
 #: endline/models.py:15
-msgid "A-levels/Uncompleted university degree"
-msgstr "Незаконченное высшее образование"
+msgid "A-levels or post-secondary non-tertiary education"
+msgstr "Среднее образование"
 
 #: endline/models.py:16
-msgid "Bachelor/Master"
-msgstr "Высшее образование"
+msgid "Uncompleted tertiary education"
+msgstr "Неоконченное высшее образование"
 
 #: endline/models.py:17
-msgid "PhD"
-msgstr "Два и более диплома / Ученая степень"
+msgid "Tertiary education (Bachelor, Master or Diploma degrees)"
+msgstr "Высшее образование"
 
-#: endline/models.py:20
+#: endline/models.py:18
+msgid "PhD or more than two diplomas or science degrees"
+msgstr "Два и более высших образования: кандидат или доктор наук"
+
+#: endline/models.py:21
 msgid "Not enough money even for food"
 msgstr "Не хватает денег даже на еду"
 
-#: endline/models.py:21
+#: endline/models.py:22
 msgid "Enough for food, but not enough to buy clothes and shoes"
 msgstr "Хватает на еду, но не хватает на покупку одежды и обуви"
 
-#: endline/models.py:22
+#: endline/models.py:23
 msgid ""
 "Enough for clothes and shoes, but not enough for the purchase of small "
 "household appliances"
 msgstr ""
 "Хватает на одежду и обувь, но не хватает на покупку мелкой бытовой техники"
 
-#: endline/models.py:24
+#: endline/models.py:25
 msgid ""
 "Enough money for small purchases, but buying expensive things (a computer, "
 "washing machine, refrigerator) requires savings or credit."
@@ -63,7 +67,7 @@ msgstr ""
 "Хватает денег на небольшие покупки, но покупка дорогих вещей (компьютера, "
 "стиральной машины, холодильника) требует накоплений или кредита"
 
-#: endline/models.py:29
+#: endline/models.py:30
 msgid ""
 "There is enough money to buy for a house, but to buy a car, a summer "
 "residence, an apartment you need to save or take a loan"
@@ -71,104 +75,104 @@ msgstr ""
 "Хватает денег на покупки для дома, но на покупку машины, дачи, квартиры "
 "необходимо копить или брать кредит"
 
-#: endline/models.py:31
+#: endline/models.py:32
 msgid "We can afford any purchases without restrictions and loans"
 msgstr "Можем позволить себе любые покупки без ограничений и кредитов"
 
-#: endline/models.py:33
+#: endline/models.py:34
 msgid "Atheist"
 msgstr "Атеист"
 
-#: endline/models.py:34
+#: endline/models.py:35
 msgid "Spiritual but not religious"
 msgstr "Верующий, но не принадлежу никакой конкретной конфессии"
 
-#: endline/models.py:35
+#: endline/models.py:36
 msgid "Orthodox Christian"
 msgstr "Православие"
 
-#: endline/models.py:36
+#: endline/models.py:37
 msgid "Catholic"
 msgstr "Католицизм"
 
-#: endline/models.py:37
+#: endline/models.py:38
 msgid "Muslim"
 msgstr "Ислам"
 
-#: endline/models.py:38
+#: endline/models.py:39
 msgid "Buddhist"
 msgstr "Буддизм"
 
-#: endline/models.py:39
+#: endline/models.py:40
 msgid "Protestant"
 msgstr "Протестантизм"
 
-#: endline/models.py:40
+#: endline/models.py:41
 msgid "Jewish"
 msgstr "Иудаизм"
 
-#: endline/models.py:41
+#: endline/models.py:42
 msgid "Another religion not mentioned here"
 msgstr "Другая религия"
 
-#: endline/models.py:43
+#: endline/models.py:44
 msgid "At least once a week"
 msgstr "Как минимум раз в неделю"
 
-#: endline/models.py:44
+#: endline/models.py:45
 msgid "Once or twice a month"
 msgstr "Один-два раза в месяц"
 
-#: endline/models.py:45
+#: endline/models.py:46
 msgid "A few times a year"
 msgstr "Несколько раз в год"
 
-#: endline/models.py:46
+#: endline/models.py:47
 msgid "Seldom / never"
 msgstr "Редко/никогда"
 
-#: endline/models.py:47
+#: endline/models.py:48
 msgid "No answer, I am atheist"
 msgstr "Нет ответа; я атеист"
 
-#: endline/models.py:61
+#: endline/models.py:62
 msgid "Male"
 msgstr "Мужской"
 
-#: endline/models.py:61
+#: endline/models.py:62
 msgid "Female"
 msgstr "Женский"
 
-#: endline/models.py:62
+#: endline/models.py:63
 msgid "Please indicate your gender"
 msgstr "Пожалуйста, укажите ваш пол"
 
-#: endline/models.py:68
+#: endline/models.py:69
 msgid "How old are you?"
 msgstr "Сколько вам лет?"
 
-#: endline/models.py:72
+#: endline/models.py:73
 msgid "What is the highest level of education that you have achieved?"
 msgstr ""
 "Какой у Вас самый высокий уровень образования, по которому Вы получили "
 "аттестат, свидетельство, диплом?"
 
-#: endline/models.py:77
+#: endline/models.py:78
 msgid ""
 "Which statement most accurately describes your family’s financial situation?"
 msgstr ""
 "Какое высказывание наиболее точно описывает финансовое положение вашей семьи?"
 
-#: endline/models.py:82
+#: endline/models.py:83
 msgid "Which of these labels best matches your religious views?"
 msgstr ""
 "Что из нижеперечисленного наиболее точно описывает ваши религиозные взгляды?"
 
-#: endline/models.py:87
+#: endline/models.py:88
 msgid "How frequently do you attend religious services?"
 msgstr "Как часто вы посещаете храм?"
 
-#: endline/models.py:92
+#: endline/models.py:93
 msgid ""
 "Do you have any feedback for us?  Did you enjoy the study?  Any complaints?"
 msgstr ""
@@ -204,11 +208,11 @@ msgstr ""
 "Для того, чтобы задание считалось выполненным, пожалуйста скопируйте его и "
 "вставьте на страницу задания в Толоке."
 
-#: last/templates/last/Results.html:26 tester/models.py:58 tester/models.py:66
+#: last/templates/last/Results.html:26 tester/models.py:59 tester/models.py:67
 msgid "Next"
 msgstr "Далее"
 
-#: tester/models.py:48
+#: tester/models.py:49
 msgid ""
 "Using the sliders please estimate the share of  participants in this study "
 "who have\n"
@@ -222,51 +226,51 @@ msgstr ""
 "6, от 7 до 10 по поводу утверждения выше. Обратите внимание: вы должны "
 "переместить ОБА слайдера, чтобы перейти на следующую страницу."
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "from 0 to 3"
 msgstr "от 0 до 3"
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "from 4 to 6"
 msgstr "от 4 до 6"
 
-#: tester/models.py:54
+#: tester/models.py:55
 msgid "From 7 to 10"
 msgstr "от 7 до 10"
 
-#: tester/models.py:55
+#: tester/models.py:56
 msgid "Share (in %)"
 msgstr "Доля (в %)"
 
-#: tester/models.py:56
+#: tester/models.py:57
 msgid "Distribution of answers"
 msgstr "Распределение ответов"
 
-#: tester/models.py:57
+#: tester/models.py:58
 msgid "of participants answered between"
 msgstr " участников выбравших "
 
-#: tester/models.py:59
+#: tester/models.py:60
 msgid "Attention: set middle slider (the blue one) to 100%"
 msgstr "Проверка внимания: установите средний (синий) слайдер на 100%"
 
-#: tester/models.py:63
+#: tester/models.py:64
 msgid "Sort items based on the relative importance for you"
 msgstr "Отсортируйте элементы в порядке важности для вас"
 
-#: tester/models.py:64
+#: tester/models.py:65
 msgid "Move from here"
 msgstr "Переместите элементы отсюда"
 
-#: tester/models.py:65
+#: tester/models.py:66
 msgid "...to here"
 msgstr "Сюда в порядке важности для вас"
 
-#: tester/models.py:68
+#: tester/models.py:69
 msgid "Attention"
 msgstr "Внимание!"
 
-#: tester/models.py:70
+#: tester/models.py:71
 msgid ""
 "You commit some errors. Please pay more attention. Next time you fail to "
 "pass the attention test, we may finish the study"
@@ -274,7 +278,7 @@ msgstr ""
 "Вы не прошли проверку на внимательность. Если вы не пройдете ее еще раз, вы, "
 "возможно, не сможете продолжать принимать участие в исследовании."
 
-#: tester/models.py:71
+#: tester/models.py:72
 msgid "Ok"
 msgstr "ОК"
 
@@ -297,8 +301,7 @@ msgid ""
 "of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range."
 msgstr ""
 "В частности, вам будет предложено переместить слайдеры, чтобы оценить "
-"процент участников, которые ответили 0–3, 4–6 "
-"и 7–10 соответственно."
+"процент участников, которые ответили 0–3, 4–6 и 7–10 соответственно."
 
 #: tester/templates/tester/DistributionIntro.html:44
 #, python-format
@@ -311,7 +314,7 @@ msgstr ""
 "окажется ближе всего к верному значению. Тем самым, в ваших интересах "
 "попытаться назвать максимально верное значение."
 
-#: tester/templates/tester/DistributionIntro.html:57
+#: tester/templates/tester/DistributionIntro.html:59
 #: tester/templates/tester/Intro.html:94 tester/templates/tester/QIntro.html:61
 #: tester/templates/tester/RelIntro.html:25
 msgid "Proceed"
@@ -445,3 +448,15 @@ msgstr ""
 "Если вы считаете, что это произошло из-за технических сбоев с нашей стороны "
 "или не по вашей вине, пожалуйста, немедленно сообщите нам об этом через "
 "систему обмена сообщениями Яндекс.Толока или по электронной почте:"
+
+#~ msgid "Primary education/Middle school"
+#~ msgstr "Средняя школа"
+
+#~ msgid "A-levels/Uncompleted university degree"
+#~ msgstr "Незаконченное высшее образование"
+
+#~ msgid "Bachelor/Master"
+#~ msgstr "Высшее образование"
+
+#~ msgid "PhD"
+#~ msgstr "Два и более диплома / Ученая степень"

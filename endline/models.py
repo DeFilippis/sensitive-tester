@@ -10,11 +10,12 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     EDUCATION_CHOICES = [
-        [1, _('Primary education/Middle school')],
-        [2, _('Secondary or vocational education')],
-        [3, _('A-levels/Uncompleted university degree')],
-        [4, _('Bachelor/Master')],
-        [5, _('PhD')],
+        [1, _('Primary or lower education')],
+        [2, _('Secondary (lower or upper) education')],
+        [3, _('A-levels or post-secondary non-tertiary education')],
+        [4, _('Uncompleted tertiary education')],
+        [5, _('Tertiary education (Bachelor, Master or Diploma degrees)')],
+        [6, _('PhD or more than two diplomas or science degrees')],
     ]
     INCOME_CHOICES = [
         [1, _('Not enough money even for food')],
