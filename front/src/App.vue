@@ -45,7 +45,6 @@
           :class="btnFunctionClass"
           rounded
         >
-        
           <div
             class="border custombtn d-flex  justify-content-center  align-items-center"
             v-for="i in likert"
@@ -53,7 +52,6 @@
             @click="answer(i[0])"
             :style="individualBtnStyle"
             rounded
-            
             text
           >
             <div>
@@ -253,17 +251,25 @@ export default {
 .custombtn {
   text-align: center;
   cursor: pointer;
-  margin-left:5px;
-  margin-right:5px;
+
   border-radius: 5px;
-  padding:5px;
-  min-height:48px;
+  padding: 5px;
+  min-height: 48px;
+  
 }
+@media screen and (min-width: 376px) {
+    .custombtn {
+   margin-left: 5px;
+    margin-right: 5px;
+  
+}
+   
+  }
 .custombtn:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 .custombtn:hover {
   outline: 5px auto -webkit-focus-ring-color;
-  background:lightgray;
+  background: lightgray;
 }
 </style>
