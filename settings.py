@@ -26,6 +26,13 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['endline']
     ),
+    dict(
+        name='endline_ru',
+        display_name="endline_test (Russian)",
+        num_demo_participants=1,
+        app_sequence=['endline'],
+        language='ru'
+    ),
 
     dict(
         name='full_ru',
