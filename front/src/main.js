@@ -7,7 +7,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
+import VueResizeText from 'vue-resize-text';
  
+Vue.use(VueResizeText)
+
 // name is optional
 Vue.use(VueLodash, { name: 'custom' , lodash: lodash })
 // index.js or main.js

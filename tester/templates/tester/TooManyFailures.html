@@ -1,0 +1,67 @@
+{% extends "tester/Page.html" %}
+
+
+
+{% block content %}
+    <style>
+        .infocard {
+            max-width: 700px;
+            font-size: 1rem
+        }
+
+        .infotext {
+            text-align: left;
+            padding-top: 25px;
+            padding-bottom: 10px;
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 1000px) {
+            .infocard {
+                font-size: 2rem !important;
+                font-weight: bold;
+                max-width: 100%;
+            }
+        }
+
+
+    </style>
+
+    <div class="container-fluid my-3">
+        <div class="row">
+            <div class="col d-flex flex-column justify-content-center align-items-center">
+                <div class="card infocard">
+                    <div class="card-body lead">
+
+                        <ul class="list-group list-group-flush text-left infotext">
+
+                            <li class="list-group-item">
+                                {% blocktrans trimmed %}
+                                    Unfortunately you have not paid enough attention while answering the questions.
+                                {% endblocktrans %}
+
+                            </li>
+                            <li class="list-group-item">
+                                {% blocktrans trimmed %}
+                                    You cannot proceed with this study anymore.
+                                {% endblocktrans %}
+                            </li>
+                            <li class="list-group-item">
+                                {% blocktrans trimmed %}
+                                    If you believe that this was due to any technical glitches on our side or it is not
+                                    your fault, please let us know immediately via Yandex.Toloka messaging system o
+                                    or via e-mail at:
+                                {% endblocktrans %}
+                                <a href="mailto:epee@hse.ru" target="_blank"
+                                   rel="noopener noreferrer">epee@hse.ru</a>.
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

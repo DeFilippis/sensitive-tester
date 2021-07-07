@@ -1,4 +1,9 @@
-otree>=3.2.4
+otree>=3.3.6
 django-webpack-loader
 pyyaml
-
+requests
+ua-parser
+user-agents
+django-user-agents
+python-memcached
+django-dotenv

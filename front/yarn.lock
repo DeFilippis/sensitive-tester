@@ -8101,6 +8101,11 @@ vue-property-decorator@^8.0.0:
   dependencies:
     vue-class-component "^7.1.0"
 
+vue-resize-text@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vue-resize-text/-/vue-resize-text-0.1.1.tgz#b3143c086d412ca181c2b2abd0153bc22742d11b"
+  integrity sha512-teQjTzJpwYdBKG2hOc7lA6U3hUNuew3nROuPLPRzX1wxSgG/tQ+YNOHobxXxuIKf36zFTs68y2Y0JY1zx7fZrg==
+
 vue-router@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"

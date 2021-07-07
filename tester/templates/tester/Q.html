@@ -10,6 +10,8 @@
 
     <script>
         window.field_desc = {{ field_desc|json }};
+        window.field_range = {{ field_range|json }};
+        window.attentionError = {{ attentionError|json }};
     </script>
     {% render_bundle 'chunk-vendors' %}
     {% render_bundle 'main' %}

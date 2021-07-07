@@ -1,68 +1,138 @@
 <template>
-  <v-app class="main-app">
-    <v-row align="center" justify="center">
-      <div v-cloak>
-        <v-card flat class="py-12 main_card" v-if="!no_q_left && body">
-          <v-card-text>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <h4 v-if="lead" :style="{ color: 'black' }">{{ lead }}</h4>
-              </v-col>
-              <v-col cols="12">
-                <v-card-title
-                  class="justify-center text-center"
-                  :style="{ background: fieldCol, 'border-radius': '25px' }"
-                >
-                  <transition
-                    name="custom-classes-transition"
-                    enter-active-class="animate__animated animate__bounceIn"
-                    appear
-                  >
-                    <div :key="body" class="white--text text-center">
-                      <span class="bodytext">
-                        {{ body }}
-                      </span>
-                    </div>
-                  </transition>
-                </v-card-title>
-              </v-col>
-              <v-col cols="12">
-                <div v-if="no_q_left">No questions left</div>
-              </v-col>
-
-              <v-col cols="12">
-                <v-btn-toggle v-model="value">
-                  <v-btn v-for="i in likert" :key="i" @click="answer(i)">
-                    {{ i }}
-                  </v-btn>
-                </v-btn-toggle>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
+  <v-container
+    class="justify-content-center d-flex  flex-column  text-center maincontainer"
+    :style="cont"
+  >
+    <v-row>
+      <v-col>
+        <h4 class='lead' v-if="lead" :style="{ color: 'black' }">
+          {{ lead }}
+        </h4>
+      </v-col>
     </v-row>
-  </v-app>
+    <v-row>
+      <v-col>
+        <v-card-title
+          class="d-flex justify-center text-center white--text text-center d-flex justify-content-center "
+          :style="{
+            background: fieldCol,
+            'border-radius': '25px',
+          }"
+        >
+          <transition
+            name="fade"
+            mode="out-in"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            appear
+          >
+            <span
+              class="bodytext white--text text-center"
+              :style="{ 'text-align': 'center' }"
+              :key="body"
+            >
+              {{ body }}
+            </span>
+          </transition>
+        </v-card-title>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col :style="{ visibility: !block ? 'visible' : 'hidden' }">
+        <v-btn-toggle
+          v-model="value"
+          class="d-flex justify-content-center"
+          :class="btnFunctionClass"
+          rounded
+          :key="btnForcer"
+        >
+          <v-btn
+            class="border custombtn d-flex  justify-content-center  align-items-center"
+            v-for="(i, ind) in likert"
+            :key="ind"
+            @click="answer(i[0])"
+            :style="individualBtnStyle"
+            rounded
+            text
+          >
+            <div>
+              {{ i[1] }}
+            </div>
+          </v-btn>
+        </v-btn-toggle>
+      </v-col>
+    </v-row>
+
+    <div data-app>
+      <attention-failed
+        :dialog="attentionFailed"
+        @input="attentionFailed = false"
+        :error="attentionError"
+      />
+    </div>
+  </v-container>
 </template>
 
 <script>
+import AttentionFailed from "./components/AttentionFailed";
 export default {
+  components: { AttentionFailed },
   data() {
     return {
+      attentionError: window.attentionError,
+      attentionFailed: false,
       lead: window.field_desc["lead"],
       trans: true,
+      btnForcer: 0,
+      block: true,
       no_q_left: false,
+      too_many_failures: false,
       body: "",
+      label: null,
       qid: null,
       field: null,
       value: null,
       toggle_exclusive: undefined,
-      likert: this._.range(0, 11),
-      progressValue:0,
+      likert: window.field_range,
+      progressValue: 0,
     };
   },
 
   computed: {
+    btnFunctionClass() {
+      const l = this.likert.length; //get the length of possible choices for likert
+      const smalls = ["xs", "sm"];
+      const small = smalls.includes(this.$vuetify.breakpoint.name);
+      if (small && l < 10) {
+        return { "flex-column": true, "align-items-stretch": true };
+      }
+
+      return {};
+    },
+    cont() {
+      const smalls = ["xs", "sm"];
+      const small = smalls.includes(this.$vuetify.breakpoint.name);
+      if (!small) {
+        return { "max-width": "760px" };
+      }
+
+      return {};
+    },
+    individualBtnStyle() {
+      const l = this.likert.length; //get the length of possible choices for likert
+      const smalls = ["xs", "sm"];
+      const small = smalls.includes(this.$vuetify.breakpoint.name);
+      if (small && l < 10) {
+        return {
+          "min-width": "inherit",
+        };
+      }
+      return {
+        width: 100 / l + "%!important",
+        "min-width": "inherit",
+      };
+    },
+
     fieldCol() {
       const colorCorr = {
         attitude: "black",
@@ -74,30 +144,39 @@ export default {
     },
   },
   watch: {
-    progressValue(val){
-      window.vueProgress.progressValue=val
+    progressValue(val) {
+      window.vueProgress.progressValue = val;
     },
     no_q_left(val) {
       if (val) {
         document.getElementById("form").submit();
       }
     },
+    too_many_failures(val) {
+      if (val) {
+        document.getElementById("form").submit();
+      }
+    },
   },
   mounted() {
-    // console.debug(this.$options.sockets)
     this.$options.sockets.onmessage = (data) => {
       const d = JSON.parse(data["data"]);
       this.trans = false;
       ({
+        attention_failed: this.attentionFailed,
         no_q_left: this.no_q_left,
+        too_many_failures: this.too_many_failures,
         body: this.body,
+        label: this.label,
         id: this.qid,
         field: this.field,
         value: this.value,
-        progress_value: this.progressValue
+        progress_value: this.progressValue,
       } = d);
     };
+
     this.trans = true;
+    this.btnForcer++;
     this.$options.sockets.onopen = (data) => {
       this.$socket.sendObj({ info_request: true });
     };
@@ -105,45 +184,117 @@ export default {
   },
 
   methods: {
+    afterEnter() {
+      this.block = false;
+    },
+    beforeLeave() {
+      this.block = true;
+    },
     answer(val) {
+      this.btnForcer++;
       this.trans = true;
       this.$socket.sendObj({
         answer: true,
         qid: this.qid,
         field: this.field,
         value: val,
+        body: this.body,
       });
       this.value = null;
     },
   },
 };
 </script>
+
 <style>
 :root {
   --animate-duration: 1800ms;
   --animate-delay: 2s;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.fade-enter,
+.fade-leave-to
+/* .fade-leave-active below version 2.1.8 */
+
+ {
   opacity: 0;
 }
+
 [v-cloak] {
   display: none;
 }
+
 .main_card {
-  max-width: 700px;
+  /* max-width: 700px; */
 }
+
 #app {
   background: transparent;
-  max-width: 700px;
+  /* max-width: 700px; */
 }
-.main-app {
-  max-width: 700px;
+
+.maincontainer {
+  @media (min-width: 960px) {
+    max-width: 960px !important;
+  }
+  @media (min-width: 1264px) {
+    max-width: 960px !important;
+  }
 }
+
 .bodytext {
   word-break: normal;
+  color: white;
+  text-align: center;
 }
+.custombtn {
+  text-align: center;
+  cursor: pointer;
+
+  border-radius: 5px;
+  padding: 5px;
+  min-height: 48px;
+}
+@media screen and (min-width: 376px) {
+  .custombtn {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 376px) {
+  .lead{font-size:0.86rem}
+}
+@media screen and (min-width: 376px) {
+  .custombtn {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media screen and (min-width: 960px) {
+   
+  .v-btn.v-size--default, .v-btn.v-size--large {
+    font-size: .675rem!important;
+}
+}
+.custombtn:focus {
+  color: blue;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+.custombtn:not(:focus):hover {
+  color: red;
+  background: white;
+}
+.custombtn:hover {
+  color: blue;
+  background: gray;
+}
+@media (max-width: @screen-sm) {
+    body{font-size: 14px;}
+}
+
 </style>

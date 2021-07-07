@@ -1,50 +1,73 @@
 {% extends "tester/Page.html" %}
-{% load otree %}
+
 
 
 {% block content %}
     <style>
-        .infocard{max-width:700px;}
-        .infotext{text-align:left;
-                  padding-bottom: 25px; }
+        .infocard {
+            max-width: 700px;
+        }
+
+        .infotext {
+            text-align: left;
+            padding-bottom: 25px;
+        }
     </style>
-    
-    <form class="otree-form" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
-        <div class="_otree-content">
+    <div class="container-fluid my-3">
+        <div class="row">
+            <div class="col d-flex flex-column justify-content-center align-items-center">
+                <form class="otree-form" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+                    <div class="_otree-content">
 
-            <div class="card infocard" >
-                <div class="card-body">
-                    <h5 class="card-title">Guess The Distribution of Responses from Other Participants</h5>
+                        <div class="card infocard">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {% trans 'Guess The Distribution of Responses from Other Participants' %}
+                                </h5>
 
-                    <div class="my-5">
-                        <div class = "infotext">
-                            <p>
-                                On the next page, we want you to estimate the fraction of participants in this study that gave each kind of answer to the questions asked we just asked about. 
-                            </p>
-                            
-                            <p>
-                                Specifically, you will be asked to move sliders to estimate the percentage of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range.
-                            </p>
+                                <div class="my-5">
+                                    <div class="infotext">
+                                        <p>
+                                            {% trans 'On the next page, we want you to estimate the fraction of participants in this study that gave each kind of answer to the questions asked we just asked about.' %}
+                                        </p>
+
+                                        <p>
+                                            {% trans 'Specifically, you will be asked to move sliders to estimate the percentage of participants who gave answers that fell into the 0-3, 4-6, and 7-10 range.' %}
+                                        </p>
+                                    </div>
+
+
+                                    <div class="alert alert-success" role="alert">
+                                        {% with Constants.bonus_amount_distribution as bonus %}
+
+
+                                            {% blocktrans trimmed %}
+                                                ATTENTION - We will reward  {{ bonus }} cents to the 10 participants who
+                                                guess
+                                                closest to the correct answer. As a result, it is in your best interest
+                                                to try to
+                                                guess correctly.
+                                            {% endblocktrans %}
+                                        {% endwith %}
+                                    </div>
+
+
+                                </div>
+                                <div class="text-center">
+                                    <button class="mdc-button foo-button mdc-button--outlined">
+                                        <div class="mdc-button__ripple"></div>
+                                        <span class="mdc-button__label">{% trans 'Proceed' %}</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        
-
-                        <div class="alert alert-success" role="alert">
-                            ATTENTION - We will reward  {{Constants.bonus_amount_distribution}} cents to the 10 participants who guess closest to the correct answer. As a result, it is in your best interest to try to guess correctly. 
-                        </div>
-                        
 
                     </div>
+                </form>
 
-                    <button class="mdc-button foo-button mdc-button--outlined">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Proceed</span>
-                    </button>
-                </div>
             </div>
-
         </div>
-    </form>
-
+    </div>
 
 
 {% endblock %}
